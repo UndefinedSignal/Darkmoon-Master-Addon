@@ -37,17 +37,12 @@ MAJOR_VERSION = "Darkmoon Master Addon |cFF38FE62Legion|r v0.9.5"
 MINOR_VERSION = "$Revision: 3 $"
 ROOT_PATH     = "Interface\\AddOns\\DMA\\"
 local cont = ""
-if not AceLibrary then error(MAJOR_VERSION .. " requires AceLibrary") end
-if not AceLibrary:IsNewVersion(MAJOR_VERSION, MINOR_VERSION) then return end
+--if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
-MangAdmin    = AceLibrary("AceAddon-2.0"):new("AceConsole-2.0", "AceDB-2.0", "AceHook-2.1", "AceDebug-2.0", "AceEvent-2.0")
-Locale       = AceLibrary("AceLocale-2.2"):new("MangAdmin")
-Strings      = AceLibrary("AceLocale-2.2"):new("TEST")
-local Tablet = AceLibrary("Tablet-2.0")
+MangAdmin    = LibStub("AceAddon-3.0"):NewAddon("MangAdmin", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
 
-MangAdmin:RegisterDB("MangAdminDb", "MangAdminDbPerChar")
-MangAdmin:RegisterDefaults("char", 
-  {
+local defaults = {
+  char = {
     functionQueue = {},
     requests = {
       tpinfo = false,
@@ -68,129 +63,105 @@ MangAdmin:RegisterDefaults("char",
     selectedZone = nil,
     newTicketQueue = {},
     instantKillMode = false,
-    msgDeltaTime = time(),
-    
-  }
-)
-MangAdmin:RegisterDefaults("account", 
-  {
-    language = nil,
-    localesearchstring = true,
-    favorites = {
-      items = {},
-      itemsets = {},
-      spells = {},
-      skills = {},
-      quests = {},
-      creatures = {},
-      objects = {},
-      teles = {}
-    },
-    buffer = {
-      tickets = {},
-      items = {},
-      itemsets = {},
-      spells = {},
-      skills = {},
-      quests = {},
-      creatures = {},
-      objects = {},
-      teles = {},
-      counter = 0
-    },
-    tickets = {
-      selected = 0,
-      count = 0,
-      requested = 0,
-      playerinfo = {},
-      loading = false
-    },
-    style = {
-      updatedelay = "4000",
-      showtooltips = true,
-      showchat = false,
-      showminimenu = true,
-      transparency = {
-        buttons = 1.0,
-        frames = 0.7,
-        backgrounds = 0.5
+    msgDeltaTime = time(),  
+  },
+  profile = {
+      language = nil,
+      localesearchstring = true,
+      favorites = {
+        items = {},
+        itemsets = {},
+        spells = {},
+        skills = {},
+        quests = {},
+        creatures = {},
+        objects = {},
+        teles = {}
       },
-      color = {
-        buffer = {},
-        buttons = {
-          r = 0.99, 
-          g = 0.99, 
-          b = 0.99
+      buffer = {
+        tickets = {},
+        items = {},
+        itemsets = {},
+        spells = {},
+        skills = {},
+        quests = {},
+        creatures = {},
+        objects = {},
+        teles = {},
+        counter = 0
+      },
+      tickets = {
+        selected = 0,
+        count = 0,
+        requested = 0,
+        playerinfo = {},
+        loading = false
+      },
+      style = {
+        updatedelay = "4000",
+        showtooltips = false,
+        showchat = false,
+        showminimenu = false,
+        transparency = {
+          buttons = 1.0,
+          frames = 0.7,
+          backgrounds = 0.5
         },
-        frames = {
-          r = 0.102,
-          g = 0.102,
-          b = 0.102
-        },
-        backgrounds = {
-          r = 0.10,
-          g = 0.10,
-          b = 0.10
-        },
-        linkifier = {
-          r = 0.8705882352941177,
-          g = 0.3725490196078432,
-          b = 0.1411764705882353
+        color = {
+          buffer = {},
+          buttons = {
+            r = 0.99, 
+            g = 0.99, 
+            b = 0.99
+          },
+          frames = {
+            r = 0.102,
+            g = 0.102,
+            b = 0.102
+          },
+          backgrounds = {
+            r = 0.10,
+            g = 0.10,
+            b = 0.10
+          },
+          linkifier = {
+            r = 0.8705882352941177,
+            g = 0.3725490196078432,
+            b = 0.1411764705882353
+          }
         }
       }
     }
-  }
-)
-
--- Register Translations
-Locale:EnableDynamicLocales(true)
---Locale:EnableDebugging()
-Locale:RegisterTranslations("enUS", function() return Return_enUS() end)
-Locale:RegisterTranslations("ruRU", function() return Return_ruRU() end)
-Strings:EnableDynamicLocales(true)
-Strings:RegisterTranslations("enUS", function() return ReturnStrings_enUS() end)
-Strings:RegisterTranslations("ruRU", function() return ReturnStrings_ruRU() end)
---Locale:Debug()
---Locale:SetLocale("enUS")
-
-MangAdmin.consoleOpts = {
-  type = 'group',
-  args = {
-    toggle = {
-      name = "toggle",
-      desc = Locale["cmd_toggle"],
-      type = 'execute',
-      func = function() MangAdmin:OnClick() end
-    },
-    transparency = {
-      name = "transparency",
-      desc = Locale["cmd_transparency"],
-      type = 'execute',
-      func = function() MangAdmin:ToggleTransparency() end
-    },
-    tooltips = {
-      name = "tooltips",
-      desc = Locale["cmd_tooltip"],
-      type = 'execute',
-      func = function() MangAdmin:ToggleTooltips() end
-    },
-    minimenu = {
-      name = "tooltips",
-      desc = "Toogle the toolbar/minimenu",
-      type = 'execute',
-      func = function() MangAdmin:ToggleMinimenu() end
-    }
-  }
 }
 
+Locale       = LibStub("AceLocale-3.0"):NewLocale("MangAdmin", "enUS")
+Locale       = Return_enUS();
+
+Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "enUS")
+Strings      = ReturnStrings_enUS()
+
+
+-- Register Translations
+--Locale:EnableDynamicLocales(true)
+--Locale:EnableDebugging()
+--Locale:RegisterTranslations("enUS", function() return Return_enUS() end)
+--Locale:RegisterTranslations("ruRU", function() return Return_ruRU() end)
+--Strings:EnableDynamicLocales(true)
+--Strings:RegisterTranslations("enUS", function() return ReturnStrings_enUS() end)
+--Strings:RegisterTranslations("ruRU", function() return ReturnStrings_ruRU() end)
+--Locale:Debug()
+--Locale:SetLocale("ruRU")
+
 function MangAdmin:OnInitialize()
+  self.db = LibStub("AceDB-3.0"):New("MangAdminDB", defaults)
+
   -- initializing MangAdmin
   --self:CreateFrames()
-  self:RegisterChatCommand(Locale["slashcmds"], self.consoleOpts) -- this registers the chat commands
+  --self:RegisterChatCommand(Locale["slashcmds"], self.consoleOpts) -- this registers the chat commands
   --self:InitButtons()  -- this prepares the actions and tooltips of nearly all MangAdmin buttons  
   --InitControls()
   --self:SearchReset()
-  MangAdmin.db.account.buffer.who = {}
+  MangAdmin.db.profile.buffer.who = {}
   -- FuBar plugin config
 --[[  MangAdmin.hasNoColor = true
   MangAdmin.hasNoText = false
@@ -205,7 +176,7 @@ function MangAdmin:OnInitialize()
   -- They will be redirected to MangAdmin:AddMessage(...)
   for i=1,NUM_CHAT_WINDOWS do
     local cf = getglobal("ChatFrame"..i)
-    self:Hook(cf, "AddMessage", true)
+    self:RawHook(cf, "AddMessage", true)
   end
   --[[ initializing Frames, like DropDowns, Sliders, aso
   self:InitDropDowns()
@@ -215,9 +186,9 @@ function MangAdmin:OnInitialize()
   ma_gobmovedistforwardback:SetText("1")
   ma_gobmovedistleftright:SetText("1")
   ma_gobmovedistupdown:SetText("1")]]
-  MangAdmin.db.account.buffer.who = {}
+  MangAdmin.db.profile.buffer.who = {}
   --clear color buffer
-  self.db.account.style.color.buffer = {}
+  self.db.profile.style.color.buffer = {}
   --altering the function setitemref, to make it possible to click links
   MangLinkifier_SetItemRef_Original = SetItemRef
   SetItemRef = MangLinkifier_SetItemRef
@@ -226,10 +197,10 @@ end
 function MangAdmin:AddMessage(frame, text, r, g, b, id)
   -- frame is the object that was hooked (one of the ChatFrames)  
   local catchedSth = false
-  local output = MangAdmin.db.account.style.showchat
+  local output = MangAdmin.db.profile.style.showchat
   if id == 1 then --make sure that the message comes from the server, message id = 1
     --Catches if Toggle is still on for some reason, but search frame is not up, and disables it so messages arent caught
-    if self.db.char.requests.toggle and not ma_popupframe:IsVisible() then
+    if self.db.char.requests.toggle then
       self.db.char.requests.toggle = false
     end
 
@@ -419,18 +390,18 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
     for diff in string.gmatch(text, Strings["ma_GmatchUpdateDiff"]) do
         --ma_difftext:SetText(diff)
         catchedSth = true
---        output = MangAdmin.db.account.style.showchat
-        output = MangAdmin.db.account.style.showchat  
+--        output = MangAdmin.db.profile.style.showchat
+        output = MangAdmin.db.profile.style.showchat  
     end
 
     -- get results of ticket list. In Trinity, everything will be constructed off the list
     for id, char, create, update in string.gmatch(text, Strings["ma_GmatchTickets"]) do
-        table.insert(MangAdmin.db.account.buffer.tickets, {tNumber = id, tChar = char, tLCreate = create, tLUpdate = update, tMsg = ""})
+        table.insert(MangAdmin.db.profile.buffer.tickets, {tNumber = id, tChar = char, tLCreate = create, tLUpdate = update, tMsg = ""})
         local ticketCount = 0
-        table.foreachi(MangAdmin.db.account.buffer.tickets, function() ticketCount = ticketCount + 1 end)
+        table.foreachi(MangAdmin.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
         ticketCount = 0
         catchedSth = true
-        output = MangAdmin.db.account.style.showchat
+        output = MangAdmin.db.profile.style.showchat
         self.db.char.requests.ticketbody = id
         self.db.char.msgDeltaTime = time()
     end
@@ -447,10 +418,10 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
         --self:ChatMsg("Matched Who")
         if acc == "Account" then
         else
-            table.insert(MangAdmin.db.account.buffer.who, {tAcc = acc, tChar = char, tIP = ip, tMap = map, tZone = zone, tExp = exp, tGMLevel = gmlevel})
+            table.insert(MangAdmin.db.profile.buffer.who, {tAcc = acc, tChar = char, tIP = ip, tMap = map, tZone = zone, tExp = exp, tGMLevel = gmlevel})
         end
             catchedSth = true
-            output = MangAdmin.db.account.style.showchat
+            output = MangAdmin.db.profile.style.showchat
             WhoUpdate()
     end
 --    ["ma_GmatchAccountInfo"] = "Player(.*) %(guid: (%d+)%) Account: (.*) %(id: (%d+)%) Email: (.*) GMLevel: (%d+) Last IP: (.*) Last login: (.*) Latency: (%d+)ms",
@@ -458,22 +429,22 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
     for charname, charguid, account, accountid, email, gmlvl, lastip, lastlogin, latency in string.gmatch(text, Strings["ma_GmatchAccountInfo"]) do
        ma_whodetail:SetText("|c00ff00ffCharacter:|r"..charname.." |cffffffff("..charguid..")|r\n".."|c00ff0000Acct:|r|cffffffff"..account.." ("..accountid..")|r\n".."|c00ff0000IP:|r|cffffffff"..lastip.."|r\n".."|c00ff0000Login:|r|cffffffff"..lastlogin.."|r\n".."|c00ff0000Latency:|r|cffffffff"..latency.."ms|r\n")  
        catchedSth = true
-       output = MangAdmin.db.account.style.showchat
+       output = MangAdmin.db.profile.style.showchat
     end
     
     for race, class, playedtime, level, money in string.gmatch(text, Strings["ma_GmatchAccountInfo2"]) do
         --self:ChatMsg("Matched Who")
        ma_whodetail2:SetText("|c00ff0000Race:|r|cffffffff"..race.."|r\n".."|c00ff0000Class|r|cffffffff"..class.."|r\n".."|c00ff0000Level:|r|cffffffff"..level.."|r\n".."|c00ff0000Money:|r|cffffffff"..money.."|r\n".."|c00ff0000Played Time:|r|cffffffff"..playedtime.."|r\n")  
        catchedSth = true
-       output = MangAdmin.db.account.style.showchat
+       output = MangAdmin.db.profile.style.showchat
     end
     for mymatch in string.gmatch(text, "=====") do
         catchedSth = true
-        output = MangAdmin.db.account.style.showchat
+        output = MangAdmin.db.profile.style.showchat
     end
     for mymatch in string.gmatch(text, "Characters Online:") do
         catchedSth = true
-        output = MangAdmin.db.account.style.showchat
+        output = MangAdmin.db.profile.style.showchat
     end
  --[[   
     -- get ticket content
@@ -485,13 +456,13 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
           if not catchedSth then
             ----self:LogAction(text)
             local ticketCount = 0
-            table.foreachi(MangAdmin.db.account.buffer.tickets, function() ticketCount = ticketCount + 1 end)
+            table.foreachi(MangAdmin.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
             ----self:LogAction("Prepare to add text to DB ticket: "..ticketCount)
-            for k,v in ipairs(self.db.account.buffer.tickets) do
+            for k,v in ipairs(self.db.profile.buffer.tickets) do
               if k == ticketCount then
                 local oldmsg = v.tMsg
-                self.db.account.buffer.tickets[k].tMsg = oldmsg..text.."\n"
-                ----self:LogAction("Added text to ticket in DB: "..k.." Ticket id:"..self.db.account.buffer.tickets[k].tNumber)
+                self.db.profile.buffer.tickets[k].tMsg = oldmsg..text.."\n"
+                ----self:LogAction("Added text to ticket in DB: "..k.." Ticket id:"..self.db.profile.buffer.tickets[k].tNumber)
               end
             end
             catchedSth = true
@@ -702,11 +673,6 @@ function MangAdmin:TelePlayer(value, player)
   end
 end
 
-function MangAdmin:CreateGuild(leader, name)
-  self:ChatMsg(".guild create "..leader.." "..name)
-  --self:LogAction("Created guild '"..name.."' with leader "..leader..".")
-end
-
 function MangAdmin:SendMail(recipient, subject, body)
   recipient = string.gsub(recipient, " ", "")
   subject = string.gsub(subject, " ", "")
@@ -723,110 +689,6 @@ function MangAdmin:UpdateMailBytesLeft()
     ma_lookupresulttext:SetText(Locale["ma_MailBytesLeft"].."|cff00ff00"..bleft.."|r")
   else
     ma_lookupresulttext:SetText(Locale["ma_MailBytesLeft"].."|cffff0000"..bleft.."|r")
-  end
-end
-
-function MangAdmin:SearchStart(var, value)
-  self.db.char.requests.toggle = true
-  if var == "item" then
-    self.db.char.requests.item = true
-    self.db.account.buffer.items = {}
-    self:ChatMsg(".lookup item "..value)
-  elseif var == "itemset" then
-    self.db.char.requests.itemset = true
-    self.db.account.buffer.itemsets = {}
-    self:ChatMsg(".lookup itemset "..value)
-  elseif var == "spell" then
-    self.db.char.requests.spell = true
-    self.db.account.buffer.spells = {}
-    self:ChatMsg(".lookup spell "..value)
-  elseif var == "skill" then
-    self.db.char.requests.skill = true
-    self.db.account.buffer.skills = {}
-    self:ChatMsg(".lookup skill "..value)
-  elseif var == "quest" then
-    self.db.char.requests.quest = true
-    self.db.account.buffer.quests = {}
-    self:ChatMsg(".lookup quest "..value)
-  elseif var == "creature" then
-    self.db.char.requests.creature = true
-    self.db.account.buffer.creatures = {}
-    self:ChatMsg(".lookup creature "..value)
-  elseif var == "object" then
-    self.db.char.requests.object = true
-    self.db.account.buffer.objects = {}
-    self:ChatMsg(".lookup object "..value)
-  elseif var == "tele" then
-    self.db.char.requests.tele = true
-    self.db.account.buffer.teles = {}
-    self:ChatMsg(".lookup tele "..value)
-  end
-  self.db.account.buffer.counter = 0
-  --self:LogAction("Searching for "..var.."s with the keyword '"..value.."'.")
-end
-
-function MangAdmin:SearchReset()
-  ma_searcheditbox:SetScript("OnTextChanged", function() end)
-  ma_var1editbox:SetScript("OnTextChanged", function() end)
-  ma_searcheditbox:SetText("")
-  ma_var1editbox:SetText("")
-  ma_var2editbox:SetText("")
-  ma_lookupresulttext:SetText(Locale["searchResults"].."0")
-  self.db.char.requests.item = false
-  self.db.char.requests.favitem = false
-  self.db.char.requests.itemset = false
-  self.db.char.requests.favitemset = false
-  self.db.char.requests.spell = false
-  self.db.char.requests.favspell = false
-  self.db.char.requests.skill = false
-  self.db.char.requests.favskill = false
-  self.db.char.requests.quest = false
-  self.db.char.requests.favquest = false
-  self.db.char.requests.creature = false
-  self.db.char.requests.favcreature = false
-  self.db.char.requests.object = false
-  self.db.char.requests.favobject = false
-  self.db.char.requests.tele = false
-  self.db.char.requests.favtele = false
-  self.db.char.requests.toggle = false
-  self.db.account.buffer.items = {}
-  self.db.account.buffer.itemsets = {}
-  self.db.account.buffer.spells = {}
-  self.db.account.buffer.skills = {}
-  self.db.account.buffer.quests = {}
-  self.db.account.buffer.creatures = {}
-  self.db.account.buffer.objects = {}
-  self.db.account.buffer.teles = {}
-  self.db.account.buffer.counter = 0
-  PopupScrollUpdate()
-end
-
-function MangAdmin:PrepareScript(object, text, script)
-
-    if type(script) == "function" then
-      object:SetScript("OnClick", script)
-    elseif type(script) == "table" then
-      for k,v in pairs(script) do
-        object:SetScript(unpack(v))
-      end
-    end
-  --end
-end
-
-function pairsByKeys(t, f)
-  if t == Nil then
-  else
-    local a = {}
-    for n in pairs(t) do table.insert(a, n) end
-    table.sort(a, f)
-    local i = 0      -- iterator variable
-    local iter = function ()   -- iterator function
-        i = i + 1
-        if a[i] == nil then return nil
-        else return a[i], t[a[i]]
-        end
-    end
-    return iter
   end
 end
 

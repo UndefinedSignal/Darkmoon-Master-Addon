@@ -9,22 +9,20 @@
 ## X-Date: 10 August 2010
 ## X-eMail: 
 ## X-Website: http://code.google.com/p/trinityadmin/
-## OptionalDeps: AceLibrary,AceEvent-2.0,AceHook-2.1,AceDebug-2.0,AceLocale-2.2,AceConsole-2.0,AceAddon-2.0
+## OptionalDeps: LibStub,AceEvent-3.0,AceHook-3.0,AceLocale-3.0,AceConsole-3.0,AceAddon-3.0
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
-## SavedVariables: MangAdminDb
-## SavedVariablesPerCharacter: MangAdminDbPerChar
 
-Libraries\AceLibrary\AceLibrary.lua
-Libraries\AceOO-2.0\AceOO-2.0.lua
-Libraries\AceEvent-2.0\AceEvent-2.0.lua
-Libraries\AceHook-2.1\AceHook-2.1.lua
-Libraries\AceDB-2.0\AceDB-2.0.lua
-Libraries\AceDebug-2.0\AceDebug-2.0.lua
-Libraries\AceLocale-2.2\AceLocale-2.2.lua
-Libraries\AceConsole-2.0\AceConsole-2.0.lua
-Libraries\AceAddon-2.0\AceAddon-2.0.lua
-Libraries\Tablet-2.0\Tablet-2.0.lua
+Libraries\LibStub\LibStub.lua
+Libraries\CallbackHandler-1.0\CallbackHandler-1.0.lua
+
+Libraries\AceAddon-3.0\AceAddon-3.0.lua
+Libraries\AceEvent-3.0\AceEvent-3.0.lua
+Libraries\AceHook-3.0\AceHook-3.0.lua
+Libraries\AceDB-3.0\AceDB-3.0.lua
+Libraries\AceLocale-3.0\AceLocale-3.0.lua
+Libraries\AceConsole-3.0\AceConsole-3.0.lua
+
 
 Locales\enUS.lua
 Locales\ruRU.lua

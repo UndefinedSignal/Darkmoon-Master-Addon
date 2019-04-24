@@ -88,13 +88,13 @@ function MangLinkifier_Decompose(chatstring)
 end
 
 function MangLinkifier_Link(orgtxt, id, type)
-  local color = MangAdmin.db.account.style.color.linkifier
+  local color = MangAdmin.db.profile.style.color.linkifier
   local urlcolor = RGBPercToHex(color.r,color.g,color.b)
   --local urlcolor = (string.rep("0",6-string.len((string.upper(string.format("%x", dec)))))..(string.upper(string.format("%x", dec))))
   ----------====~~GO Target Command Replace Text ~~====----------
   if(type == "targid") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Htargidadd:" .. id .. "|h["..Locale["lfer_Spawn"].."]|h|r "
-    link = link .." - |cff" .. urlcolor .. "|Htargidlist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
+--    link = link .." - |cff" .. urlcolor .. "|Htargidlist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
   elseif(type == "targguid") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Htargguidgo:" .. id .. "|h["..Locale["lfer_Goto"].."]|h|r "
     link = link .." - |cff" .. urlcolor .. "|Htargguidmove:" .. id .. "|h["..Locale["lfer_Move"].."]|h|r "
@@ -108,7 +108,7 @@ function MangLinkifier_Link(orgtxt, id, type)
     link = link .." - |cff" .. urlcolor .. "|Hnpcguidmove:" .. id .. "|h["..Locale["lfer_Move"].."]|h|r "
   elseif(type == "npcentry") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Hnpcentryadd:" .. id .. "|h["..Locale["lfer_Spawn"].."]|h|r "
-    link = link .." - |cff" .. urlcolor .. "|Hnpcentrylist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
+--    link = link .." - |cff" .. urlcolor .. "|Hnpcentrylist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
     link = link .." - |cff" .. urlcolor .. "|Hnpcentryreload:" .. id .. "|h["..Locale["lfer_Reload"].."]|h|r "
   elseif(type == "npcdisplay") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Hnpcdisplay:" .. id .. "|h["..Locale["lfer_Morph"].."]|h|r "
@@ -141,7 +141,7 @@ function MangLinkifier_Link(orgtxt, id, type)
   elseif(type == "lookupgo") then
     link = "|cffffffff|Hgameobject_entry:" .. id .. "|h[" .. orgtxt .. "]|h|r"
     link = link .." - |cff" .. urlcolor .. "|Hlookupgoadd:" .. id .. "|h["..Locale["lfer_Spawn"].."]|h|r "
-    link = link .." - |cff" .. urlcolor .. "|Hlookupgolist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
+--    link = link .." - |cff" .. urlcolor .. "|Hlookupgolist:" .. id .. "|h["..Locale["lfer_List"].."]|h|r "
   elseif(type == "lookupcreature") then
     link = "|cffffffff|Hcreature_entry:" .. id .. "|h[" .. orgtxt .. "]|h|r"
     link = link .." - |cff" .. urlcolor .. "|Hlookupcreatureadd:" .. id .. "|h["..Locale["lfer_Spawn"].."]|h|r "
