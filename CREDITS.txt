@@ -1,6 +1,7 @@
 TrinityAdmin is derived from MangAdmin.
 TrinityAdmin is maintained and developed by iotech
-TrinityAdmin v2 is maintained and develop by Ghostcrawler337 Currently
+TrinityAdmin v2 is maintained and develop by Ghostcrawler337
+TrinityAdmin v3 (DMA) is maintained and develop by TestUnit currently
 
 MangAdmin is developed by:
 Josh (Project Owner), iotech, infamousblob, Atreus420, killat200623, dragonfrost, and Necroblack

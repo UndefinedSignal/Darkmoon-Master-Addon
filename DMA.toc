@@ -1,14 +1,14 @@
-## Interface: 70000
+## Interface: 70300
 ## Title: DMA
-## Author: TrinityAdmin Dev team + Manground Dev Team + RPForge Dev Team
+## Author: TrinityAdmin Dev team + Manground Dev Team + TestUnit
 ## Version: 7.0.3
-## Notes: This addon actually was created for work with Trinity and UltraCore Servers and 3.3.5a clients. But now it can be used for 6.2+ draenor and legion servers.
-## URL: http://code.google.com/p/trinityadmin/
-## Name: TrinityAdmin
+## Notes: This addon was created for work with Trinity 7.3.5+ Servers
+## URL: https://gitlab.com/minabazacoop/dma
+## Name: Darkmoon Admin
 ## License: GPLv3
-## X-Date: 10 August 2010
+## X-Date: 24 April 2019
 ## X-eMail: 
-## X-Website: http://code.google.com/p/trinityadmin/
+## X-Website: https://rp-wow.ru/users/132
 ## OptionalDeps: LibStub,AceEvent-3.0,AceHook-3.0,AceLocale-3.0,AceConsole-3.0,AceAddon-3.0
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
@@ -28,6 +28,6 @@ Locales\enUS.lua
 Locales\ruRU.lua
 Locales\strings.lua
 
-TrinityAdmin.lua
-MangLinkifier.lua
+DMA.lua
+Linkifier.lua
 
