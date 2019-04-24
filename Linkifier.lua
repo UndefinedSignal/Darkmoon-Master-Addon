@@ -99,7 +99,8 @@ function MangLinkifier_Link(orgtxt, id, type)
     link = orgtxt .." - |cff" .. urlcolor .. "|Htargguidgo:" .. id .. "|h["..Locale["lfer_Goto"].."]|h|r "
     link = link .." - |cff" .. urlcolor .. "|Htargguidmove:" .. id .. "|h["..Locale["lfer_Move"].."]|h|r "
     link = link .." - |cff" .. urlcolor .. "|Htargguidturn:" .. id .. "|h["..Locale["lfer_Turn"].."]|h|r "
-    link = link .." - |cff" .. urlcolor .. "|Htargguiddel:" .. id .. "|h["..Locale["lfer_Delete"].."]|h|r \n"
+    link = link .." - |cff" .. urlcolor .. "|Htargguiddel:" .. id .. "|h["..Locale["lfer_Delete"].."]|h|r " 
+    link = link .." - |cff" .. urlcolor .. "|Htargguidact:" .. id .. "|h["..Locale["lfer_Activate"].."]|h|r \n" 
   elseif(type == "targxyz") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Htargxyz:" .. id .. "|h["..Locale["lfer_Teleport"].."]|h|r "
   ----------====~~ NPC Info Command Replace Text ~~====----------
@@ -175,6 +176,9 @@ function MangLinkifier_SetItemRef(link, text, button)
     return;
   elseif ( strsub(link, 1, 12) == "targguidturn" ) then
     SendChatMessage(".gobject turn "..strsub(link, 14), say, nil, nil)
+    return;
+  elseif ( strsub(link, 1, 11) == "targguidact" ) then
+      SendChatMessage(".gobject activate "..strsub(link, 13), say, nil, nil)
     return;
   elseif ( strsub(link, 1, 11) == "targguiddel" ) then
     SendChatMessage(".gobject delete "..strsub(link, 13), say, nil, nil)

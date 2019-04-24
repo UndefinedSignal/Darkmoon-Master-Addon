@@ -682,6 +682,7 @@ function Return_enUS()
     ["lfer_Move"] = "Move",
     ["lfer_Turn"] = "Turn",
     ["lfer_Delete"] = "Delete",
+    ["lfer_Activate"] = "Activate",
     ["lfer_Teleport"] = "Teleport",
     ["lfer_Morph"] = "Morph",
     ["lfer_Add"] = "Add",
