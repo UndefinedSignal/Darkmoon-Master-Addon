@@ -704,6 +704,33 @@ function MangAdmin:ID_Setting_Start_Read()
     return mang_ID_start
 end  
 
+function MangAdmin:ID_Setting_Write(num,val)
+    
+    if num == 0 then
+    -- GUID
+      mang_ID_guid = val
+    elseif num == 1 then
+    -- ID
+      mang_ID_entryid = val
+    end
+
+end
+
+function MangAdmin:ID_Setting_Read(num)
+           
+local val = "" 
+           
+    if num == 0 then
+    -- GUID
+      val = mang_ID_guid
+    elseif num == 1 then
+    -- ID
+      val = mang_ID_entryid
+    end
+    
+    return val
+end
+
 function MangAdmin:OID_Setting_Start_Read()
     
     return mang_OID_start
@@ -741,4 +768,4 @@ local val = ""
     end
     
     return val
-end    
+end
