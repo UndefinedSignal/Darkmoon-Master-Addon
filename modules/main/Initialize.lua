@@ -6,8 +6,15 @@ DMA = LibStub("AceAddon-3.0"):NewAddon("DMA", "AceConsole-3.0", "AceEvent-3.0", 
 DMA.Linkifier = DMA;
 DMA.User = {};
 
-if DMAUserBackgroundAlpha == nil then
-	DMAUserBackgroundAlpha = 1;
+if DMAUserVars == nil then
+	DMAUserVars = {}
+	DMAUserVars["Darkmoon"] = true;
+	DMAUserVars["BackgroundAlpha"] = 1;
+	DMAUserVars["Gm-mode"] = false;
+	DMAUserVars["Fly-mode"] = false;
+	DMAUserVars["Whisper"] = false;
+	DMAUserVars["GmChat"] = false;
+	DMAUserVars["Invisibility"] = false;
 end
 
 function DMA:OnEnable()

@@ -200,8 +200,12 @@ function MangLinkifier_SetItemRef(link, text, button)
     SendChatMessage(".list creature "..strsub(link, 14), say, nil, nil)
     return;
   elseif ( strsub(link, 1, 14) == "npcentryreload" ) then
-    SendChatMessage(".reload creature_template "..strsub(link, 16), say, nil, nil)
-    return;
+    if DMAUserVars["Darkmoon"] then
+      return;
+    else
+      SendChatMessage(".reload creature_template "..strsub(link, 16), say, nil, nil)
+      return;
+    end
   elseif ( strsub(link, 1, 10) == "npcdisplay" ) then
     SendChatMessage(".morph "..strsub(link, 12), say, nil, nil)
     return;

@@ -13,6 +13,7 @@
 	</Button>
 
 	<Button name="DMA_GMTriggerButton" text="[TRIGGER]" virtual="true">
+		<NormalFont style="GameFontHighlightLeft"/>
 		<Scripts>
 			<OnClick>
 				DMA:EXECUTEGMCOMMAND(self:GetName())
@@ -81,11 +82,11 @@
 				</Scripts>
 			</Button>
 
-            <Frame name="$parentExposeLeft">
+            <Frame name="$parentExposeLeft" frameStrata="PARENT">
                 <Size x="32" y="64"/>
                 <Anchors><Anchor relativeTo="DMA_MiniMenu" point="LEFT" x="-12" y="0"/></Anchors>
 		        <Frames>
-		        	<Button name="$parentDummy" frameStrata="HIGH">
+		        	<Button name="$parentDummy" frameStrata="PARENT" frameLevel="4">
 		        		<Anchors>
 		        			<Anchor point="TOPLEFT" x="0" y="0"/>
 		        			<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
@@ -94,7 +95,7 @@
 				        <Layers>
 
 				        	<Layer level="BACKGROUND">
-					            <Texture parentKey="background" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="HIGH">
+					            <Texture parentKey="background" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="PARENT">
 					                <Anchors>
 					                    <Anchor point="TOPLEFT" x="0" y="0"/>
 					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
@@ -105,7 +106,7 @@
 				        	</Layer>
 
 				            <Layer level="HIGHLIGHT">
-					            <Texture parentKey="highlight" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Flash" alphaMode="ADD" frameStrata="HIGH">
+					            <Texture parentKey="highlight" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Flash" alphaMode="ADD" frameStrata="PARENT">
 					            	
 					                <Anchors>
 					                    <Anchor point="TOPLEFT" x="0" y="0"/>
@@ -130,11 +131,11 @@
 		        </Frames>
             </Frame>
 
-            <Frame name="$parentExposeRight" frameStrata="HIGH">
+            <Frame name="$parentExposeRight" frameStrata="PARENT">
                 <Size x="32" y="64"/>
                 <Anchors><Anchor relativeTo="DMA_MiniMenu" point="RIGHT" x="14" y="0"/></Anchors>
 		        <Frames>
-		        	<Button name="$parentDummy">
+		        	<Button name="$parentDummy" frameStrata="PARENT" frameLevel="4">
 		        		<Anchors>
 		        			<Anchor point="TOPLEFT" x="0" y="0"/>
 		        			<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
@@ -143,7 +144,7 @@
 				        <Layers>
 
 				        	<Layer level="BACKGROUND">
-					            <Texture name="$parentBackground" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="HIGH">
+					            <Texture name="$parentBackground" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="PARENT">
 					                <Anchors>
 					                    <Anchor point="TOPLEFT" x="0" y="0"/>
 					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
@@ -538,7 +539,7 @@
                           ` | '
             -->
 
-			<Slider name="DMA_AlphaSlider" orientation="HORIZONTAL" enableMouse="true" hidden="false" minValue="0" maxValue="100" defaultValue="75" valueStep="1">
+			<Slider name="DMA_AlphaSlider" orientation="HORIZONTAL" enableMouse="true" hidden="false" minValue="0" maxValue="100" valueStep="1">
 				<Size x="164" y="20"/>
 				<Anchors>
 					<Anchor relativeTo="DMA_MiniMenu" point="BOTTOM" x="0" y="0"/>

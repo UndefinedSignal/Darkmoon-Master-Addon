@@ -106,20 +106,21 @@ function DMA:ShowGMFrame(self)
 end
 
 function DMA:BackGroundAlphaInitialize()
-	local number = tonumber(DMAUserBackgroundAlpha)
+	local number = tonumber(DMAUserVars["BackgroundAlpha"])
 	DMA_MiniMenuBackground:SetAlpha(number);
 	DMA_MiniMenuLeftBackground:SetAlpha(number);
 	DMA_MiniMenuRightBackground:SetAlpha(number);
 end
 
 function DMA:AlphaSlider()
-	DMA_AlphaSlider:SetOrientation('HORIZONTAL')
-	DMA_AlphaSlider:SetMinMaxValues(1, 11)
+	DMA_AlphaSlider:SetOrientation('HORIZONTAL');
+	DMA_AlphaSlider:SetMinMaxValues(1, 11);
+	DMA_AlphaSlider:SetValue(DMAUserVars["BackgroundAlpha"]*10);
 	DMA_AlphaSlider:SetScript("OnValueChanged", function(self,event,arg1) 
 		local number = tonumber(event)/10;
 		DMA_MiniMenuBackground:SetAlpha(number);
 		DMA_MiniMenuLeftBackground:SetAlpha(number);
 		DMA_MiniMenuRightBackground:SetAlpha(number);
-		DMAUserBackgroundAlpha = number;
+		DMAUserVars["BackgroundAlpha"] = number;
 	end)
 end
