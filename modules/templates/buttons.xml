@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Button name="DMA_TriggerButton" virtual="true" inherits="UIMenuButtonStretchTemplate">
+		
+
+
+		<HighlightTexture file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD">
+			<Color a="0.3" r="1" g="1" b="1" />
+			<Anchors>
+				<Anchor point="TOPLEFT" x="0" y="0"/>
+				<Anchor point="BOTTOMRIGHT" x="0" y="-9"/>
+			</Anchors>
+			<TexCoords left="0" right="0.6640625" top="0" bottom="1"/>
+		</HighlightTexture>
+
+	</Button>
+</Ui>

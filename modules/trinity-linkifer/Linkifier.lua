@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------------------------------------
 --
 -- TrinityAdmin Version 3.x
--- TrinityAdmin is a derivative of MangAdmin.
+-- TrinityAdmin is a derivative of DMA.Linkifier.
 --
 -- Copyright (C) 2007 Free Software Foundation, Inc.
 -- License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -88,7 +88,7 @@ function MangLinkifier_Decompose(chatstring)
 end
 
 function MangLinkifier_Link(orgtxt, id, type)
-  local color = MangAdmin.db.profile.style.color.linkifier
+  local color = DMA.Linkifier.db.profile.style.color.linkifier
   local urlcolor = RGBPercToHex(color.r,color.g,color.b)
   --local urlcolor = (string.rep("0",6-string.len((string.upper(string.format("%x", dec)))))..(string.upper(string.format("%x", dec))))
   ----------====~~GO Target Command Replace Text ~~====----------

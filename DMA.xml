@@ -4,7 +4,7 @@
 	<Include file="Libraries\libs.xml"/>
 	<Include file="Locales\include.xml"/>
 
-	<Include file="modules\trinity-linkifer\include.xml"/>
+	<Include file="Modules\Modules.xml"/>
 
 	<Script file="DMA.lua" />
 

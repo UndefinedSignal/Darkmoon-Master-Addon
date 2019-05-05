@@ -1,7 +1,7 @@
 ﻿-------------------------------------------------------------------------------------------------------------
 --
 -- TrinityAdmin Version 3.x
--- TrinityAdmin is a derivative of MangAdmin.
+-- DMA.Linkifier is a derivative of TrinityAdmin.
 --
 -- Copyright (C) 2007 Free Software Foundation, Inc.
 -- License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -18,28 +18,32 @@
 -- Dev Blog: http://trinityadmin.blogspot.com/
 -------------------------------------------------------------------------------------------------------------
 
-local genv = getfenv(0)
-local Mang = genv.Mang
-GPS = '.gps'
-cWorking = 0
-cMap = 0
-cX = 0
-cY = 0
-cZ = 0
-incX = 0
-incY = 0
-incZ = 0
-fID = 0
-gettingGOBinfo=0
-gettingGOBinfoinfo=0
+local cWorking = 0
+local cMap = 0
+local cX = 0
+local cY = 0
+local cZ = 0
+local incX = 0
+local incY = 0
+local incZ = 0
+local fID = 0
+local gettingGOBinfo=0
+local gettingGOBinfoinfo=0
 
-MAJOR_VERSION = "Darkmoon Master Addon |cFF38FE62Legion|r v0.9.5"
-MINOR_VERSION = "$Revision: 3 $"
-ROOT_PATH     = "Interface\\AddOns\\DMA\\"
 local cont = ""
 --if not LibStub then error(MAJOR_VERSION .. " requires LibStub") end
 
-MangAdmin    = LibStub("AceAddon-3.0"):NewAddon("MangAdmin", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0")
+-- Register Translations
+--Locale:EnableDynamicLocales(true)
+--Locale:EnableDebugging()
+--Locale:RegisterTranslations("enUS", function() return Return_enUS() end)
+--Locale:RegisterTranslations("ruRU", function() return Return_ruRU() end)
+--Strings:EnableDynamicLocales(true)
+--Strings:RegisterTranslations("enUS", function() return ReturnStrings_enUS() end)
+--Strings:RegisterTranslations("ruRU", function() return ReturnStrings_ruRU() end)
+--Locale:Debug()
+--Locale:SetLocale("ruRU")
+
 
 local defaults = {
   char = {
@@ -134,46 +138,34 @@ local defaults = {
     }
 }
 
-Locale       = LibStub("AceLocale-3.0"):NewLocale("MangAdmin", "enUS")
+Locale       = LibStub("AceLocale-3.0"):NewLocale("DMA.Linkifier", "ruRU")
 Locale       = Return_enUS();
 
-Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "enUS")
+Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "ruRU")
 Strings      = ReturnStrings_enUS()
 
+function DMA.Linkifier:OnInitialize()
+  self.db = LibStub("AceDB-3.0"):New("DMA.LinkifierDB", defaults)
 
--- Register Translations
---Locale:EnableDynamicLocales(true)
---Locale:EnableDebugging()
---Locale:RegisterTranslations("enUS", function() return Return_enUS() end)
---Locale:RegisterTranslations("ruRU", function() return Return_ruRU() end)
---Strings:EnableDynamicLocales(true)
---Strings:RegisterTranslations("enUS", function() return ReturnStrings_enUS() end)
---Strings:RegisterTranslations("ruRU", function() return ReturnStrings_ruRU() end)
---Locale:Debug()
---Locale:SetLocale("ruRU")
-
-function MangAdmin:OnInitialize()
-  self.db = LibStub("AceDB-3.0"):New("MangAdminDB", defaults)
-
-  -- initializing MangAdmin
+  -- initializing DMA.Linkifier
   --self:CreateFrames()
   --self:RegisterChatCommand(Locale["slashcmds"], self.consoleOpts) -- this registers the chat commands
-  --self:InitButtons()  -- this prepares the actions and tooltips of nearly all MangAdmin buttons  
+  --self:InitButtons()  -- this prepares the actions and tooltips of nearly all DMA.Linkifier buttons  
   --InitControls()
   --self:SearchReset()
-  MangAdmin.db.profile.buffer.who = {}
+  DMA.Linkifier.db.profile.buffer.who = {}
   -- FuBar plugin config
---[[  MangAdmin.hasNoColor = true
-  MangAdmin.hasNoText = false
-  MangAdmin.clickableTooltip = true
-  MangAdmin.hasIcon = true
-  MangAdmin.hideWithoutStandby = true
-  MangAdmin:SetIcon(ROOT_PATH.."Textures\\icon.tga")
-  -- make MangAdmin frames closable with escape key
+--[[  DMA.Linkifier.hasNoColor = true
+  DMA.Linkifier.hasNoText = false
+  DMA.Linkifier.clickableTooltip = true
+  DMA.Linkifier.hasIcon = true
+  DMA.Linkifier.hideWithoutStandby = true
+  DMA.Linkifier:SetIcon(ROOT_PATH.."Textures\\icon.tga")
+  -- make DMA.Linkifier frames closable with escape key
   tinsert(UISpecialFrames,"ma_bgframe")
   tinsert(UISpecialFrames,"ma_popupframe")]]
   -- those all hook the AddMessage method of the chat frames.
-  -- They will be redirected to MangAdmin:AddMessage(...)
+  -- They will be redirected to DMA.Linkifier:AddMessage(...)
   for i=1,NUM_CHAT_WINDOWS do
     local cf = getglobal("ChatFrame"..i)
     self:RawHook(cf, "AddMessage", true)
@@ -186,7 +178,7 @@ function MangAdmin:OnInitialize()
   ma_gobmovedistforwardback:SetText("1")
   ma_gobmovedistleftright:SetText("1")
   ma_gobmovedistupdown:SetText("1")]]
-  MangAdmin.db.profile.buffer.who = {}
+  DMA.Linkifier.db.profile.buffer.who = {}
   --clear color buffer
   self.db.profile.style.color.buffer = {}
   --altering the function setitemref, to make it possible to click links
@@ -194,10 +186,10 @@ function MangAdmin:OnInitialize()
   SetItemRef = MangLinkifier_SetItemRef
 end
 
-function MangAdmin:AddMessage(frame, text, r, g, b, id)
+function DMA.Linkifier:AddMessage(frame, text, r, g, b, id)
   -- frame is the object that was hooked (one of the ChatFrames)  
   local catchedSth = false
-  local output = MangAdmin.db.profile.style.showchat
+  local output = DMA.Linkifier.db.profile.style.showchat
   if id == 1 then --make sure that the message comes from the server, message id = 1
     --Catches if Toggle is still on for some reason, but search frame is not up, and disables it so messages arent caught
     if self.db.char.requests.toggle then
@@ -298,15 +290,15 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
       end
     end
 
-    if MangAdmin:ID_Setting_Start_Read() then    
+    if DMA.Linkifier:ID_Setting_Start_Read() then    
         local b1,e1,pattern = string.find(text, "GUID: (%d+)%.")
         --local b1,e1,pattern = string.find(text, "GUID:")
         if b1 then
             b1,e1,pattern = string.find(text, "([0-9]+)")
             if b1 then
-                MangAdmin:ID_Setting_Start_Write(0)
+                DMA.Linkifier:ID_Setting_Start_Write(0)
                 
-                MangAdmin:ID_Setting_Write(0,pattern)
+                DMA.Linkifier:ID_Setting_Write(0,pattern)
                 --ma_NPC_guidbutton:SetText(pattern)
                 --self:LogAction("NPC_GUID_Get id "..pattern..".")
             end	
@@ -318,7 +310,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
             b1,e1,pattern = string.find(text, "([0-9]+)")
             if b1 then
                 
-                MangAdmin:ID_Setting_Write(1,pattern)
+                DMA.Linkifier:ID_Setting_Write(1,pattern)
                 --ma_NPC_idbutton:SetText(pattern)
                 --self:LogAction("NPC_EntryID_Get id "..pattern..".")
             end	
@@ -330,7 +322,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
             b1,e1,pattern = string.find(text, "([0-9]+)")
             if b1 then
                 
-                --MangAdmin:ID_Setting_Write(1,pattern)
+                --DMA.Linkifier:ID_Setting_Write(1,pattern)
                 --ma_npcdisplayid:SetText(pattern)
                 --self:LogAction("NPC_DisplayID_Get id "..pattern..".")
             end	
@@ -339,14 +331,14 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
     
     end
 
-    if MangAdmin:OID_Setting_Start_Read() then    
+    if DMA.Linkifier:OID_Setting_Start_Read() then    
         local b1,e1,pattern = string.find(text, "GUID: (%d+) ")
         --local b1,e1,pattern = string.find(text, "GUID:")
         if b1 then
             b1,e1,pattern = string.find(text, "([0-9]+)")
             if b1 then
-                MangAdmin:OID_Setting_Start_Write(0)
-                MangAdmin:OID_Setting_Write(0,pattern)
+                DMA.Linkifier:OID_Setting_Start_Write(0)
+                DMA.Linkifier:OID_Setting_Write(0,pattern)
                 --ma_Obj_guidbutton:SetText(pattern)
                 --self:LogAction("OBJECT_GUID_Get id "..pattern..".")
             end	
@@ -361,7 +353,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
             b1,e1,pattern = string.find(xpattern, "([0-9]+)")
             if b1 then
                 
-    --      		MangAdmin:OID_Setting_Write(1,pattern)
+    --      		DMA.Linkifier:OID_Setting_Write(1,pattern)
                 --ma_Obj_idbutton:SetText(pattern)
                 --self:LogAction("OBJECT_EntryID_Get id "..pattern..".")
                 
@@ -376,7 +368,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
             b1,e1,pattern = string.find(xpattern, "([0-9]+)")
             if b1 then
                 
-    --      		MangAdmin:OID_Setting_Write(1,pattern)
+    --      		DMA.Linkifier:OID_Setting_Write(1,pattern)
     --      		ma_Obj_idbutton:SetText(pattern)
                 --ma_gobdisplayid:SetText(pattern)
                 --self:LogAction("OBJECT DisplayID"..pattern..".")
@@ -390,18 +382,18 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
     for diff in string.gmatch(text, Strings["ma_GmatchUpdateDiff"]) do
         --ma_difftext:SetText(diff)
         catchedSth = true
---        output = MangAdmin.db.profile.style.showchat
-        output = MangAdmin.db.profile.style.showchat  
+--        output = DMA.Linkifier.db.profile.style.showchat
+        output = DMA.Linkifier.db.profile.style.showchat  
     end
 
     -- get results of ticket list. In Trinity, everything will be constructed off the list
     for id, char, create, update in string.gmatch(text, Strings["ma_GmatchTickets"]) do
-        table.insert(MangAdmin.db.profile.buffer.tickets, {tNumber = id, tChar = char, tLCreate = create, tLUpdate = update, tMsg = ""})
+        table.insert(DMA.Linkifier.db.profile.buffer.tickets, {tNumber = id, tChar = char, tLCreate = create, tLUpdate = update, tMsg = ""})
         local ticketCount = 0
-        table.foreachi(MangAdmin.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
+        table.foreachi(DMA.Linkifier.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
         ticketCount = 0
         catchedSth = true
-        output = MangAdmin.db.profile.style.showchat
+        output = DMA.Linkifier.db.profile.style.showchat
         self.db.char.requests.ticketbody = id
         self.db.char.msgDeltaTime = time()
     end
@@ -418,10 +410,10 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
         --self:ChatMsg("Matched Who")
         if acc == "Account" then
         else
-            table.insert(MangAdmin.db.profile.buffer.who, {tAcc = acc, tChar = char, tIP = ip, tMap = map, tZone = zone, tExp = exp, tGMLevel = gmlevel})
+            table.insert(DMA.Linkifier.db.profile.buffer.who, {tAcc = acc, tChar = char, tIP = ip, tMap = map, tZone = zone, tExp = exp, tGMLevel = gmlevel})
         end
             catchedSth = true
-            output = MangAdmin.db.profile.style.showchat
+            output = DMA.Linkifier.db.profile.style.showchat
             WhoUpdate()
     end
 --    ["ma_GmatchAccountInfo"] = "Player(.*) %(guid: (%d+)%) Account: (.*) %(id: (%d+)%) Email: (.*) GMLevel: (%d+) Last IP: (.*) Last login: (.*) Latency: (%d+)ms",
@@ -429,22 +421,22 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
     for charname, charguid, account, accountid, email, gmlvl, lastip, lastlogin, latency in string.gmatch(text, Strings["ma_GmatchAccountInfo"]) do
        ma_whodetail:SetText("|c00ff00ffCharacter:|r"..charname.." |cffffffff("..charguid..")|r\n".."|c00ff0000Acct:|r|cffffffff"..account.." ("..accountid..")|r\n".."|c00ff0000IP:|r|cffffffff"..lastip.."|r\n".."|c00ff0000Login:|r|cffffffff"..lastlogin.."|r\n".."|c00ff0000Latency:|r|cffffffff"..latency.."ms|r\n")  
        catchedSth = true
-       output = MangAdmin.db.profile.style.showchat
+       output = DMA.Linkifier.db.profile.style.showchat
     end
     
     for race, class, playedtime, level, money in string.gmatch(text, Strings["ma_GmatchAccountInfo2"]) do
         --self:ChatMsg("Matched Who")
        ma_whodetail2:SetText("|c00ff0000Race:|r|cffffffff"..race.."|r\n".."|c00ff0000Class|r|cffffffff"..class.."|r\n".."|c00ff0000Level:|r|cffffffff"..level.."|r\n".."|c00ff0000Money:|r|cffffffff"..money.."|r\n".."|c00ff0000Played Time:|r|cffffffff"..playedtime.."|r\n")  
        catchedSth = true
-       output = MangAdmin.db.profile.style.showchat
+       output = DMA.Linkifier.db.profile.style.showchat
     end
     for mymatch in string.gmatch(text, "=====") do
         catchedSth = true
-        output = MangAdmin.db.profile.style.showchat
+        output = DMA.Linkifier.db.profile.style.showchat
     end
     for mymatch in string.gmatch(text, "Characters Online:") do
         catchedSth = true
-        output = MangAdmin.db.profile.style.showchat
+        output = DMA.Linkifier.db.profile.style.showchat
     end
  --[[   
     -- get ticket content
@@ -456,7 +448,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
           if not catchedSth then
             ----self:LogAction(text)
             local ticketCount = 0
-            table.foreachi(MangAdmin.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
+            table.foreachi(DMA.Linkifier.db.profile.buffer.tickets, function() ticketCount = ticketCount + 1 end)
             ----self:LogAction("Prepare to add text to DB ticket: "..ticketCount)
             for k,v in ipairs(self.db.profile.buffer.tickets) do
               if k == ticketCount then
@@ -496,7 +488,7 @@ function MangAdmin:AddMessage(frame, text, r, g, b, id)
   end
 end
 
-function MangAdmin:ChatMsg(msg, msgt, recipient)
+function DMA.Linkifier:ChatMsg(msg, msgt, recipient)
   if not msgt then local msgt = "say" end
   if msgt == "addon" then
     if recipient then
@@ -513,11 +505,11 @@ function MangAdmin:ChatMsg(msg, msgt, recipient)
   end
 end
 
-function MangAdmin:AndBit(value, test) 
+function DMA.Linkifier:AndBit(value, test) 
   return mod(value, test*2) >= test 
 end
 
-function MangAdmin:SetSkill(value, skill, maxskill)
+function DMA.Linkifier:SetSkill(value, skill, maxskill)
   if self:Selection("player") or self:Selection("self") or self:Selection("none") then
     local player = UnitName("target") or UnitName("player")
     local class = UnitClass("target") or UnitClass("player")
@@ -547,7 +539,7 @@ function MangAdmin:SetSkill(value, skill, maxskill)
   end
 end
 
-function MangAdmin:Quest(value, state)
+function DMA.Linkifier:Quest(value, state)
   if self:Selection("player") or self:Selection("self") or self:Selection("none") then
     local player = UnitName("target") or UnitName("player")
     local class = UnitClass("target") or UnitClass("player")
@@ -576,7 +568,7 @@ function MangAdmin:Quest(value, state)
   end
 end
 
-function MangAdmin:Creature(value, state)
+function DMA.Linkifier:Creature(value, state)
     local command = ".npc add"
     local logcmd = "Spawned"
     if state == "RightButton" then
@@ -598,7 +590,7 @@ function MangAdmin:Creature(value, state)
 
 end
 
-function MangAdmin:AddItem(value, state)
+function DMA.Linkifier:AddItem(value, state)
   if self:Selection("player") or self:Selection("self") or self:Selection("none") then
     local player = UnitName("target") or UnitName("player")
     local amount = ma_var1editbox:GetText()
@@ -633,7 +625,7 @@ function MangAdmin:AddItem(value, state)
   end
 end
 
-function MangAdmin:AddItemSet(value)
+function DMA.Linkifier:AddItemSet(value)
   if self:Selection("player") or self:Selection("self") or self:Selection("none") then
     local player = UnitName("target") or UnitName("player")
     self:ChatMsg(".additemset "..value)
@@ -643,7 +635,7 @@ function MangAdmin:AddItemSet(value)
   end
 end
 
-function MangAdmin:AddObject(value, state)
+function DMA.Linkifier:AddObject(value, state)
   local loot = ma_var1editbox:GetText()
   local _time = ma_var2editbox:GetText()
   if state == "RightButton" then
@@ -663,7 +655,7 @@ function MangAdmin:AddObject(value, state)
   end
 end
 
-function MangAdmin:TelePlayer(value, player)
+function DMA.Linkifier:TelePlayer(value, player)
   if value == "gochar" then
     self:ChatMsg(".appear "..player)
     --self:LogAction("Teleported to player "..player..".")
@@ -673,7 +665,7 @@ function MangAdmin:TelePlayer(value, player)
   end
 end
 
-function MangAdmin:SendMail(recipient, subject, body)
+function DMA.Linkifier:SendMailLinkifieril(recipient, subject, body)
   recipient = string.gsub(recipient, " ", "")
   subject = string.gsub(subject, " ", "")
   body = string.gsub(body, "\n", " ")
@@ -683,7 +675,7 @@ function MangAdmin:SendMail(recipient, subject, body)
   --self:LogAction("Sent a mail to "..recipient..". Subject was: "..subject)
 end
 
-function MangAdmin:UpdateMailBytesLeft()
+function DMA.Linkifier:UpdateMailBytesLeft()
   local bleft = 246 - strlen(ma_searcheditbox:GetText()) - strlen(ma_var1editbox:GetText()) - strlen(ma_maileditbox:GetText())
   if bleft >= 0 then
     ma_lookupresulttext:SetText(Locale["ma_MailBytesLeft"].."|cff00ff00"..bleft.."|r")
@@ -699,12 +691,12 @@ local mang_OID_start = 0
 local mang_OID_guid = ""
 local mang_OID_entryid = ""
 
-function MangAdmin:ID_Setting_Start_Read()
+function DMA.Linkifier:ID_Setting_Start_Read()
     
     return mang_ID_start
 end  
 
-function MangAdmin:ID_Setting_Write(num,val)
+function DMA.Linkifier:ID_Setting_Write(num,val)
     
     if num == 0 then
     -- GUID
@@ -716,7 +708,7 @@ function MangAdmin:ID_Setting_Write(num,val)
 
 end
 
-function MangAdmin:ID_Setting_Read(num)
+function DMA.Linkifier:ID_Setting_Read(num)
            
 local val = "" 
            
@@ -731,19 +723,19 @@ local val = ""
     return val
 end
 
-function MangAdmin:OID_Setting_Start_Read()
+function DMA.Linkifier:OID_Setting_Start_Read()
     
     return mang_OID_start
 
 end   
 
-function MangAdmin:OID_Setting_Start_Write(num)
+function DMA.Linkifier:OID_Setting_Start_Write(num)
     
     mang_OID_start = num
 
 end    
 
-function MangAdmin:OID_Setting_Write(num,val)
+function DMA.Linkifier:OID_Setting_Write(num,val)
     
     if num == 0 then
     -- GUID
@@ -755,7 +747,7 @@ function MangAdmin:OID_Setting_Write(num,val)
 
 end    
 
-function MangAdmin:OID_Setting_Read(num)
+function DMA.Linkifier:OID_Setting_Read(num)
            
 local val = "" 
            
@@ -768,4 +760,9 @@ local val = ""
     end
     
     return val
+end
+
+function DMA.Linkifier:SendCoreMessage(msg)
+  msg = "."..msg;
+  SendAddonMessage("RPS", msg, "WHISPER", UnitName("player"));
 end

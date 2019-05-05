@@ -1,0 +1,743 @@
+<Ui
+    xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<Button name="DMA_MenuButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="[TEXT]" virtual="true" hidden="false">
+		<Size x="115" y="28"/>
+		<NormalFont style="GameFontHighlightLeft"/>
+		<Scripts>
+			<OnClick>
+				DMA:EXECUTEPICKMENUCOMMAND(self:GetName())
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="DMA_GMTriggerButton" text="[TRIGGER]" virtual="true">
+		<Scripts>
+			<OnClick>
+				DMA:EXECUTEGMCOMMAND(self:GetName())
+			</OnClick>
+			<OnLeave>
+				DMA:HideTooltip(self);
+			</OnLeave>
+		</Scripts>
+	</Button>
+
+	<CheckButton name="DMAGobMoveCheckboxTemplate" inherits="UIPanelSquareButton" virtual="true">
+		<Size x="38" y="38" />
+
+	</CheckButton>
+
+    <Frame name="DMA_MiniMenu" parent="UIParent" enableMouse="true" movable="true" clampedToScreen="true" hidden="false">
+    	<Size x="200" y="350"/>
+        <Anchors>
+            <Anchor point="CENTER" x="0" y="0"/>
+        </Anchors>
+
+        <Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="3" right="3" top="3" bottom="3"/>
+            </BackgroundInsets>
+        </Backdrop>
+
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                <!--Interface\BankFrame\Bank-Background-->
+                <!--Interface\Collections\CollectionsBackgroundTile-->
+                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                <Texture name="$parentBackground" file="Interface\Legionfall\Legionfall">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="3" y="0"/>
+                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                    </Anchors>
+                    <TexCoords top="0.0087890625" left="0.0087890625" bottom="0.560546875" right="0.8466796875"/>
+                    <Color r="1" g="1" b="1" a="0.75"/>
+                </Texture>
+            </Layer>
+        </Layers>
+
+        <Frames>
+
+			<Button parentKey="Close" name="DMAEye">
+				<Size x="32" y="32"/>
+				<Anchors>
+					<Anchor relativeTo="DMA_MiniMenu" relativePoint="TOP" x="-14" y="13"/>
+				</Anchors>
+				<NormalTexture file="Interface\AddOns\DMA\Resources\IMG\darkmoon"/>
+				<Scripts>
+					<OnEnter>
+						self:SetNormalTexture("Interface/AddOns/DMA/Resources/IMG/darkmoon-closed");
+					</OnEnter>
+					<OnLeave>
+						self:SetNormalTexture("Interface/AddOns/DMA/Resources/IMG/darkmoon");
+					</OnLeave>
+					<OnClick>
+						DMA_MiniMenu:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+
+            <Frame name="$parentExposeLeft">
+                <Size x="32" y="64"/>
+                <Anchors><Anchor relativeTo="DMA_MiniMenu" point="LEFT" x="-12" y="0"/></Anchors>
+		        <Frames>
+		        	<Button name="$parentDummy" frameStrata="HIGH">
+		        		<Anchors>
+		        			<Anchor point="TOPLEFT" x="0" y="0"/>
+		        			<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+		        		</Anchors>
+
+				        <Layers>
+
+				        	<Layer level="BACKGROUND">
+					            <Texture parentKey="background" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="HIGH">
+					                <Anchors>
+					                    <Anchor point="TOPLEFT" x="0" y="0"/>
+					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					                </Anchors>
+					                <Color r="0.5" g="0.32" b="0.55" a="0.75"/>
+					            </Texture>
+				        		
+				        	</Layer>
+
+				            <Layer level="HIGHLIGHT">
+					            <Texture parentKey="highlight" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Flash" alphaMode="ADD" frameStrata="HIGH">
+					            	
+					                <Anchors>
+					                    <Anchor point="TOPLEFT" x="0" y="0"/>
+					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					                </Anchors>
+					            </Texture>
+				            </Layer>
+				        </Layers>
+
+		        		<Scripts>
+		        			<OnEnter>
+		        				DMA:DMA_MiniMenuExposeLeftOnEnter(self);
+		        			</OnEnter>
+		        			<OnLeave>
+		        				DMA:DMA_MiniMenuExposeLeftOnLeave(self);
+		        			</OnLeave>
+		        			<OnClick>
+		        				DMA:DMA_MiniMenuExposeLeftOnClick(self);
+		        			</OnClick>
+		        		</Scripts>
+		        	</Button>
+		        </Frames>
+            </Frame>
+
+            <Frame name="$parentExposeRight" frameStrata="HIGH">
+                <Size x="32" y="64"/>
+                <Anchors><Anchor relativeTo="DMA_MiniMenu" point="RIGHT" x="14" y="0"/></Anchors>
+		        <Frames>
+		        	<Button name="$parentDummy">
+		        		<Anchors>
+		        			<Anchor point="TOPLEFT" x="0" y="0"/>
+		        			<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+		        		</Anchors>
+
+				        <Layers>
+
+				        	<Layer level="BACKGROUND">
+					            <Texture name="$parentBackground" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Bgnd" frameStrata="HIGH">
+					                <Anchors>
+					                    <Anchor point="TOPLEFT" x="0" y="0"/>
+					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					                </Anchors>
+					                <Color r="0.5" g="0.32" b="0.55" a="0.75"/>
+					            </Texture>
+				        		
+				        	</Layer>
+
+				            <Layer level="HIGHLIGHT">
+					            <Texture parentKey="highlight" file="Interface\UNITPOWERBARALT\ThunderkingCir_Pill_Flash" alphaMode="ADD" frameStrata="HIGH">
+					            	
+					                <Anchors>
+					                    <Anchor point="TOPLEFT" x="0" y="0"/>
+					                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					                </Anchors>
+					            </Texture>
+				            </Layer>
+				        </Layers>
+
+		        		<Scripts>
+		        			<OnEnter>
+		        				DMA:DMA_MiniMenuExposeRightOnEnter(self);
+		        			</OnEnter>
+		        			<OnLeave>
+		        				DMA:DMA_MiniMenuExposeRightOnLeave(self);
+		        			</OnLeave>
+		        			<OnClick>
+		        				DMA:DMA_MiniMenuExposeRightOnClick(self);
+		        			</OnClick>
+		        		</Scripts>
+		        	</Button>
+		        </Frames>
+            </Frame>
+
+            <!-- 
+           \.   \.      __,-"-.__      ./   ./
+       \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
+        \`.  \_`-''      _,="=._      ``-'_/  .'/
+         \ `-',-._   _.  _,="=._  ,_   _.-,`-' /
+      \. /`,-',-._"""  \ _,="=._ /  """_.-,`-,'\ ./
+       \`-'  /    `-._  "       "  _.-'    \  `-'/
+       /)   (         \    ,-.    /         )   (\
+    ,-'"     `-.       \  /   \  /       .-'     "`-,
+  ,'_._         `-.____/ /  _  \ \____.-'         _._`,
+ /,'   `.                \_/ \_/                .'   `,\
+/'       )                  _            Krogg (       `\
+        /   _,-'"`-.  ,++|T|||T|++.  .-'"`-,_   \
+       / ,-'        \/|`|`|`|'|'|'|\/        `-, \
+      /,'             | | | | | | |             `,\
+     /'               ` | | | | | '               `\
+                        ` | | | '
+                          ` | '
+            -->
+
+			<Frame name="DMA_MiniMenuContentGM" hidden="false">
+				<Anchors>
+		            <Anchor relativeTo="DMA_MiniMenu" point="TOPLEFT" x="3" y="0"/>
+		            <Anchor relativeTo="DMA_MiniMenu" point="BOTTOMRIGHT" x="0" y="0"/>
+				</Anchors>
+
+			    <Frames>
+		        	<Button name="$parentGMON" inherits="DMA_GMTriggerButton" text="GM-mode — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parent" point="TOP" x="-20" y="-20"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "GM");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentGMOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentGMON" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "GM");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentFLYON" inherits="DMA_GMTriggerButton" text="Fly-mode — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentGMON" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "FLY");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentFLYOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentFLYON" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "FLY");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentWHON" inherits="DMA_GMTriggerButton" text="Whisper — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentFLYON" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "WHISPER");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentWHOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentWHON" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "WHISPER");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentCHAT" inherits="DMA_GMTriggerButton" text="GM Chat — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentWHON" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "CHAT");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentCHATOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentCHAT" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "CHAT");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentINVON" inherits="DMA_GMTriggerButton" text="Invisibility — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentCHAT" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "VIS");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentINVOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentINVON" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "VIS");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentTAXICHEAT" inherits="DMA_GMTriggerButton" text="Taxicheat — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentINVON" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "TAXI");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentTAXICHEATOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentTAXICHEAT" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "TAXI");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentWATERWALK" inherits="DMA_GMTriggerButton" text="Waterwalk — On">
+				        <Anchors>
+				            <Anchor relativeTo="$parentTAXICHEAT" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "WATERWALK");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentWATERWALKOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentWATERWALK" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "WATERWALK");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentVIEWALLMAPS" inherits="DMA_GMTriggerButton" text="View All Maps">
+				        <Anchors>
+				            <Anchor relativeTo="$parentWATERWALK" point="LEFT" x="0" y="-25"/>
+				        </Anchors>
+						<Size x="115" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "VIEWALL");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+		        	<Button name="$parentVIEWALLMAPSOFF" inherits="DMA_GMTriggerButton" text="[ Off ]">
+				        <Anchors>
+				            <Anchor relativeTo="$parentVIEWALLMAPS" point="RIGHT" x="40" y="0"/>
+				        </Anchors>
+						<Size x="48" y="28"/>
+						<NormalFont style="GameFontHighlightLeft"/>
+						<Scripts>
+							<OnEnter>
+								DMA:ShowTooltipForTriggerButton(self, "VIEWALL");
+							</OnEnter>
+						</Scripts>
+		        	</Button>
+			    </Frames>
+			</Frame>
+
+			<Frame name="DMAGobMoveFrame" movable="true" toplevel="true" frameStrata="PARENT" hidden="true">
+				<Anchors>
+					<Anchor relativeTo="DMA_MiniMenuContentGM" point="TOPLEFT" x="15" y="-90"/>
+					<Anchor relativeTo="DMA_MiniMenuContentGM" point="RIGHT" x="-15" y="0"/>
+				</Anchors>
+
+				<Frames>
+					<CheckButton name="DMAGobMoveForward" inherits="DMAGobMoveCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOP" x="0" y="-5"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								SquareButton_SetIcon(self, "UP");
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Button name="DMAGobMoveJump" inherits="UIPanelSquareButton">
+						<Size x="38" y="38" />
+						<Anchors>
+							<Anchor point="TOP" relativeTo="DMAGobMoveForward" relativePoint="BOTTOM" x="0" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self.icon:SetTexture("Interface\\Buttons\\JumpUpArrow");
+								self.icon:SetTexCoord(0,1,0,1);
+								self.icon:SetSize(18,18);
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</Button>
+					<CheckButton name="DMAGobMoveRotateLeft" inherits="DMAGobMoveCheckboxTemplate">
+						<Size x="38" y="38" />
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="DMAGobMoveForward" relativePoint="LEFT" x="0" y="-38"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self.icon:SetTexture("Interface\\Buttons\\UI-RotationLeft-Button-Up");
+								self.icon:SetTexCoord(0,1,0,1);
+								self.icon:SetSize(35,35);
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="DMAGobMoveRotateRight" inherits="DMAGobMoveCheckboxTemplate">
+						<Size x="38" y="38" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="DMAGobMoveForward" relativePoint="RIGHT" x="0" y="-38"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self.icon:SetTexture("Interface\\Buttons\\UI-RotationRight-Button-Up");
+								self.icon:SetTexCoord(0,1,0,1);
+								self.icon:SetSize(35,35);
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="DMAGobMoveBackward" inherits="DMAGobMoveCheckboxTemplate">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="DMAGobMoveJump" relativePoint="BOTTOM" x="0" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								SquareButton_SetIcon(self, "DOWN");
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="DMAGobMoveStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
+						<Anchors>
+							<Anchor point="RIGHT" relativeTo="DMAGobMoveForward" relativePoint="LEFT"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								SquareButton_SetIcon(self, "LEFT");
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="DMAGobMoveStrafeRight" inherits="DMAGobMoveCheckboxTemplate">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="DMAGobMoveForward" relativePoint="RIGHT"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								SquareButton_SetIcon(self, "RIGHT");
+								self:RegisterForClicks("AnyUp");
+								print("OnLoad"..self:GetName())
+							</OnLoad>
+							<OnClick>
+								print("OnClick "..self:GetName());
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+				</Frames>
+			</Frame>
+
+            <!-- 
+           \.   \.      __,-"-.__      ./   ./
+       \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
+        \`.  \_`-''      _,="=._      ``-'_/  .'/
+         \ `-',-._   _.  _,="=._  ,_   _.-,`-' /
+      \. /`,-',-._"""  \ _,="=._ /  """_.-,`-,'\ ./
+       \`-'  /    `-._  "       "  _.-'    \  `-'/
+       /)   (         \    ,-.    /         )   (\
+    ,-'"     `-.       \  /   \  /       .-'     "`-,
+  ,'_._         `-.____/ /  _  \ \____.-'         _._`,
+ /,'   `.                \_/ \_/                .'   `,\
+/'       )                  _            Krogg (       `\
+        /   _,-'"`-.  ,++|T|||T|++.  .-'"`-,_   \
+       / ,-'        \/|`|`|`|'|'|'|\/        `-, \
+      /,'             | | | | | | |             `,\
+     /'               ` | | | | | '               `\
+                        ` | | | '
+                          ` | '
+            -->
+
+			<Slider name="DMA_AlphaSlider" orientation="HORIZONTAL" enableMouse="true" hidden="false" minValue="0" maxValue="100" defaultValue="75" valueStep="1">
+				<Size x="164" y="20"/>
+				<Anchors>
+					<Anchor relativeTo="DMA_MiniMenu" point="BOTTOM" x="0" y="0"/>
+				</Anchors>
+				<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
+				<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
+							edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+					<EdgeSize val="8"/>
+					<TileSize val="8"/>
+					<BackgroundInsets left="3" right="3" top="6" bottom="6"/>
+				</Backdrop>
+				<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+					<Size x="32" y="32"/>
+				</ThumbTexture>
+			</Slider>
+
+        </Frames>
+        <Scripts>
+            <OnLoad>
+            	DMA:DMA_MiniMenuOnLoad(self);
+            </OnLoad>
+            <OnDragStart>DMA:DMA_MiniMenuOnDragStart(self);</OnDragStart>
+            <OnDragStop>DMA:DMA_MiniMenuOnDragStop(self);</OnDragStop>
+        </Scripts>
+	</Frame>
+
+	<Frame name="DMA_MiniMenuLeft" parent="DMA_MiniMenu" hidden="true">
+    	<Size x="150" y="300"/>
+        <Anchors>
+            <Anchor relativeTo="DMA_MiniMenu" point="LEFT" x="-146" y="0"/>
+        </Anchors>
+
+        <Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="3" right="3" top="3" bottom="3"/>
+            </BackgroundInsets>
+        </Backdrop>
+
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                <!--Interface\BankFrame\Bank-Background-->
+                <!--Interface\Collections\CollectionsBackgroundTile-->
+                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                <Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="3" y="0"/>
+                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                    </Anchors>
+                    <TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>
+                    <Color r="1" g="1" b="1" a="0.75"/>
+                </Texture>
+            </Layer>
+        </Layers>
+
+        <Frames>
+			<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="3" y="0"/>
+					<Anchor point="BOTTOMRIGHT" x="-15" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						--if (RPSEmoteEntry10:IsShown()) then
+						--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSEmoteFramework:GenerateScrollMenu());
+						--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSEmoteFramework:GenerateScrollMenu());
+						--else
+						--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSEmoteFramework:GenerateScrollMenu());
+						--end
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+
+        	<Button name="$parentPick1" inherits="DMA_MenuButtonTemplate" text="GM">
+		        <Anchors>
+		            <Anchor relativeTo="DMA_MiniMenuLeft" point="TOP" x="0" y="-15"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick2" inherits="DMA_MenuButtonTemplate" text="Char">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick1" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick3" inherits="DMA_MenuButtonTemplate" text="Char2">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick2" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick4" inherits="DMA_MenuButtonTemplate" text="NPC">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick3" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick5" inherits="DMA_MenuButtonTemplate" text="Gameobject">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick4" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick6" inherits="DMA_MenuButtonTemplate" text="Gameobject2">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick5" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick7" inherits="DMA_MenuButtonTemplate" text="Tele">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick6" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick8" inherits="DMA_MenuButtonTemplate" text="Misc">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick7" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        	<Button name="$parentPick9" inherits="DMA_MenuButtonTemplate" text="Server">
+		        <Anchors>
+		            <Anchor relativeTo="$parentPick8" point="LEFT" x="0" y="-30"/>
+		        </Anchors>
+        	</Button>
+        </Frames>
+
+		<Animations>
+		    <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
+		       <Alpha duration="1" order="1" fromAlpha="0" toAlpha="1"/>
+		    </AnimationGroup>
+		    <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
+		       <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+				<Scripts>
+					<OnFinished>
+						DMA:DMA_MiniMenuLeft_OnFadeOutAnimFinished(self);
+					</OnFinished>
+				</Scripts>
+		    </AnimationGroup>
+		</Animations>
+
+		<Scripts>
+			<OnShow>
+				DMA:DMA_MiniMenuLeft_OnShow(self);
+			</OnShow>
+		</Scripts>
+
+	</Frame>
+
+
+
+	<Frame name="DMA_MiniMenuRight" parent="DMA_MiniMenu" hidden="true">
+    	<Size x="150" y="300"/>
+        <Anchors>
+            <Anchor relativeTo="DMA_MiniMenu" point="RIGHT" x="147" y="0"/>
+        </Anchors>
+
+        <Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="3" right="3" top="3" bottom="3"/>
+            </BackgroundInsets>
+        </Backdrop>
+
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                <!--Interface\BankFrame\Bank-Background-->
+                <!--Interface\Collections\CollectionsBackgroundTile-->
+                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                <Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="3" y="0"/>
+                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                    </Anchors>
+                    <TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>
+                    <Color r="1" g="1" b="1" a="0.75"/>
+                </Texture>
+            </Layer>
+        </Layers>
+
+		<Animations>
+		    <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
+		       <Alpha duration="1" order="1" fromAlpha="0" toAlpha="1"/>
+		    </AnimationGroup>
+		    <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
+		       <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+				<Scripts>
+					<OnFinished>
+						DMA:DMA_MiniMenuRight_OnFadeOutAnimFinished(self);
+					</OnFinished>
+				</Scripts>
+		    </AnimationGroup>
+		</Animations>
+
+		<Scripts>
+			<OnShow>
+				DMA:DMA_MiniMenuRight_OnShow(self);
+			</OnShow>
+		</Scripts>
+	</Frame>
+
+	<GameTooltip name="MyGMTooltip" inherits="GameTooltipTemplate"/>
+</Ui>
