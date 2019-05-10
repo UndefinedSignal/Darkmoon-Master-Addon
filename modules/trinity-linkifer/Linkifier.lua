@@ -86,6 +86,24 @@ function MangLinkifier_Decompose(chatstring)
   end
   return chatstring
 end
+--[[
+local function Rainbowify(text)
+  local finalText = ""
+  local i = 1
+
+  local characterCount = 0;
+  for character in string.gmatch(text, "([%z\1-\127\194-\244][\128-\191]*)") do
+    characterCount = characterCount + 1
+  end
+
+  for character in string.gmatch(text, "([%z\1-\127\194-\244][\128-\191]*)") do
+    ---@type Color
+    local color = Rainbow(i, characterCount)
+    finalText = finalText .. color:WrapTextInColorCode(character)
+    i = i + 1
+  end
+  return finalText
+end]]
 
 function MangLinkifier_Link(orgtxt, id, type)
   local color = DMA.Linkifier.db.profile.style.color.linkifier

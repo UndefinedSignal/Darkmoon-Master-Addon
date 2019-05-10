@@ -4,4 +4,7 @@
 	<Include file="trinity-linkifer\trinity-linkifer.xml"/>
 	<Include file="mini-menu\mini-menu.xml"/>
 
+	<Include file="morph-catalog\morph-catalog.xml"/>
+	<Include file="slashCmd\slashCmd.xml"/>
+	
 </Ui>
