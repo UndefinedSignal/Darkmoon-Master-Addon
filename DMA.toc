@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80100
 ## Title: DMA
-## Author: TrinityAdmin Dev team + Manground Dev Team + TestUnit
+## Author: TrinityAdmin Dev team + Manground Dev Team + TestUnit + Taku @Druidsmoker
 ## Version: 7.0.3
 ## Notes: This addon was created for work with Trinity 7.3.5+ Servers
 ## URL: https://gitlab.com/minabazacoop/dma

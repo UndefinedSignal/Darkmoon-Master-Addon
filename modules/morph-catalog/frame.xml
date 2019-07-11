@@ -1,0 +1,14 @@
+<Ui
+    xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <Frame name="DMA_MorphCatalog" parent="UIParent" enableMouse="true" movable="true" clampedToScreen="true" hidden="false">
+    	<Size x="850" y="600"/>
+
+		<Frames>
+			
+		</Frames>
+
+    </Frame>
+
+</Ui>
