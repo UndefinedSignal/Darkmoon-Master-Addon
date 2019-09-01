@@ -2,6 +2,7 @@
 
 	<Script file="interface.lua"/>
 	<Script file="commands.lua"/>
+	<Script file="gmmovement.lua"/>
 	<Include file="frame.xml"/>
 
 </Ui>

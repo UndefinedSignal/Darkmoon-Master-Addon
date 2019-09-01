@@ -8,6 +8,9 @@ DMA.Linkifier = DMA;
 DMA.User = {};
 DMA.Debug = false;
 
+DMA.PlayerMovement = {}
+DMA.PlayerMovement.Distance = 1;
+
 if DMAUserVars == nil then
 	DMAUserVars = {};
 	DMAUserVars["Darkmoon"] = true;

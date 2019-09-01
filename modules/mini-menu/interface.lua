@@ -1,4 +1,4 @@
---DMA_MiniMenu
+	--DMA_MiniMenu
 
 function DMA:DMA_MiniMenuExposeLeftOnEnter(self)
 	SetCursor("Interface/CURSOR/Inspect");

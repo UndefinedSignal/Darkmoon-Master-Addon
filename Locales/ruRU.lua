@@ -20,9 +20,9 @@
 
 function Return_ruRU()
   return {
-    ["slashcmds"] = { "/mangadmin", "/ma" },
+    ["slashcmds"] = { "/dma" },
     ["lang"] = "Русский",
-    ["realm"] = "|cFF00FF00Реалм:|r RpForge",--..GetCVar("realmName"),
+    ["realm"] = "|cFF00FF00Реалм:|r Darkmoon",--..GetCVar("realmName"),
     ["char"] = "|cFF00FF00Чар:|r "..UnitName("player"),
     ["guid"] = "|cFF00FF00Guid:|r ",
     ["tickets"] = "|cFF00FF00Тикеты:|r ",

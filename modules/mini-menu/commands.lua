@@ -62,5 +62,3 @@ function DMA:SendChatMessage(msg, ChatType, channel)
 		end
 	end
 end
-
-	

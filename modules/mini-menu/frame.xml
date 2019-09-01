@@ -24,10 +24,6 @@
 		</Scripts>
 	</Button>
 
-	<CheckButton name="DMAGobMoveCheckboxTemplate" inherits="UIPanelSquareButton" virtual="true">
-		<Size x="38" y="38" />
-
-	</CheckButton>
 
     <Frame name="DMA_MiniMenu" parent="UIParent" enableMouse="true" movable="true" clampedToScreen="true" hidden="false">
     	<Size x="200" y="350"/>
@@ -419,7 +415,7 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
-								print("OnClick "..self:GetName());
+								DMA:MoveBackForward(1);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -483,10 +479,58 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
-								print("OnClick "..self:GetName());
+								DMA:MoveBackForward(2);
 							</OnClick>
 						</Scripts>
 					</CheckButton>
+
+                    <EditBox name="RPS_TextMacros" enableMouse="false" autoFocus="false" multiline="false" letters="4">
+                        <Size x="32" y="42"/>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="DMAGobMoveBackward" relativePoint="LEFT" x="-20" y="20"/>
+						</Anchors>
+
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+									<Size x="8" y="20"/>
+									<Anchors>
+										<Anchor point="LEFT" x="-5" y="0"/>
+									</Anchors>
+									<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+								</Texture>
+								<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+									<Size x="8" y="20"/>
+									<Anchors>
+										<Anchor point="RIGHT" x="0" y="0"/>
+									</Anchors>
+									<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+								</Texture>
+								<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+									<Size x="10" y="20"/>
+									<Anchors>
+										<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+										<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+									</Anchors>
+									<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+								</Texture>
+							</Layer>
+						</Layers>
+
+					    <Scripts>
+					    	<OnTextChanged>
+					    		DMA.PlayerMovement.Distance = tonumber(self:GetText());
+					    	</OnTextChanged>
+							<OnEscapePressed>
+								self:ClearFocus();
+							</OnEscapePressed>
+							<OnEnterPressed>
+								self:ClearFocus();
+							</OnEnterPressed>
+					    </Scripts>
+					    <FontString inherits="ChatFontNormal" />
+                    </EditBox>
+
 					<CheckButton name="DMAGobMoveStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
 							<Anchor point="RIGHT" relativeTo="DMAGobMoveForward" relativePoint="LEFT"/>
