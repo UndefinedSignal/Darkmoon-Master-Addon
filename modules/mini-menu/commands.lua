@@ -19,18 +19,18 @@ commands["DMA_MiniMenuContentGMVIEWALLMAPSOFF"] = {"cheat explore 0"};
 
 
 commands["DMA_MiniMenuLeftPick1"] = {"/DMA:HideMiniMenuFrames();	DMA_MiniMenuContentGM:Show();"}; -- GM
-commands["DMA_MiniMenuLeftPick2"] = {"/print(\"Executed\")"}; -- Char
-commands["DMA_MiniMenuLeftPick3"] = {"/print(\"Executed\")"}; -- Char2
-commands["DMA_MiniMenuLeftPick4"] = {"/print(\"Executed\")"}; -- NPC
-commands["DMA_MiniMenuLeftPick5"] = {"/DMA:HideMiniMenuFrames();	DMAGobMoveFrame:Show();"}; -- Gameobject
-commands["DMA_MiniMenuLeftPick6"] = {"/print(\"Executed\")"}; -- Gameobject2
-commands["DMA_MiniMenuLeftPick7"] = {"/print(\"Executed\")"}; -- Tele
-commands["DMA_MiniMenuLeftPick8"] = {"/print(\"Executed\")"}; -- Misc
-commands["DMA_MiniMenuLeftPick9"] = {"/print(\"Executed\")"}; -- Server
+commands["DMA_MiniMenuLeftPick2"] = {"/print(\"WIP\")"}; -- Char
+commands["DMA_MiniMenuLeftPick3"] = {"/print(\"WIP\")"}; -- Char2
+commands["DMA_MiniMenuLeftPick4"] = {"/print(\"WIP\")"}; -- NPC
+commands["DMA_MiniMenuLeftPick5"] = {"/DMA:HideMiniMenuFrames();	DMAPlayerMoveFrame:Show();"}; -- Playermove
+commands["DMA_MiniMenuLeftPick6"] = {"/print(\"WIP\")"}; -- Gameobject
+commands["DMA_MiniMenuLeftPick7"] = {"/print(\"WIP\")"}; -- Tele
+commands["DMA_MiniMenuLeftPick8"] = {"/print(\"WIP\")"}; -- Misc
+commands["DMA_MiniMenuLeftPick9"] = {"/print(\"WIP\")"}; -- Server
 
 function DMA:HideMiniMenuFrames()
 	DMA_MiniMenuContentGM:Hide();
-	DMAGobMoveFrame:Hide();
+	DMAPlayerMoveFrame:Hide();
 end
 
 function DMA:EXECUTEGMCOMMAND(cmd)

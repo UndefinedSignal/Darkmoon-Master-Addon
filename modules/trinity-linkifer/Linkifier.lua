@@ -32,6 +32,7 @@ function MangLinkifier_Decompose(chatstring)
       chatstring = string.gsub (chatstring, Strings["lfer_GOtargid2"], MangLinkifier_Link(Strings["lfer_GOtargid3"], "%2", "targid"))
     end
     for guid in string.gmatch(chatstring, Strings["lfer_GOtargguid1"]) do --TARGET GUID
+      print("MEMES")
       chatstring = string.gsub (chatstring, Strings["lfer_GOtargguid1"], MangLinkifier_Link(Strings["lfer_GOtargguid3"], "%1", "targguid"))
     end
     for guid in string.gmatch(chatstring, Strings["lfer_GOtargxyz1"]) do --TARGET XYZ
