@@ -66,6 +66,7 @@ function Return_enUS()
     ["lfer_Activate"] = "Activate",
     ["lfer_Teleport"] = "Teleport",
     ["lfer_Morph"] = "Morph",
+    ["made_by"] = "TestUnit",
     ["lfer_Add"] = "Add",
     ["lfer_Remove"] = "Remove",
     ["lfer_Learn"] = "Learn",

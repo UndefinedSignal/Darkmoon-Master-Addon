@@ -124,6 +124,7 @@ function Return_ruRU()
     ["ma_MailRecipient"] = "Получатель",
     ["ma_Mail"] = "Послать письмо",
     ["ma_Send"] = "Послать",
+    ["made_by"] = "TestUnit",
     ["ma_MailSubject"] = "Тема",
     ["ma_MailYourMsg"] = "Сообщение !",
     ["ma_Online"] = "Онлайн",

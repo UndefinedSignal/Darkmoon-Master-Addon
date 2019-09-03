@@ -563,6 +563,17 @@
 				</Frames>
 			</Frame>
 
+			<Frame name="DMACharacterFrame" movable="true" toplevel="true" frameStrata="PARENT" hidden="true">
+				<Anchors>
+					<Anchor relativeTo="DMA_MiniMenuContentGM" point="TOPLEFT" x="15" y="-90"/>
+					<Anchor relativeTo="DMA_MiniMenuContentGM" point="RIGHT" x="-15" y="0"/>
+				</Anchors>
+
+				<Frames>
+
+				</Frames>
+			</Frame>
+
             <!-- 
            \.   \.      __,-"-.__      ./   ./
        \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
@@ -574,7 +585,7 @@
     ,-'"     `-.       \  /   \  /       .-'     "`-,
   ,'_._         `-.____/ /  _  \ \____.-'         _._`,
  /,'   `.                \_/ \_/                .'   `,\
-/'       )                  _            Krogg (       `\
+/'       )                  _         TestUnit (       `\
         /   _,-'"`-.  ,++|T|||T|++.  .-'"`-,_   \
        / ,-'        \/|`|`|`|'|'|'|\/        `-, \
       /,'             | | | | | | |             `,\
