@@ -187,7 +187,7 @@
     ,-'"     `-.       \  /   \  /       .-'     "`-,
   ,'_._         `-.____/ /  _  \ \____.-'         _._`,
  /,'   `.                \_/ \_/                .'   `,\
-/'       )                  _            Krogg (       `\
+/'       )                  _         TestUnit (       `\
         /   _,-'"`-.  ,++|T|||T|++.  .-'"`-,_   \
        / ,-'        \/|`|`|`|'|'|'|\/        `-, \
       /,'             | | | | | | |             `,\
@@ -448,7 +448,8 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
-								print("OnClick "..self:GetName());
+								DMA:SendChatMessage(".gps");
+								--print("OnClick "..self:GetName());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -465,7 +466,8 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
-								print("OnClick "..self:GetName());
+								DMA:SendChatMessage(".gps");
+								--print("OnClick "..self:GetName());
 							</OnClick>
 						</Scripts>
 					</CheckButton>
@@ -484,7 +486,7 @@
 						</Scripts>
 					</CheckButton>
 
-                    <EditBox name="RPS_TextMacros" enableMouse="false" autoFocus="false" multiline="false" letters="4">
+                    <EditBox name="$parentDistance" enableMouse="false" autoFocus="false" multiline="false" letters="4">
                         <Size x="32" y="42"/>
 						<Anchors>
 							<Anchor point="TOP" relativeTo="DMAPlayerMoveBackward" relativePoint="LEFT" x="-20" y="20"/>
@@ -570,6 +572,354 @@
 				</Anchors>
 
 				<Frames>
+					<Slider name="$parentSpeed" orientation="HORIZONTAL" enableMouse="true" hidden="false" defaultValue="1.0" minValue="0.1" maxValue="50" valueStep="0.1">
+						<Size x="140" y="20"/>
+						<Anchors>
+							<Anchor relativeTo="DMACharacterFrame" point="TOP" x="-13" y="20"/>
+						</Anchors>
+						<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
+						<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
+									edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+							<EdgeSize val="8"/>
+							<TileSize val="8"/>
+							<BackgroundInsets left="3" right="3" top="6" bottom="6"/>
+						</Backdrop>
+						<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+							<Size x="32" y="32"/>
+						</ThumbTexture>
+
+						<Frames>
+							<Button name="$parentReload2">
+								<Anchors>
+									<Anchor point="LEFT" x="-15" y="0"/>
+								</Anchors>
+								<Size x="24" y="24"/>
+								<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+								<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+								<Scripts>
+									<OnClick>
+										DMA:SpeedSliderReloadToDefauld();
+									</OnClick>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартным настройкам|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+								</Scripts>
+							</Button>
+
+		                    <EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="4">
+		                        <Size x="32" y="62"/>
+								<Anchors>
+									<Anchor point="RIGHT" x="35" y="-1"/>
+								</Anchors>
+
+								<Layers>
+									<Layer level="BACKGROUND">
+										<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+											<Size x="8" y="20"/>
+											<Anchors>
+												<Anchor point="LEFT" x="-5" y="0"/>
+											</Anchors>
+											<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+										</Texture>
+										<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+											<Size x="8" y="20"/>
+											<Anchors>
+												<Anchor point="RIGHT" x="0" y="0"/>
+											</Anchors>
+											<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+										</Texture>
+										<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+											<Size x="10" y="20"/>
+											<Anchors>
+												<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+												<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+											</Anchors>
+											<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+										</Texture>
+									</Layer>
+								</Layers>
+
+							    <Scripts>
+							    	<OnTextChanged>
+							    		local num
+							    		if self:GetText() == "" then
+							    			self:SetText("1");
+							    			num = 1;
+							    		else
+							    			num = self:GetText();
+							    		end
+							    		DMACharacterFrameSpeed:SetValue(num);
+							    	</OnTextChanged>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+									<OnEnterPressed>
+							    		local num
+							    		if self:GetText() == "" then
+							    			self:SetText("1");
+							    			num = 1;
+							    		else
+							    			num = self:GetText();
+							    		end
+							    		DMACharacterFrameSpeed:SetValue(num);
+							    		DMA:SetCharacterSpeed(num);
+										self:ClearFocus();
+									</OnEnterPressed>
+							    </Scripts>
+							    <FontString inherits="ChatFontNormal" />
+		                    </EditBox>
+
+						    <CheckButton name="$parentCheckAll" inherits="CharCheckBox" checked="false">
+						        <Anchors>
+						            <Anchor point="TOPLEFT" x="0" y="30"/>
+						        </Anchors>
+						        <Scripts>
+						        	<OnLoad>
+						        		DMACharacterFrameSpeedCheckAllHeader:SetText("All")
+						        	</OnLoad>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFВсе скорости|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						        </Scripts>
+						    </CheckButton>
+
+						    <CheckButton name="$parentCheckBackWalk" inherits="CharCheckBox" checked="false">
+						        <Anchors>
+						            <Anchor point="TOPLEFT" x="32" y="30"/>
+						        </Anchors>
+						        <Scripts>
+						        	<OnLoad>
+						        		DMACharacterFrameSpeedCheckBackWalkHeader:SetText("BWalk")
+						        	</OnLoad>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFСкорость заднего хода|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						        </Scripts>
+						    </CheckButton>
+
+						    <CheckButton name="$parentCheckFly" inherits="CharCheckBox" checked="false">
+						        <Anchors>
+						            <Anchor point="TOPLEFT" x="65" y="30"/>
+						        </Anchors>
+						        <Scripts>
+						        	<OnLoad>
+						        		DMACharacterFrameSpeedCheckFlyHeader:SetText("Fly")
+						        	</OnLoad>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFСкорость полёта|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						        </Scripts>
+						    </CheckButton>
+
+						    <CheckButton name="$parentCheckWalk" inherits="CharCheckBox" checked="false">
+						        <Anchors>
+						            <Anchor point="TOPLEFT" x="98" y="30"/>
+						        </Anchors>
+						        <Scripts>
+						        	<OnLoad>
+						        		DMACharacterFrameSpeedCheckWalkHeader:SetText("Walk")
+						        	</OnLoad>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFСкорость ходьбы|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						        </Scripts>
+						    </CheckButton>
+
+						    <CheckButton name="$parentCheckSwim" inherits="CharCheckBox" checked="false">
+						        <Anchors>
+						            <Anchor point="TOPLEFT" x="130" y="30"/>
+						        </Anchors>
+						        <Scripts>
+						        	<OnLoad>
+						        		DMACharacterFrameSpeedCheckSwimHeader:SetText("Swim")
+						        	</OnLoad>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFСкорость плавания|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						        </Scripts>
+						    </CheckButton>
+
+						</Frames>
+						<Scripts>
+							<OnLoad>
+								DMACharacterFrameSpeed:SetValue(1);
+								DMACharacterFrameSpeedCounter:SetText(string.sub(DMACharacterFrameSpeed:GetValue(), 1, 5));
+							</OnLoad>
+							<OnMouseUp>
+								DMA:SetCharacterSpeed(string.sub(DMACharacterFrameSpeed:GetValue(), 1, 5));
+							</OnMouseUp>
+							<OnValueChanged> 
+								DMACharacterFrameSpeedCounter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+							</OnValueChanged>
+						</Scripts>
+
+					</Slider>
+
+					<Slider name="$parentScale" orientation="HORIZONTAL" enableMouse="true" hidden="false" defaultValue="1.0" minValue="0.1" maxValue="10" valueStep="0.1">
+						<Size x="140" y="20"/>
+						<Anchors>
+							<Anchor relativeTo="DMACharacterFrame" point="TOP" x="-13" y="-25"/>
+						</Anchors>
+						<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
+						<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
+									edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+							<EdgeSize val="8"/>
+							<TileSize val="8"/>
+							<BackgroundInsets left="3" right="3" top="6" bottom="6"/>
+						</Backdrop>
+						<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+							<Size x="32" y="32"/>
+						</ThumbTexture>
+
+				        <Layers>	
+					        <Layer>
+					            <FontString name="$parentHeader" font="Fonts\FRIZQT___CYR.TTF" text="Рост" justifyH="CENTER" justifyV="CENTER">
+					                <Color r="1" g="1" b="1" a="1"/>
+					                <FontHeight val="12"/>
+					                <Anchors>
+					                    <Anchor point="BOTTOM" relativeTo="$parent" x="0" y="17" />
+					                </Anchors>
+					                <Shadow>
+					                    <Offset x="1" y="1" />
+					                    <Color r="0" g="0" b="0"/>
+					                </Shadow>
+					            </FontString>
+					        </Layer>
+					    </Layers>
+
+						<Frames>
+							<Button name="$parentReload2">
+								<Anchors>
+									<Anchor point="LEFT" x="-15" y="-1"/>
+								</Anchors>
+								<Size x="24" y="24"/>
+								<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+								<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+								<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+								<Scripts>
+									<OnClick>
+										DMA:ScaleSliderReloadToDefauld();
+									</OnClick>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартным настройкам|r")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+								</Scripts>
+							</Button>
+
+		                    <EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="4">
+		                        <Size x="32" y="62"/>
+								<Anchors>
+									<Anchor point="RIGHT" x="35" y="-1"/>
+								</Anchors>
+
+								<Layers>
+									<Layer level="BACKGROUND">
+										<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+											<Size x="8" y="20"/>
+											<Anchors>
+												<Anchor point="LEFT" x="-5" y="0"/>
+											</Anchors>
+											<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+										</Texture>
+										<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+											<Size x="8" y="20"/>
+											<Anchors>
+												<Anchor point="RIGHT" x="0" y="0"/>
+											</Anchors>
+											<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+										</Texture>
+										<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+											<Size x="10" y="20"/>
+											<Anchors>
+												<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+												<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+											</Anchors>
+											<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+										</Texture>
+									</Layer>
+								</Layers>
+
+							    <Scripts>
+							    	<OnTextChanged>
+							    		local num
+							    		if self:GetText() == "" then
+							    			self:SetText("1");
+							    			num = 1;
+							    		else
+							    			num = self:GetText();
+							    		end
+							    		DMACharacterFrameScale:SetValue(num);
+							    	</OnTextChanged>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+									<OnEnterPressed>
+							    		local num
+							    		if self:GetText() == "" then
+							    			self:SetText("1");
+							    			num = 1;
+							    		else
+							    			num = self:GetText();
+							    		end
+							    		DMACharacterFrameScale:SetValue(num);
+							    		DMA:SetCharacterScale(num);
+										self:ClearFocus();
+									</OnEnterPressed>
+							    </Scripts>
+							    <FontString inherits="ChatFontNormal" />
+		                    </EditBox>
+
+						</Frames>
+						<Scripts>
+							<OnLoad>
+								DMACharacterFrameScale:SetValue(1);
+								DMACharacterFrameScaleCounter:SetText(string.sub(DMACharacterFrameSpeed:GetValue(), 1, 5));
+							</OnLoad>
+							<OnMouseUp>
+								DMA:SetCharacterScale(string.sub(DMACharacterFrameScale:GetValue(), 1, 5));
+							</OnMouseUp>
+							<OnValueChanged> 
+								DMACharacterFrameScaleCounter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+							</OnValueChanged>
+						</Scripts>
+
+					</Slider>
 
 				</Frames>
 			</Frame>

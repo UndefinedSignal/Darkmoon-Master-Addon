@@ -135,7 +135,7 @@ DMAMorphFrame.ModelPreview.CopyID:SetText("Скопировать ID")
 DMAMorphFrame.ModelPreview.CopyID:SetScript("OnClick", function(self, Button, Down)
 	ChatFrame1EditBox:Show()
 	ChatFrame1EditBox:SetFocus()
-	ChatFrame1EditBox:SetText(DMAMorphFrame.ModelPreview.ModelFrame.DisplayInfo)
+	ChatFrame1EditBox:SetText(".morph "..DMAMorphFrame.ModelPreview.ModelFrame.DisplayInfo)
 	ChatFrame1EditBox:HighlightText()
 end)
 -- end ModelPreview
@@ -457,6 +457,14 @@ end
 
 if DMA.Debug then
 	print("ModelFrames OK")
+end
+
+function DMA:ProcessDMAMorph()
+	if DMAMorphFrame:IsShown() then
+		DMAMorphFrame:Hide()
+	else
+		DMAMorphFrame:Show()
+	end
 end
 
 -- slash commands

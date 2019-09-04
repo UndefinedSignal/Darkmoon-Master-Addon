@@ -49,7 +49,7 @@ function DMA:MoveCharacterXYZ(mode)
 	py = py + distance * sin;
 	local pz = 0
 
-	local msg = ".go xyz "..px.." "..py;
+	local msg = ".go xyz "..px.." "..py.." "..DMAUserVars["LastGPS-Z"];
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
 -- 1.5707975 - 3.141595 + 1.5707975

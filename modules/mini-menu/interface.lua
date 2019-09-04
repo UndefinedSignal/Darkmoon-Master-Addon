@@ -151,3 +151,93 @@ function DMA:AlphaSlider()
 		DMAUserVars["BackgroundAlpha"] = number;
 	end)
 end
+
+--[[
+───────────▒▒▒▒▒▒▒▒
+─────────▒▒▒──────▒▒▒
+────────▒▒───▒▒▒▒──▒░▒
+───────▒▒───▒▒──▒▒──▒░▒
+──────▒▒░▒──────▒▒──▒░▒
+───────▒▒░▒────▒▒──▒░▒
+─────────▒▒▒▒▒▒▒───▒▒
+─────────────────▒▒▒
+─────▒▒▒▒────────▒▒
+───▒▒▒░░▒▒▒─────▒▒──▓▓▓▓▓▓▓▓
+──▒▒─────▒▒▒────▒▒▓▓▓▓▓░░░░░▓▓──▓▓▓▓
+─▒───▒▒────▒▒─▓▓▒░░░░░░░░░█▓▒▓▓▓▓░░▓▓▓
+▒▒──▒─▒▒───▓▒▒░░▒░░░░░████▓▓▒▒▓░░░░░░▓▓
+░▒▒───▒──▓▓▓░▒░░░░░░█████▓▓▒▒▒▒▓▓▓▓▓░░▓▓
+──▒▒▒▒──▓▓░░░░░░███████▓▓▓▒▒▒▒▒▓───▓▓░▓▓
+──────▓▓░░░░░░███████▓▓▓▒▒▒▒▒▒▒▓───▓░░▓▓
+─────▓▓░░░░░███████▓▓▓▒▒▒▒▒▒▒▒▒▓▓▓▓░░▓▓
+────▓▓░░░░██████▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▓░░░░▓▓
+────▓▓▓░████▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓▓▓
+─────▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓
+─────▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓
+──────▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓
+───────▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓
+─────────▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓
+───────────▓▓▓▓▓▓▒▒▒▒▒▓▓▓▓
+───────────────▓▓▓▓▓▓▓▓
+-- Made by TestUnit
+]]--
+
+local DMAScaleCheckBoxes = {}
+DMAScaleCheckBoxes["DMACharacterFrameSpeedCheckSwim"] = {"/DMACharacterFrameSpeedCheckAll:SetChecked();"}
+DMAScaleCheckBoxes["DMACharacterFrameSpeedCheckWalk"] = {"/DMACharacterFrameSpeedCheckAll:SetChecked();"}
+DMAScaleCheckBoxes["DMACharacterFrameSpeedCheckFly"] = {"/DMACharacterFrameSpeedCheckAll:SetChecked(false);"}
+DMAScaleCheckBoxes["DMACharacterFrameSpeedCheckBackWalk"] = {"/DMACharacterFrameSpeedCheckAll:SetChecked(false);"}
+DMAScaleCheckBoxes["DMACharacterFrameSpeedCheckAll"] = {"/DMACharacterFrameSpeedCheckBackWalk:SetChecked(false);	DMACharacterFrameSpeedCheckFly:SetChecked(false);	DMACharacterFrameSpeedCheckWalk:SetChecked(false);	DMACharacterFrameSpeedCheckSwim:SetChecked(false);"}
+
+function DMA:GetActiveSpeedCheckBox()
+	local messages = {}	
+	if not DMACharacterFrameSpeedCheckSwim:GetChecked() and not DMACharacterFrameSpeedCheckAll:GetChecked() and not DMACharacterFrameSpeedCheckWalk:GetChecked() and not DMACharacterFrameSpeedCheckFly:GetChecked() and not DMACharacterFrameSpeedCheckBackWalk:GetChecked() then
+		table.insert(messages, ".mod speed all ")
+		return messages
+	end
+	if DMACharacterFrameSpeedCheckAll:GetChecked() then
+		table.insert(messages, ".mod speed all ")
+		return messages
+	end
+	if DMACharacterFrameSpeedCheckSwim:GetChecked() then
+		table.insert(messages, ".mod speed swim ")
+	end
+	if DMACharacterFrameSpeedCheckWalk:GetChecked() then
+		table.insert(messages, ".mod speed walk ")
+	end
+	if DMACharacterFrameSpeedCheckFly:GetChecked() then
+		table.insert(messages, ".mod speed fly ")
+	end
+	if DMACharacterFrameSpeedCheckBackWalk:GetChecked() then
+		table.insert(messages, ".mod speed backwalk ")
+	end
+	return messages
+end
+
+function DMA:SetCharacterSpeed(arg)
+	local message = DMA:GetActiveSpeedCheckBox();
+	for i=1, #message do
+		DMA:SendChatMessage(message[i]..arg);
+	end
+end
+
+function DMA:SetCharacterScale(arg)
+	local msg = ".mod scale ";
+	DMA:SendChatMessage(msg..arg);
+end
+
+function DMA:ProcessSpeedSliderCheckBoxes(arg)
+	DMA:SendChatMessage(DMAScaleCheckBoxes[arg]);
+end
+
+function DMA:SpeedSliderReloadToDefauld()
+	DMACharacterFrameSpeed:SetValue(1.000);
+	DMACharacterFrameSpeedCounter:SetText(string.sub(DMACharacterFrameSpeed:GetValue(), 1, 5));
+	DMA:SetCharacterSpeed(string.sub(DMACharacterFrameSpeed:GetValue(), 1, 5));
+end
+
+function DMA:ScaleSliderReloadToDefauld()
+	DMACharacterFrameScale:SetValue(1.000);
+	DMACharacterFrameScaleCounter:SetText(string.sub(DMACharacterFrameScale:GetValue(), 1, 5));
+	DMA:SetCharacterScale(string.sub(DMACharacterFrameScale:GetValue(), 1, 5));
+end
