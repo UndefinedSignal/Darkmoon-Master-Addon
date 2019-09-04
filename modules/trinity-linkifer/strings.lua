@@ -77,8 +77,8 @@ function ReturnStrings_enUS()
     ["lfer_AddGoxyz2"] = "'([%p%d.%d]+) ([%p%d.%d]+) ([%p%d.%d]+)'",
     ["lfer_AddGoxyz3"] = "'%1 %2 %3'",
     ----------====~~ GPS Command Match Text ~~====----------
-    ["lfer_GPSxyz1"] = "X: ([%p%d.%d]+) Y: ([%p%d.%d]+) Z: ([%p%d.%d]+)",
-    ["lfer_GPSxyz2"] = "X: ([%p%d.%d]+) Y: ([%p%d.%d]+) Z: ([%p%d.%d]+)",
+    ["lfer_GPSxyz1"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
+    ["lfer_GPSxyz2"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
     ["lfer_GPSxyz3"] = "X: %1 Y: %2 Z: %3"
   }
 end

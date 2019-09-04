@@ -51,6 +51,10 @@ if DMAUserVars == nil then
 	DMAUserVars["GmChat"] = false;
 	DMAUserVars["Invisibility"] = false;
 
+	DMAUserVars["LastGPS-X"] = 0;
+	DMAUserVars["LastGPS-Y"] = 0;
+	DMAUserVars["LastGPS-Z"] = 0;
+
 	DMAUserVars["LastNPC"] = nil;
 	DMAUserVars["LastGOBID"] = nil;
 	DMAUserVars["LastGOBGUID"] = nil;
@@ -59,4 +63,5 @@ end
 function DMA:OnEnable()
 	DMA:AlphaSlider();
 	DMA:BackGroundAlphaInitialize();
+	DMA:AddMinimapIcon()
 end

@@ -62,7 +62,10 @@ function MangLinkifier_Decompose(chatstring)
     end
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ
-      chatstring = string.gsub (chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
+      chatstring = string.gsub(chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
+      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, " X: ")+4, string.find(chatstring, " Y: ")-1);
+      DMAUserVars["LastGPS-Y"] = strsub(chatstring, string.find(chatstring, " Y: ")+4, string.find(chatstring, " Z: ")-1);
+      DMAUserVars["LastGPS-Z"] = strsub(chatstring, string.find(chatstring, " Z: ")+4, string.find(chatstring, " - |cff")-3);
     end
     ----------====~~ Added Options for Clickable Links Made by Mangos ~~====----------
     for guid in string.gmatch(chatstring, "%|cffffffff%|Hquest:(.*)%|h%[(.*)%]%|h%|r") do --LOOKUP QUEST
@@ -251,7 +254,7 @@ function MangLinkifier_SetItemRef(link, text, button)
     return;
   ----------====~~ GPS Command Functions ~~====----------
   elseif ( strsub(link, 1, 6) == "gpsxyz" ) then
-    SendChatMessage(".go  "..strsub(link, 8), say, nil, nil)
+    SendChatMessage(".go xyz "..strsub(link, 8), say, nil, nil)
     return;
   ----------====~~ Support for Clickable Links Made by Mangos and Added Options ~~====----------
   elseif ( strsub(link, 1, 5) == "quest" ) then

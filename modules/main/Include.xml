@@ -2,5 +2,6 @@
 
 	<Script file="Initialize.lua"/>
 	<Script file="Commands-DB.lua"/>
+	<Script file="MapIcon.lua"/>
 
 </Ui>
