@@ -32,11 +32,13 @@ MAJOR_VERSION = "Darkmoon Master Addon |cFF38FE62Legion|r v0.9.5";
 MINOR_VERSION = "$Revision: 3 $";
 ROOT_PATH     = "Interface\\AddOns\\DMA\\";
 
-DMA = LibStub("AceAddon-3.0"):NewAddon("DMA", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0");
+DMA = LibStub("AceAddon-3.0"):NewAddon("DMA", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0");
 DMA.HBD = LibStub("HereBeDragons-2.0");
 DMA.Linkifier = DMA;
 DMA.User = {};
 DMA.Debug = false;
+DMA.Timers = {};
+DMA.Timers["GPS-Timer"] = nil;
 
 DMA.PlayerMovement = {}
 DMA.PlayerMovement.Distance = 1;
@@ -56,13 +58,19 @@ if DMAUserVars == nil then
 	DMAUserVars["LastGPS-Z"] = 0;
 	DMAUserVars["LastGPS-O"] = 0;
 
+	DMAUserVars["MoveDistance"] = 1;
+
+
+	DMAUserVars["GPS-Scan"] = true;
+
 	DMAUserVars["LastNPC"] = nil;
 	DMAUserVars["LastGOBID"] = nil;
 	DMAUserVars["LastGOBGUID"] = nil;
 end
 
 function DMA:OnEnable()
+	DMA:InitializeHooks()
 	DMA:AlphaSlider();
 	DMA:BackGroundAlphaInitialize();
-	DMA:AddMinimapIcon()
+	DMA:AddMinimapIcon();
 end

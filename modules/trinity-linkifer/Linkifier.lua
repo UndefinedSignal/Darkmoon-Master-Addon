@@ -66,6 +66,8 @@ function MangLinkifier_Decompose(chatstring)
       DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, " X: ")+4, string.find(chatstring, " Y: ")-1);
       DMAUserVars["LastGPS-Y"] = strsub(chatstring, string.find(chatstring, " Y: ")+4, string.find(chatstring, " Z: ")-1);
       DMAUserVars["LastGPS-Z"] = strsub(chatstring, string.find(chatstring, " Z: ")+4, string.find(chatstring, " - |cff")-3);
+      DMAUserVars["GPS-Scan"] = false;
+      DMA:UpdateEditBoxXYZ();
     end
     ----------====~~ Added Options for Clickable Links Made by Mangos ~~====----------
     for guid in string.gmatch(chatstring, "%|cffffffff%|Hquest:(.*)%|h%[(.*)%]%|h%|r") do --LOOKUP QUEST

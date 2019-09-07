@@ -436,7 +436,7 @@
 						<Anchors>
 							<Anchor relativeTo="DMA_MiniMenuContentGM" point="TOPLEFT" x="37" y="-25"/>
 						</Anchors>
-						<Scripts>
+						<Scripts><!--TestUnit-->
 							<OnLoad>
 								DMAPlayerMoveFrameCoordXName:SetText("X")
 							</OnLoad>
@@ -448,6 +448,9 @@
 				            <OnLeave>
 				                GameTooltip:Hide()
 				            </OnLeave>
+					    	<OnEnterPressed>
+					    		DMA:ProcessManualXYZInput()
+					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
 				    <EditBox name="$parentCoordY" inherits="XYZBox">
@@ -466,6 +469,9 @@
 				            <OnLeave>
 				                GameTooltip:Hide()
 				            </OnLeave>
+					    	<OnEnterPressed>
+					    		DMA:ProcessManualXYZInput()
+					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
 				    <EditBox name="$parentCoordZ" inherits="XYZBox">
@@ -484,6 +490,9 @@
 				            <OnLeave>
 				                GameTooltip:Hide()
 				            </OnLeave>
+					    	<OnEnterPressed>
+					    		DMA:ProcessManualXYZInput()
+					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
 				    <EditBox name="$parentCoordO" inherits="XYZBox">
@@ -502,6 +511,9 @@
 				            <OnLeave>
 				                GameTooltip:Hide()
 				            </OnLeave>
+					    	<OnEnterPressed>
+					    		DMA:ProcessManualOrientationInput()
+					    	</OnEnterPressed>
 						</Scripts>
 
 				    </EditBox>
@@ -513,6 +525,7 @@
 						<Scripts>
 							<OnLoad>
 								DMAPlayerMoveFrameDistanceName:SetText("D")
+								DMAPlayerMoveFrameDistance:SetText(DMAUserVars["MoveDistance"])
 							</OnLoad>
 				            <OnEnter>
 				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
@@ -522,6 +535,9 @@
 				            <OnLeave>
 				                GameTooltip:Hide()
 				            </OnLeave>
+					    	<OnEnterPressed>
+					    		DMAUserVars["MoveDistance"] = self:GetText();
+					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
 
@@ -535,10 +551,47 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
+								DMA:ProcessGPSMove();
 								DMA:MoveCharacterXYZ(1);
 							</OnClick>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFПереместиться вперёд|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
 						</Scripts>
 					</CheckButton>
+
+					<CheckButton name="DMAPlayerUpdateCoords" inherits="DMAGobMoveCheckboxTemplate">
+						<Size x="38" y="38" />
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="DMAPlayerMoveForward" relativePoint="LEFT" x="-38" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self.icon:SetTexture("Interface\\Buttons\\UI-RotationRight-Button-Up");
+								self.icon:SetTexCoord(0,1,0,1);
+								self.icon:SetSize(35,35);
+								self:RegisterForClicks("AnyUp");
+							</OnLoad>
+							<OnClick>
+								DMA:SendChatMessage(".gps");
+								DMA:UpdateEditBoxXYZ();
+							</OnClick>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFF!!!ВАЖНО!!!|nОбновляет текущие координаты|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+					</CheckButton>
+
 					<CheckButton name="DMAPlayerMoveBackward" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
 							<Anchor point="BOTTOM" relativeTo="DMAPlayerMoveForward" relativePoint="BOTTOM" x="0" y="-38"/>
@@ -549,8 +602,17 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
+								DMA:ProcessGPSMove();
 								DMA:MoveCharacterXYZ(2);
 							</OnClick>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFПереместиться назад|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
 						</Scripts>
 					</CheckButton>
 					<CheckButton name="DMAPlayerMoveStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
@@ -563,8 +625,17 @@
 								self:RegisterForClicks("AnyUp");
 							</OnLoad>
 							<OnClick>
+								DMA:ProcessGPSMove();
 								DMA:MoveCharacterXYZ(4);
 							</OnClick>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться влево|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
 						</Scripts>
 					</CheckButton>
 					<CheckButton name="DMAPlayerMoveStrafeRight" inherits="DMAGobMoveCheckboxTemplate">
@@ -575,11 +646,19 @@
 							<OnLoad>
 								SquareButton_SetIcon(self, "RIGHT");
 								self:RegisterForClicks("AnyUp");
-								print("OnLoad"..self:GetName())
 							</OnLoad>
 							<OnClick>
+								DMA:ProcessGPSMove();
 								DMA:MoveCharacterXYZ(3);
 							</OnClick>
+				            <OnEnter><!--TestUnit-->
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться вправо|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
 						</Scripts>
 					</CheckButton>
 				</Frames>

@@ -86,7 +86,7 @@
 						<Anchor point="TOPRIGHT" x="-3" y="-3"/>
 					</Anchors>
 				</Texture>
-			</Layer>
+			</Layer><!--TestUnit-->
 			<Layer level="BORDER">
 				<Texture name="$parentInsetBottomBorder" inherits="_UI-Frame-InnerBotTile" parentKey="InsetBorderBottom">
 					<Anchors>
@@ -169,7 +169,7 @@
 				<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD"/>
 				<Scripts>
 					<OnClick>
-						
+						DMA:ProcessPlayerMoveIncDecrement(self:GetName())
 					</OnClick>
 		            <OnEnter>
 		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
@@ -191,7 +191,7 @@
 				<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD"/>
 				<Scripts>
 					<OnClick>
-						
+						DMA:ProcessPlayerMoveIncDecrement(self:GetName())
 					</OnClick>
 		            <OnEnter>
 		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")

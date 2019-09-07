@@ -248,3 +248,53 @@ function DMA:UpdateEditBoxXYZ()
 	DMAPlayerMoveFrameCoordZ:SetText(DMAUserVars["LastGPS-Z"]);
 	DMAPlayerMoveFrameCoordO:SetText(DMAUserVars["LastGPS-O"]);
 end
+
+function DMA:ProcessGPSMove()
+	local py, px = DMA.HBD:GetPlayerWorldPosition();
+	local pa = GetPlayerFacing();
+
+	if not (math.floor(DMAUserVars["LastGPS-X"]) == math.floor(px) and math.floor(DMAUserVars["LastGPS-Y"]) == math.floor(py) and DMAUserVars["LastGPS-O"] == pa) then
+		DMAUserVars["GPS-Scan"] = true;
+		DMA.Timers["GPS-Timer"] = self:ScheduleTimer("ProcessGPSTimer", 1);
+		SendChatMessage(".gps", "GUILD", DEFAULT_CHAT_FRAME.editBox.languageID);
+	end
+	DMA:UpdateEditBoxXYZ();
+end
+
+function DMA:ProcessGPSTimer()
+	DMAUserVars["GPS-Scan"] = false;
+	DMA:UpdateEditBoxXYZ();
+end
+
+function DMA:ProcessManualXYZInput()
+	local msg = ".go xyz "..DMAPlayerMoveFrameCoordX:GetText().." "..DMAPlayerMoveFrameCoordY:GetText().." "..DMAPlayerMoveFrameCoordZ:GetText();
+	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+end
+
+function DMA:ProcessManualOrientationInput()
+	local _, _, mapid = GetPlayerWorldPosition();
+	local msg = ".go xyz "..DMAPlayerMoveFrameCoordX:GetText().." "..DMAPlayerMoveFrameCoordY:GetText().." "..DMAPlayerMoveFrameCoordZ:GetText().." "..mapid.." "..DMAPlayerMoveFrameCoordO:GetText();
+	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+end
+
+-- I'm so sorry for that
+
+local DMAMoveIncrementFrames = {}
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordXIncrement"] = "DMAPlayerMoveFrameCoordX:SetText(tonumber(DMAPlayerMoveFrameCoordX:GetText())+tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordXDecrement"] = "DMAPlayerMoveFrameCoordX:SetText(tonumber(DMAPlayerMoveFrameCoordX:GetText())-tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordYIncrement"] = "DMAPlayerMoveFrameCoordY:SetText(tonumber(DMAPlayerMoveFrameCoordY:GetText())+tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordYDecrement"] = "DMAPlayerMoveFrameCoordY:SetText(tonumber(DMAPlayerMoveFrameCoordY:GetText())-tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordZIncrement"] = "DMAPlayerMoveFrameCoordZ:SetText(tonumber(DMAPlayerMoveFrameCoordZ:GetText())+tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordZDecrement"] = "DMAPlayerMoveFrameCoordZ:SetText(tonumber(DMAPlayerMoveFrameCoordZ:GetText())-tonumber(DMAPlayerMoveFrameDistance:GetText()))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordOIncrement"] = "print(\"WIP\")";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordODecrement"] = "print(\"WIP\")";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceIncrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())+tonumber(1))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceDecrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())-tonumber(1))";
+
+function DMA:ProcessPlayerMoveIncDecrement(frame_name)
+	RunScript(DMAMoveIncrementFrames[frame_name]);
+	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") then
+		return
+	end
+	DMA:ProcessManualXYZInput();
+end

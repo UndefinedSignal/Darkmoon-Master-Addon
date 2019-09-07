@@ -28,7 +28,7 @@
 -- Made by TestUnit
 ]]--
 function DMA:MoveCharacterXYZ(mode)
-	local distance = DMA.PlayerMovement.Distance;
+	local distance = DMAUserVars["MoveDistance"];
 	local angle = GetPlayerFacing();
 	if distance == nil then
 		distance = 1;
@@ -47,9 +47,14 @@ function DMA:MoveCharacterXYZ(mode)
 	local py, px = DMA.HBD:GetPlayerWorldPosition();
 	px = px + distance * cos;
 	py = py + distance * sin;
-	local pz = 0
 
-	local msg = ".go xyz "..px.." "..py.." "..DMAUserVars["LastGPS-Z"];
+	DMAUserVars["LastGPS-X"] = px;
+	DMAUserVars["LastGPS-Y"] = py;
+	DMAUserVars["LastGPS-O"] = angle;
+
+	DMA:UpdateEditBoxXYZ();
+
+	local msg = ".go xyz "..DMAUserVars["LastGPS-X"].." "..DMAUserVars["LastGPS-Y"].." "..DMAUserVars["LastGPS-Z"];
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
 -- 1.5707975 - 3.141595 + 1.5707975
