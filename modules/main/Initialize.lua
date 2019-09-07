@@ -54,6 +54,7 @@ if DMAUserVars == nil then
 	DMAUserVars["LastGPS-X"] = 0;
 	DMAUserVars["LastGPS-Y"] = 0;
 	DMAUserVars["LastGPS-Z"] = 0;
+	DMAUserVars["LastGPS-O"] = 0;
 
 	DMAUserVars["LastNPC"] = nil;
 	DMAUserVars["LastGOBID"] = nil;

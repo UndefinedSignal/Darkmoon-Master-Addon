@@ -116,4 +116,111 @@
 			</Layer>
 		</Layers>
 	</Frame>
+    <EditBox name="XYZBox" enableMouse="false" autoFocus="false" multiline="false" letters="13" virtual="true">
+        <Size x="128" y="32"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+					<Size x="8" y="20"/>
+					<Anchors>
+						<Anchor point="LEFT" x="-5" y="0"/>
+					</Anchors>
+					<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+					<Size x="8" y="20"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+					<Size x="10" y="20"/>
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+				</Texture>
+			</Layer>
+	        <Layer>
+	            <FontString name="$parentName" font="Fonts\FRIZQT___CYR.TTF" text="@" justifyH="LEFT" justifyV="TOP">
+	                <Color r="1" g="1" b="1" a="1"/>
+	                <FontHeight val="14"/>
+	                <Anchors>
+	                    <Anchor point="LEFT" relativeTo="$parent" x="-22" y="0" />
+	                </Anchors>
+	                <Shadow>
+	                    <Offset x="1" y="1" />
+	                    <Color r="0" g="0" b="0"/>
+	                </Shadow>
+	            </FontString>
+	        </Layer>
+		</Layers>
+
+		<Frames>
+			<Button name="$parentIncrement">
+				<Anchors>
+					<Anchor point="RIGHT" x="16" y="1"/>
+				</Anchors>
+				<Size x="18" y="18"/>
+				<NormalTexture file="Interface\Buttons\UI-PlusButton-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-PlusButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD"/>
+				<Scripts>
+					<OnClick>
+						
+					</OnClick>
+		            <OnEnter>
+		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+		                GameTooltip:AddLine("|cFFFFFFFFУвеличить переменную|r")
+		                GameTooltip:Show()
+		            </OnEnter>
+		            <OnLeave>
+		                GameTooltip:Hide()
+		            </OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentDecrement">
+				<Anchors>
+					<Anchor relativeTo="$parentIncrement" point="RIGHT" x="17" y="0"/>
+				</Anchors>
+				<Size x="18" y="18"/>
+				<NormalTexture file="Interface\Buttons\UI-MinusButton-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-MinusButton-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD"/>
+				<Scripts>
+					<OnClick>
+						
+					</OnClick>
+		            <OnEnter>
+		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+		                GameTooltip:AddLine("|cFFFFFFFFУменьшить переменную|r")
+		                GameTooltip:Show()
+		            </OnEnter>
+		            <OnLeave>
+		                GameTooltip:Hide()
+		            </OnLeave>
+				</Scripts>
+			</Button>
+		</Frames>
+
+	    <Scripts>
+	    	<OnTextChanged>
+	    		if self:GetText() == "" then
+	    			self:SetText("1");
+	    		end
+	    	</OnTextChanged>
+			<OnEscapePressed>
+				self:ClearFocus();
+			</OnEscapePressed>
+			<OnEnterPressed>
+	    		if self:GetText() == "" then
+	    			self:SetText("1");
+	    		end
+				self:ClearFocus();
+			</OnEnterPressed>
+	    </Scripts>
+	    <FontString inherits="ChatFontNormal" />
+    </EditBox>
 </Ui>

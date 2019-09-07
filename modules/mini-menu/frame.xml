@@ -26,7 +26,7 @@
 
 
     <Frame name="DMA_MiniMenu" parent="UIParent" enableMouse="true" movable="true" clampedToScreen="true" hidden="false">
-    	<Size x="200" y="350"/>
+    	<Size x="220" y="350"/>
         <Anchors>
             <Anchor point="CENTER" x="0" y="0"/>
         </Anchors>
@@ -46,12 +46,14 @@
                 <!--Interface\BankFrame\Bank-Background-->
                 <!--Interface\Collections\CollectionsBackgroundTile-->
                 <!--Interface\GuildBankFrame\GuildVaultBG-->
-                <Texture name="$parentBackground" file="Interface\Legionfall\Legionfall">
+                <!--file="Interface\Legionfall\Legionfall"
+                <TexCoords top="0.0087890625" left="0.0087890625" bottom="0.560546875" right="0.8466796875"/>-->
+                <Texture name="$parentBackground" file="Interface/AddOns/DMA/Resources/IMG/bfa-back">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="3" y="0"/>
                         <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
                     </Anchors>
-                    <TexCoords top="0.0087890625" left="0.0087890625" bottom="0.560546875" right="0.8466796875"/>
+                   <!-- <TexCoords top="0.0087890625" left="0.0087890625" bottom="0.560546875" right="0.8466796875"/>-->
                     <Color r="1" g="1" b="1" a="0.75"/>
                 </Texture>
             </Layer>
@@ -205,7 +207,7 @@
 			    <Frames>
 		        	<Button name="$parentGMON" inherits="DMA_GMTriggerButton" text="GM-mode — On">
 				        <Anchors>
-				            <Anchor relativeTo="$parent" point="TOP" x="-20" y="-20"/>
+				            <Anchor relativeTo="$parent" point="TOP" x="-15" y="-30"/>
 				        </Anchors>
 						<Size x="115" y="28"/>
 						<NormalFont style="GameFontHighlightLeft"/>
@@ -396,6 +398,19 @@
 						</Scripts>
 		        	</Button>
 			    </Frames>
+
+			    <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture file="Interface\ENCOUNTERJOURNAL\UI-EJ-BOSS-Pandemonius" alphaMode="ADD">
+                            <Size x="128" y="64"/>
+                            <Color r="1.0" g="1.0" b="1.0" a="0.70"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="-10" y="25"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+			    </Layers>
+
 			</Frame>
 
 			<Frame name="DMAPlayerMoveFrame" movable="true" toplevel="true" frameStrata="PARENT" hidden="true">
@@ -404,10 +419,115 @@
 					<Anchor relativeTo="DMA_MiniMenuContentGM" point="RIGHT" x="-15" y="0"/>
 				</Anchors>
 
+			    <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture file="Interface\ENCOUNTERJOURNAL\UI-EJ-BOSS-Zereketh the Unbound" alphaMode="ADD">
+                            <Size x="128" y="64"/>
+                            <Color r="1.0" g="1.0" b="1.0" a="0.70"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="-25" y="-65"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+			    </Layers>
+
 				<Frames>
+				    <EditBox name="$parentCoordX" inherits="XYZBox">
+						<Anchors>
+							<Anchor relativeTo="DMA_MiniMenuContentGM" point="TOPLEFT" x="37" y="-25"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								DMAPlayerMoveFrameCoordXName:SetText("X")
+							</OnLoad>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината X|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+				    </EditBox>
+				    <EditBox name="$parentCoordY" inherits="XYZBox">
+						<Anchors>
+							<Anchor relativeTo="$parentCoordX" point="BOTTOMLEFT" x="0" y="-20"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								DMAPlayerMoveFrameCoordYName:SetText("Y")
+							</OnLoad>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината Y|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+				    </EditBox>
+				    <EditBox name="$parentCoordZ" inherits="XYZBox">
+						<Anchors>
+							<Anchor relativeTo="$parentCoordY" point="BOTTOMLEFT" x="0" y="-20"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								DMAPlayerMoveFrameCoordZName:SetText("Z")
+							</OnLoad>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината Z|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+				    </EditBox>
+				    <EditBox name="$parentCoordO" inherits="XYZBox">
+						<Anchors>
+							<Anchor relativeTo="$parentCoordZ" point="BOTTOMLEFT" x="0" y="-20"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								DMAPlayerMoveFrameCoordOName:SetText("O")
+							</OnLoad>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFНаправление взгляда в радианах|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+
+				    </EditBox>
+
+				    <EditBox name="$parentDistance" inherits="XYZBox">
+						<Anchors>
+							<Anchor relativeTo="$parentCoordO" point="BOTTOMLEFT" x="0" y="-20"/>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								DMAPlayerMoveFrameDistanceName:SetText("D")
+							</OnLoad>
+				            <OnEnter>
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				                GameTooltip:AddLine("|cFFFFFFFFДистанция|r")
+				                GameTooltip:Show()
+				            </OnEnter>
+				            <OnLeave>
+				                GameTooltip:Hide()
+				            </OnLeave>
+						</Scripts>
+				    </EditBox>
+
 					<CheckButton name="DMAPlayerMoveForward" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
-							<Anchor point="TOP" x="0" y="-5"/>
+							<Anchor point="CENTER" x="0" y="-80"/>
 						</Anchors>
 						<Scripts>
 							<OnLoad>
@@ -419,61 +539,9 @@
 							</OnClick>
 						</Scripts>
 					</CheckButton>
-					<Button name="DMAPlayerMoveJump" inherits="UIPanelSquareButton">
-						<Size x="38" y="38" />
-						<Anchors>
-							<Anchor point="TOP" relativeTo="DMAPlayerMoveForward" relativePoint="BOTTOM" x="0" y="0"/>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								self.icon:SetTexture("Interface\\Buttons\\JumpUpArrow");
-								self.icon:SetTexCoord(0,1,0,1);
-								self.icon:SetSize(18,18);
-							</OnLoad>
-							<OnClick>
-								print("OnClick "..self:GetName());
-							</OnClick>
-						</Scripts>
-					</Button>
-					<CheckButton name="DMAPlayerMoveRotateLeft" inherits="DMAGobMoveCheckboxTemplate">
-						<Size x="38" y="38" />
-						<Anchors>
-							<Anchor point="RIGHT" relativeTo="DMAPlayerMoveForward" relativePoint="LEFT" x="0" y="-38"/>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								self.icon:SetTexture("Interface\\Buttons\\UI-RotationLeft-Button-Up");
-								self.icon:SetTexCoord(0,1,0,1);
-								self.icon:SetSize(35,35);
-								self:RegisterForClicks("AnyUp");
-							</OnLoad>
-							<OnClick>
-								DMA:SendChatMessage(".gps");
-								--print("OnClick "..self:GetName());
-							</OnClick>
-						</Scripts>
-					</CheckButton>
-					<CheckButton name="DMAPlayerMoveRotateRight" inherits="DMAGobMoveCheckboxTemplate">
-						<Size x="38" y="38" />
-						<Anchors>
-							<Anchor point="LEFT" relativeTo="DMAPlayerMoveForward" relativePoint="RIGHT" x="0" y="-38"/>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								self.icon:SetTexture("Interface\\Buttons\\UI-RotationRight-Button-Up");
-								self.icon:SetTexCoord(0,1,0,1);
-								self.icon:SetSize(35,35);
-								self:RegisterForClicks("AnyUp");
-							</OnLoad>
-							<OnClick>
-								DMA:SendChatMessage(".gps");
-								--print("OnClick "..self:GetName());
-							</OnClick>
-						</Scripts>
-					</CheckButton>
 					<CheckButton name="DMAPlayerMoveBackward" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
-							<Anchor point="TOP" relativeTo="DMAPlayerMoveJump" relativePoint="BOTTOM" x="0" y="0"/>
+							<Anchor point="BOTTOM" relativeTo="DMAPlayerMoveForward" relativePoint="BOTTOM" x="0" y="-38"/>
 						</Anchors>
 						<Scripts>
 							<OnLoad>
@@ -485,57 +553,9 @@
 							</OnClick>
 						</Scripts>
 					</CheckButton>
-
-                    <EditBox name="$parentDistance" enableMouse="false" autoFocus="false" multiline="false" letters="4">
-                        <Size x="32" y="42"/>
-						<Anchors>
-							<Anchor point="TOP" relativeTo="DMAPlayerMoveBackward" relativePoint="LEFT" x="-20" y="20"/>
-						</Anchors>
-
-						<Layers>
-							<Layer level="BACKGROUND">
-								<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
-									<Size x="8" y="20"/>
-									<Anchors>
-										<Anchor point="LEFT" x="-5" y="0"/>
-									</Anchors>
-									<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-								</Texture>
-								<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
-									<Size x="8" y="20"/>
-									<Anchors>
-										<Anchor point="RIGHT" x="0" y="0"/>
-									</Anchors>
-									<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
-								</Texture>
-								<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
-									<Size x="10" y="20"/>
-									<Anchors>
-										<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
-										<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
-									</Anchors>
-									<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-								</Texture>
-							</Layer>
-						</Layers>
-
-					    <Scripts>
-					    	<OnTextChanged>
-					    		DMA.PlayerMovement.Distance = tonumber(self:GetText());
-					    	</OnTextChanged>
-							<OnEscapePressed>
-								self:ClearFocus();
-							</OnEscapePressed>
-							<OnEnterPressed>
-								self:ClearFocus();
-							</OnEnterPressed>
-					    </Scripts>
-					    <FontString inherits="ChatFontNormal" />
-                    </EditBox>
-
 					<CheckButton name="DMAPlayerMoveStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
-							<Anchor point="RIGHT" relativeTo="DMAPlayerMoveForward" relativePoint="LEFT"/>
+							<Anchor point="RIGHT" relativeTo="DMAPlayerMoveBackward" relativePoint="LEFT"/>
 						</Anchors>
 						<Scripts>
 							<OnLoad>
@@ -549,7 +569,7 @@
 					</CheckButton>
 					<CheckButton name="DMAPlayerMoveStrafeRight" inherits="DMAGobMoveCheckboxTemplate">
 						<Anchors>
-							<Anchor point="LEFT" relativeTo="DMAPlayerMoveForward" relativePoint="RIGHT"/>
+							<Anchor point="LEFT" relativeTo="DMAPlayerMoveBackward" relativePoint="RIGHT"/>
 						</Anchors>
 						<Scripts>
 							<OnLoad>
@@ -563,6 +583,11 @@
 						</Scripts>
 					</CheckButton>
 				</Frames>
+				<Scripts>
+					<OnShow>
+						DMA:UpdateEditBoxXYZ();
+					</OnShow>
+				</Scripts>
 			</Frame>
 
 			<Frame name="DMACharacterFrame" movable="true" toplevel="true" frameStrata="PARENT" hidden="true">
@@ -571,11 +596,23 @@
 					<Anchor relativeTo="DMA_MiniMenuContentGM" point="RIGHT" x="-15" y="0"/>
 				</Anchors>
 
+			    <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture file="Interface\ENCOUNTERJOURNAL\UI-EJ-BOSS-Nhallish Feaster of Souls" alphaMode="ADD">
+                            <Size x="128" y="64"/>
+                            <Color r="1.0" g="1.0" b="1.0" a="0.70"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="-20" y="-65"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+			    </Layers>
+
 				<Frames>
 					<Slider name="$parentSpeed" orientation="HORIZONTAL" enableMouse="true" hidden="false" defaultValue="1.0" minValue="0.1" maxValue="50" valueStep="0.1">
 						<Size x="140" y="20"/>
 						<Anchors>
-							<Anchor relativeTo="DMACharacterFrame" point="TOP" x="-13" y="20"/>
+							<Anchor relativeTo="DMACharacterFrame" point="TOP" x="-13" y="10"/>
 						</Anchors>
 						<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
 						<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
@@ -589,7 +626,7 @@
 						</ThumbTexture>
 
 						<Frames>
-							<Button name="$parentReload2">
+							<Button name="$parentReload">
 								<Anchors>
 									<Anchor point="LEFT" x="-15" y="0"/>
 								</Anchors>
@@ -613,7 +650,7 @@
 							</Button>
 
 		                    <EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="4">
-		                        <Size x="32" y="62"/>
+		                        <Size x="32" y="32"/>
 								<Anchors>
 									<Anchor point="RIGHT" x="35" y="-1"/>
 								</Anchors>
@@ -647,28 +684,25 @@
 
 							    <Scripts>
 							    	<OnTextChanged>
-							    		local num
 							    		if self:GetText() == "" then
 							    			self:SetText("1");
-							    			num = 1;
+							    			DMACharacterFrameSpeed:SetValue(1);
 							    		else
-							    			num = self:GetText();
+							    			DMACharacterFrameSpeed:SetValue(self:GetText());
 							    		end
-							    		DMACharacterFrameSpeed:SetValue(num);
 							    	</OnTextChanged>
 									<OnEscapePressed>
 										self:ClearFocus();
 									</OnEscapePressed>
 									<OnEnterPressed>
-							    		local num
 							    		if self:GetText() == "" then
 							    			self:SetText("1");
-							    			num = 1;
+								    		DMACharacterFrameSpeed:SetValue(1);
+								    		DMA:SetCharacterSpeed(1);
 							    		else
-							    			num = self:GetText();
+								    		DMACharacterFrameSpeed:SetValue(self:GetText());
+								    		DMA:SetCharacterSpeed(self:GetText());
 							    		end
-							    		DMACharacterFrameSpeed:SetValue(num);
-							    		DMA:SetCharacterSpeed(num);
 										self:ClearFocus();
 									</OnEnterPressed>
 							    </Scripts>
@@ -819,7 +853,7 @@
 					    </Layers>
 
 						<Frames>
-							<Button name="$parentReload2">
+							<Button name="$parentReload">
 								<Anchors>
 									<Anchor point="LEFT" x="-15" y="-1"/>
 								</Anchors>
@@ -843,7 +877,7 @@
 							</Button>
 
 		                    <EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="4">
-		                        <Size x="32" y="62"/>
+		                        <Size x="32" y="32"/>
 								<Anchors>
 									<Anchor point="RIGHT" x="35" y="-1"/>
 								</Anchors>
@@ -877,28 +911,25 @@
 
 							    <Scripts>
 							    	<OnTextChanged>
-							    		local num
 							    		if self:GetText() == "" then
 							    			self:SetText("1");
-							    			num = 1;
+							    			DMACharacterFrameScale:SetValue(1);
 							    		else
-							    			num = self:GetText();
+							    			DMACharacterFrameScale:SetValue(self:GetText());
 							    		end
-							    		DMACharacterFrameScale:SetValue(num);
 							    	</OnTextChanged>
 									<OnEscapePressed>
 										self:ClearFocus();
 									</OnEscapePressed>
 									<OnEnterPressed>
-							    		local num
 							    		if self:GetText() == "" then
 							    			self:SetText("1");
-							    			num = 1;
+								    		DMACharacterFrameScale:SetValue(1);
+								    		DMA:SetCharacterScale(1);
 							    		else
-							    			num = self:GetText();
+								    		DMACharacterFrameScale:SetValue(self:GetText());
+								    		DMA:SetCharacterScale(self:GetText());
 							    		end
-							    		DMACharacterFrameScale:SetValue(num);
-							    		DMA:SetCharacterScale(num);
 										self:ClearFocus();
 									</OnEnterPressed>
 							    </Scripts>
@@ -947,7 +978,7 @@
 			<Slider name="DMA_AlphaSlider" orientation="HORIZONTAL" enableMouse="true" hidden="false" minValue="0" maxValue="100" valueStep="1">
 				<Size x="164" y="20"/>
 				<Anchors>
-					<Anchor relativeTo="DMA_MiniMenu" point="BOTTOM" x="0" y="0"/>
+					<Anchor relativeTo="DMA_MiniMenu" point="BOTTOM" x="0" y="15"/>
 				</Anchors>
 				<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
 				<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
@@ -992,12 +1023,13 @@
                 <!--Interface\BankFrame\Bank-Background-->
                 <!--Interface\Collections\CollectionsBackgroundTile-->
                 <!--Interface\GuildBankFrame\GuildVaultBG-->
-                <Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">
+                <!--<Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">-->
+                <Texture name="$parentBackground" file="Interface/AddOns/DMA/Resources/IMG/bfa-back">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="3" y="0"/>
                         <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
                     </Anchors>
-                    <TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>
+                    <!--<TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>-->
                     <Color r="1" g="1" b="1" a="0.75"/>
                 </Texture>
             </Layer>
@@ -1113,12 +1145,13 @@
                 <!--Interface\BankFrame\Bank-Background-->
                 <!--Interface\Collections\CollectionsBackgroundTile-->
                 <!--Interface\GuildBankFrame\GuildVaultBG-->
-                <Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">
+                <!--<Texture name="$parentBackground" file="Interface\PLAYERACTIONBARALT\Darkmoon">-->
+                <Texture name="$parentBackground" file="Interface/AddOns/DMA/Resources/IMG/bfa-back">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="3" y="0"/>
                         <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
                     </Anchors>
-                    <TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>
+                    <!--<TexCoords top="0.17578125" left="0.00390625" bottom="0.357421875" right="1"/>-->
                     <Color r="1" g="1" b="1" a="0.75"/>
                 </Texture>
             </Layer>

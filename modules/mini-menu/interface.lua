@@ -241,3 +241,10 @@ function DMA:ScaleSliderReloadToDefauld()
 	DMACharacterFrameScaleCounter:SetText(string.sub(DMACharacterFrameScale:GetValue(), 1, 5));
 	DMA:SetCharacterScale(string.sub(DMACharacterFrameScale:GetValue(), 1, 5));
 end
+
+function DMA:UpdateEditBoxXYZ()
+	DMAPlayerMoveFrameCoordX:SetText(DMAUserVars["LastGPS-X"]);
+	DMAPlayerMoveFrameCoordY:SetText(DMAUserVars["LastGPS-Y"]);
+	DMAPlayerMoveFrameCoordZ:SetText(DMAUserVars["LastGPS-Z"]);
+	DMAPlayerMoveFrameCoordO:SetText(DMAUserVars["LastGPS-O"]);
+end
