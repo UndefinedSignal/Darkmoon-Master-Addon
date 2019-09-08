@@ -63,7 +63,7 @@ function MangLinkifier_Decompose(chatstring)
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ
       chatstring = string.gsub(chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
-      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, " X: ")+4, string.find(chatstring, " Y: ")-1);
+      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, "X: ")+4, string.find(chatstring, " Y: ")-1);
       DMAUserVars["LastGPS-Y"] = strsub(chatstring, string.find(chatstring, " Y: ")+4, string.find(chatstring, " Z: ")-1);
       DMAUserVars["LastGPS-Z"] = strsub(chatstring, string.find(chatstring, " Z: ")+4, string.find(chatstring, " - |cff")-3);
       DMAUserVars["GPS-Scan"] = false;
