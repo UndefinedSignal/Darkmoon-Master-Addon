@@ -148,7 +148,7 @@ DMAMorphFrame.TitleFrame.Background = DMAMorphFrame.TitleFrame:CreateTexture(nil
 DMAMorphFrame.TitleFrame.Background:SetColorTexture(1,0,0,0)
 DMAMorphFrame.TitleFrame.Background:SetAllPoints(DMAMorphFrame.TitleFrame)
 DMAMorphFrame.TitleFrame.FontString = DMAMorphFrame.TitleFrame:CreateFontString(nil,nil,"GameFontNormal")
-DMAMorphFrame.TitleFrame.FontString:SetText("DMA Morph Catalog")
+DMAMorphFrame.TitleFrame.FontString:SetText("Taku Morph Catalog")
 DMAMorphFrame.TitleFrame.FontString:SetAllPoints(DMAMorphFrame.TitleFrame)
 DMAMorphFrame.TitleFrame.CloseButton = CreateFrame("Button", nil, DMAMorphFrame.TitleFrame, "UIPanelCloseButton")
 DMAMorphFrame.TitleFrame.CloseButton:SetPoint("RIGHT", -3, 0)
@@ -356,7 +356,7 @@ end)
 
 function DMAMorphFrame.Gallery:Load(Reset)
 	if DMA.Debug then
-		print("--- DMAMorphFrame.Gallery:Load ---")
+		print("--- TakuMorphFrame.Gallery:Load ---")
 		print("ModelID .. " .. ModelID)
 		print("LastMaxModelID .. " .. LastMaxModelID)
 		print("OffsetModelID .. " .. OffsetModelID)

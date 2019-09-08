@@ -1,7 +1,28 @@
+--[[
+           \.   \.      __,-"-.__      ./   ./
+       \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
+        \`.  \_`-''      _,="=._      ``-'_/  .'/
+         \ `-',-._   _.  _,="=._  ,_   _.-,`-' /
+      \. /`,-',-._"""  \ _,="=._ /  """_.-,`-,'\ ./
+       \`-'  /    `-._  "       "  _.-'    \  `-'/
+       /)   (         \    ,-.    /         )   (\
+    ,-'"     `-.       \  /   \  /       .-'     "`-,
+  ,'_._         `-.____/ /  _  \ \____.-'         _._`,
+ /,'   `.                \_/ \_/                .'   `,\
+/'       )                  _         TestUnit (       `\
+        /   _,-'"`-.  ,++|T|||T|++.  .-'"`-,_   \
+       / ,-'        \/|`|`|`|'|'|'|\/        `-, \
+      /,'             | | | | | | |             `,\
+     /'               ` | | | | | '               `\
+                        ` | | | '
+                          ` | '
+]]--
+
 function DMA:AddMinimapIcon()
+	--icon = "Interface\\AddOns\\DMA\\Resources\\IMG\\dma.tga"
 	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("DMA", {
 		type = "data source",
-		icon = "Interface\\AddOns\\DMA\\Resources\\IMG\\dma.tga",
+		icon = "Interface\\ICONS\\INV_AzeriteDebuff",
 		tocname = "dma",
 		OnClick = function(_, button)
 			DMA:ProcessDmaMenu(button);

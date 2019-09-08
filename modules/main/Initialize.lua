@@ -42,9 +42,11 @@ DMA.Timers["GPS-Timer"] = nil;
 
 DMA.PlayerMovement = {}
 DMA.PlayerMovement.Distance = 1;
+DMA.Version = 0.87;
 
 if DMAUserVars == nil then
 	DMAUserVars = {};
+	DMAUserVars["Version"] = DMA.Version;
 	DMAUserVars["Darkmoon"] = true;
 	DMAUserVars["BackgroundAlpha"] = 1;
 	DMAUserVars["Gm-mode"] = false;
@@ -52,24 +54,19 @@ if DMAUserVars == nil then
 	DMAUserVars["Whisper"] = false;
 	DMAUserVars["GmChat"] = false;
 	DMAUserVars["Invisibility"] = false;
-
 	DMAUserVars["LastGPS-X"] = 0;
 	DMAUserVars["LastGPS-Y"] = 0;
 	DMAUserVars["LastGPS-Z"] = 0;
 	DMAUserVars["LastGPS-O"] = 0;
-
 	DMAUserVars["MoveDistance"] = 1;
-
-
 	DMAUserVars["GPS-Scan"] = true;
-
 	DMAUserVars["LastNPC"] = nil;
 	DMAUserVars["LastGOBID"] = nil;
 	DMAUserVars["LastGOBGUID"] = nil;
 end
 
 function DMA:OnEnable()
-	DMA:InitializeHooks()
+	DMA:InitializeHooks();
 	DMA:AlphaSlider();
 	DMA:BackGroundAlphaInitialize();
 	DMA:AddMinimapIcon();

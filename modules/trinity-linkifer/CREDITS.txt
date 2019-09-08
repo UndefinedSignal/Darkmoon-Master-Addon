@@ -17,3 +17,6 @@ Shocker (various)
 TrinityAdmin V2 also contains code donated by:
 Lightning Blade (various)
 Rochet2 (Fixed and updated some parts of the add-on)
+
+TrinityLinkifer optimized for BfA by:
+TestUnit
