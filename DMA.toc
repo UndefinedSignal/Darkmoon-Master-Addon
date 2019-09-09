@@ -10,6 +10,6 @@
 ## OptionalDeps: LibStub, CallbackHandler-1.0, AceAddon-3.0, AceEvent-3.0, AceHook-3.0, AceDB-3.0, AceLocale-3.0, AceConsole-3.0
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
-## SavedVariables: DMAUserVars, DMAFavMorphs, DMAIconData
+## SavedVariables: DMAUserVars, DMAFavMorphs, DMAIconData, DMASave
 
 DMA.xml

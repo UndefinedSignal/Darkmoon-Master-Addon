@@ -176,6 +176,7 @@ function MangLinkifier_Link(orgtxt, id, type)
     link = link .." - |cff" .. urlcolor .. "|Hlookupspellunlearn:" .. id .. "|h["..Locale["lfer_Unlearn"].."]|h|r "
   elseif(type == "lookuptele") then
     link = "|cffffffff|Htele:" .. id .. "|h[" .. orgtxt .. "]|h|r"
+    link = link .." - |cff" .. urlcolor .. "|Hlookupteleteleport:" .. id .. "|h["..Locale["lfer_Teleport"].."]|h|r "   
     link = link .." - |cff" .. urlcolor .. "|Hlookupteledelete:" .. id .. "|h["..Locale["lfer_Delete"].."]|h|r "
   else 
     link = orgtxt .." - |cffc20000"..Locale["lfer_Error"].." |r |cff008873" .. type .. "|r"
@@ -312,6 +313,9 @@ function MangLinkifier_SetItemRef(link, text, button)
     return;
   elseif ( strsub(link, 1, 16) == "lookupteledelete" ) then
     SendChatMessage(".tele del "..strsub(link, 18), say, nil, nil)
+    return;
+  elseif ( strsub(link, 1, 18) == "lookupteleteleport" ) then
+    SendChatMessage(".tele "..strsub(link, 20), say, nil, nil)
     return;
   end
   MangLinkifier_SetItemRef_Original(link, text, button);
