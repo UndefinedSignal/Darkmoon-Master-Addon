@@ -69,8 +69,8 @@ function Return_enUS()
     ["made_by"] = "TestUnit",
     ["lfer_Add"] = "Add",
     ["lfer_Remove"] = "Remove",
-    ["lfer_Learn"] = "Learn",
-    ["lfer_Unlearn"] = "Unlearn",
+    ["lfer_Learn"] = "Aura",
+    ["lfer_Unlearn"] = "Unaura",
     ["lfer_Error"] = "Error Search String Matched but an error occured or unable to find type",
 }
 end

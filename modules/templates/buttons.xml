@@ -19,6 +19,51 @@
             -->
 
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+    <Button name="DMA_MenuButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="[TEXT]" virtual="true" hidden="false">
+        <Size x="115" y="28"/>
+        <NormalFont style="GameFontHighlightLeft"/>
+        <Scripts>
+            <OnClick>
+                DMA:EXECUTEPICKMENUCOMMAND(self:GetName())
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="DMA_GMTriggerButton" text="[TRIGGER]" virtual="true">
+        <NormalFont style="GameFontHighlightLeft"/>
+        <Scripts>
+            <OnClick>
+                DMA:EXECUTEGMCOMMAND(self:GetName())
+            </OnClick>
+            <OnLeave>
+                DMA:HideTooltip(self);
+            </OnLeave>
+        </Scripts>
+    </Button>
+
+    <Button name="DMA_GOBButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="" virtual="true" hidden="false">
+        <Size x="180" y="20"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="$parentNumber" inherits="SystemFont_Med1" justifyH="CENTER" text="0">
+                    <Size x="42" y="32"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="5"/>
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0.25"/>
+                </FontString>
+
+                <FontString name="$parentName" inherits="SystemFont_Med1" text="...">
+                    <Size x="128" y="0"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="10" y="0"/>
+                    </Anchors>
+                    <Color r="1" g="1" b="1"/>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Button>
+
 	<Button name="DMA_TriggerButton" virtual="true" inherits="UIMenuButtonStretchTemplate">
 		
 		<HighlightTexture file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD">

@@ -63,7 +63,7 @@ function MangLinkifier_Decompose(chatstring)
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ
       chatstring = string.gsub(chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
-      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, "X: ")+4, string.find(chatstring, " Y: ")-1);
+      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, "X: ")+3, string.find(chatstring, " Y: ")-1);
       DMAUserVars["LastGPS-Y"] = strsub(chatstring, string.find(chatstring, " Y: ")+4, string.find(chatstring, " Z: ")-1);
       DMAUserVars["LastGPS-Z"] = strsub(chatstring, string.find(chatstring, " Z: ")+4, string.find(chatstring, " - |cff")-3);
       DMAUserVars["GPS-Scan"] = false;
@@ -77,7 +77,8 @@ function MangLinkifier_Decompose(chatstring)
       chatstring = string.gsub (chatstring, "%|cff(.*)%|Hitem:(.*)%|h%[(.*)%]%|h%|r", MangLinkifier_Link("%3-%1", "%2", "lookupitem"))
     end
     for guid in string.gmatch(chatstring, "%|cffffffff%|Hgameobject_entry:(.*)%|h%[(.*)%]%|h%|r") do --LOOKUP OBJECT
-      chatstring = string.gsub (chatstring, "%|cffffffff%|Hgameobject_entry:(.*)%|h%[(.*)%]%|h%|r", MangLinkifier_Link("%2", "%1", "lookupgo"))
+      chatstring = string.gsub(chatstring, "%|cffffffff%|Hgameobject_entry:(.*)%|h%[(.*)%]%|h%|r", MangLinkifier_Link("%2", "%1", "lookupgo"))
+      DMA:ProcessDMAGobjectList(chatstring);
     end
     for guid in string.gmatch(chatstring, "%|cffffffff%|Hcreature_entry:(.*)%|h%[(.*)%]%|h%|r") do --LOOKUP CREATURE
       chatstring = string.gsub (chatstring, "%|cffffffff%|Hcreature_entry:(.*)%|h%[(.*)%]%|h%|r", MangLinkifier_Link("%2", "%1", "lookupcreature"))
@@ -303,10 +304,10 @@ function MangLinkifier_SetItemRef(link, text, button)
     SendChatMessage(".learn "..strsub(link, 7), say, nil, nil)
     return;
   elseif ( strsub(link, 1, 16) == "lookupspelllearn" ) then
-    SendChatMessage(".learn "..strsub(link, 18), say, nil, nil)
+    SendChatMessage(".aura "..strsub(link, 18), say, nil, nil)
     return;
   elseif ( strsub(link, 1, 18) == "lookupspellunlearn" ) then
-    SendChatMessage(".unlearn "..strsub(link, 20), say, nil, nil)
+    SendChatMessage(".unaura "..strsub(link, 20), say, nil, nil)
     return;
   elseif ( strsub(link, 1, 4) == "tele" ) then
     SendChatMessage(".tele "..strsub(link, 6), say, nil, nil)

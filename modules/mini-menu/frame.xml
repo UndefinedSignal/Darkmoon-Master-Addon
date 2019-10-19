@@ -22,29 +22,6 @@
     xmlns="http://www.blizzard.com/wow/ui/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-	<Button name="DMA_MenuButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="[TEXT]" virtual="true" hidden="false">
-		<Size x="115" y="28"/>
-		<NormalFont style="GameFontHighlightLeft"/>
-		<Scripts>
-			<OnClick>
-				DMA:EXECUTEPICKMENUCOMMAND(self:GetName())
-			</OnClick>
-		</Scripts>
-	</Button>
-
-	<Button name="DMA_GMTriggerButton" text="[TRIGGER]" virtual="true">
-		<NormalFont style="GameFontHighlightLeft"/>
-		<Scripts>
-			<OnClick>
-				DMA:EXECUTEGMCOMMAND(self:GetName())
-			</OnClick>
-			<OnLeave>
-				DMA:HideTooltip(self);
-			</OnLeave>
-		</Scripts>
-	</Button>
-
-
     <Frame name="DMA_MiniMenu" parent="UIParent" enableMouse="true" movable="true" clampedToScreen="true" hidden="false">
     	<Size x="220" y="350"/>
         <Anchors>
@@ -1063,6 +1040,158 @@
 				</Frames>
 			</Frame>
 
+			<Frame name="DMA_MiniMenuContentGameobject" hidden="true">
+				<Anchors>
+		            <Anchor relativeTo="DMA_MiniMenu" point="TOPLEFT" x="0" y="0"/>
+		            <Anchor relativeTo="DMA_MiniMenu" point="BOTTOMRIGHT" x="0" y="0"/>
+				</Anchors>
+
+			    <Frames>
+					<Frame name="$parentObjectScene" hidden="false">
+						<Anchors>
+				            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-45"/>
+				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
+						</Anchors>
+						<Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+						    <EdgeSize>
+						        <AbsValue val="16"/>
+						    </EdgeSize>
+						    <BackgroundInsets>
+						        <AbsInset left="3" right="3" top="3" bottom="3"/>
+						    </BackgroundInsets>
+						</Backdrop>
+						<Frames>
+
+	      					<EditBox name="$parentEditBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
+						          <Size x="195" y="30"/>
+						          <Anchors>
+						              <Anchor point="TOPRIGHT" x="0" y="25"/>
+						          </Anchors>
+						          <Scripts>
+						              <OnShow/>
+						              <OnEnterPressed>
+						                  --RPSEmoteFramework:EmotesSearch(RPSEmoteFramework.EmoteList, self:GetText())
+						                  --RPSEmoteFramework:GenerateScrollMenu()
+						                  self:ClearFocus();
+						              </OnEnterPressed>
+						              <OnTextChanged>
+						                  --DMA:GenerateObjectsScrollMenu()
+						                  SearchBoxTemplate_OnTextChanged(self);
+						              </OnTextChanged>
+						              <OnEditFocusLost/>
+						              <OnEditFocusGained/>
+						              <OnKeyDown/>
+						            <OnEnter>
+						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+						                GameTooltip:AddLine("|cFFFFFFFFО боже! Что же это?|r")
+						                GameTooltip:AddLine("")
+						                GameTooltip:AddLine("Поиск ГОшек?! ОХУЕТЬ!")
+						                GameTooltip:Show()
+						            </OnEnter>
+						            <OnLeave>
+						                GameTooltip:Hide()
+						            </OnLeave>
+						          </Scripts>
+						    </EditBox>
+
+							<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate" hidden="false">
+								<Anchors>
+						            <Anchor relativeTo="$parent" point="TOPLEFT" x="2" y="-4"/>
+						            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-25" y="4"/>
+								</Anchors>
+								<Scripts>
+									<OnVerticalScroll>
+										if (DMA_MiniMenuContentGameobjectObjectSceneGOB13:IsShown()) then
+											FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+											FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										else
+											FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										end
+									</OnVerticalScroll>
+									<OnShow>
+										DMA.GObjectListInitialized = true;
+										DMA:GenerateObjectsScrollMenu();
+									</OnShow>
+								</Scripts>
+							</ScrollFrame>
+
+							<Button name="$parentGOB1" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentScrollBar" point="TOP" x="5" y="-2"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB2" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB1" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB3" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB2" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB4" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB3" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB5" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB4" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB6" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB5" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB7" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB6" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB8" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB7" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB9" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB8" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB10" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB9" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB11" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB10" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB12" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB11" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentGOB13" inherits="DMA_GOBButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentGOB12" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+
+						</Frames>
+						<Scripts>
+							<OnShow>
+								DMA:GenerateObjectsScrollMenu();
+							</OnShow>
+						</Scripts>
+					</Frame>
+			    </Frames>
+
+			</Frame>
+
             <!-- 
            \.   \.      __,-"-.__      ./   ./
        \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
@@ -1200,11 +1329,6 @@
 		        <Anchors>
 		            <Anchor relativeTo="$parentPick5" point="LEFT" x="0" y="-30"/>
 		        </Anchors>
-		        <Scripts>
-		        	<OnLoad>
-		        		self:Disable();
-		        	</OnLoad>
-		        </Scripts>
         	</Button>
         	<Button name="$parentPick7" inherits="DMA_MenuButtonTemplate" text="Tele">
 		        <Anchors>
@@ -1235,10 +1359,10 @@
 
 		<Animations>
 		    <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
-		       <Alpha duration="1" order="1" fromAlpha="0" toAlpha="1"/>
+		       <Alpha duration="0.2" order="1" fromAlpha="0" toAlpha="1"/>
 		    </AnimationGroup>
 		    <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
-		       <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+		       <Alpha duration="0.2" order="1" fromAlpha="1" toAlpha="0"/>
 				<Scripts>
 					<OnFinished>
 						DMA:DMA_MiniMenuLeft_OnFadeOutAnimFinished(self);
@@ -1292,10 +1416,10 @@
 
 		<Animations>
 		    <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
-		       <Alpha duration="1" order="1" fromAlpha="0" toAlpha="1"/>
+		       <Alpha duration="0.2" order="1" fromAlpha="0" toAlpha="1"/>
 		    </AnimationGroup>
 		    <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
-		       <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+		       <Alpha duration="0.2" order="1" fromAlpha="1" toAlpha="0"/>
 				<Scripts>
 					<OnFinished>
 						DMA:DMA_MiniMenuRight_OnFadeOutAnimFinished(self);

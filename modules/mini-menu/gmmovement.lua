@@ -59,3 +59,31 @@ function DMA:MoveCharacterXYZ(mode)
 end
 -- 1.5707975 - 3.141595 + 1.5707975
 -- 6,28319
+
+
+function DMA:GenerateObjScrollMenu()
+  FauxScrollFrame_Update(DMA_MiniMenuContentGameobjectObjectSceneScrollBar,#RPSEmoteFramework.EmoteList.ToShow,10,32);
+
+  for jBtn=1, 12 do
+    lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DMA_MiniMenuContentGameobjectObjectSceneScrollBar);
+    DMA.lineplusoffset[jBtn] = tonumber(lineplusoffset)
+    --print("RPSEmoteFramework.EmoteList.lineplusoffset["..jBtn.."]:"..RPSEmoteFramework.EmoteList.lineplusoffset[jBtn])
+  end
+
+  DMA:GObjectScrollBar_Update()
+end
+
+
+function DMA:GObjectScrollBar_Update()
+    if DMA.GObjectListInitialized then
+        for line=1,#DMA.lineplusoffset do
+            local lineplusoffset = DMA.lineplusoffset[line];
+            if lineplusoffset <= #DMA.GObjectList.ToShow then
+                _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:SetText("[ |cFFFD8A00" .. line .. "|r ] ");
+                --_G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:Show();
+            else
+                --_G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:Hide();
+            end
+        end
+    end
+end

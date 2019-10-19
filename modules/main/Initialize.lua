@@ -44,6 +44,26 @@ DMA.PlayerMovement = {}
 DMA.PlayerMovement.Distance = 1;
 DMA.Version = 0.87;
 
+DMA.GObjectListInitialized = false
+--DMA.GObjectList[number] = { id, name }
+DMA.GOBCounter = 1;
+DMA.GObjectList = {};
+DMA.GObjectList.ToShow = {};
+DMA.lineplusoffset = {
+  [1] = 1,
+  [2] = 2,
+  [3] = 3,
+  [4] = 4,
+  [5] = 5,
+  [6] = 6,
+  [7] = 7,
+  [8] = 8,
+  [9] = 9,
+  [10] = 10,
+  [11] = 11,
+  [12] = 12
+}
+
 if DMAUserVars == nil then
 	DMAUserVars = {};
 	DMAUserVars["Version"] = DMA.Version;
@@ -70,4 +90,6 @@ function DMA:OnEnable()
 	DMA:AlphaSlider();
 	DMA:BackGroundAlphaInitialize();
 	DMA:AddMinimapIcon();
+	DMA.GObjectListInitialized = true;
+	DMA:GenerateObjScrollMenu();
 end

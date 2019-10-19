@@ -52,7 +52,7 @@ commands["DMA_MiniMenuLeftPick2"] = {"/DMA:HideMiniMenuFrames();	DMACharacterFra
 commands["DMA_MiniMenuLeftPick3"] = {"/print(\"WIP\")"}; -- Char2
 commands["DMA_MiniMenuLeftPick4"] = {"/print(\"WIP\")"}; -- NPC
 commands["DMA_MiniMenuLeftPick5"] = {"/DMA:HideMiniMenuFrames();	DMAPlayerMoveFrame:Show();"}; -- Playermove
-commands["DMA_MiniMenuLeftPick6"] = {"/print(\"WIP\")"}; -- Gameobject
+commands["DMA_MiniMenuLeftPick6"] = {"/DMA:HideMiniMenuFrames();	DMA_MiniMenuContentGameobject:Show();"}; -- Gameobject
 commands["DMA_MiniMenuLeftPick7"] = {"/print(\"WIP\")"}; -- Tele
 commands["DMA_MiniMenuLeftPick8"] = {"/DMA:ProcessDMAMorph()"}; -- Misc
 commands["DMA_MiniMenuLeftPick9"] = {"/print(\"WIP\")"}; -- Server
@@ -61,6 +61,7 @@ function DMA:HideMiniMenuFrames()
 	DMA_MiniMenuContentGM:Hide();
 	DMACharacterFrame:Hide();
 	DMAPlayerMoveFrame:Hide();
+	DMA_MiniMenuContentGameobject:Hide()
 end
 
 function DMA:EXECUTEGMCOMMAND(cmd)
