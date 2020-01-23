@@ -44,7 +44,7 @@ function DMA:MoveCharacterXYZ(mode)
 	end
 	local sin = math.sin(angle);
 	local cos = math.cos(angle);
-	local py, px = DMA.HBD:GetPlayerWorldPosition();
+	local px, py = DMA.HBD:GetRawPlayerWorldPosition();
 	px = px + distance * cos;
 	py = py + distance * sin;
 
@@ -55,6 +55,7 @@ function DMA:MoveCharacterXYZ(mode)
 	DMA:UpdateEditBoxXYZ();
 
 	local msg = ".go xyz "..DMAUserVars["LastGPS-X"].." "..DMAUserVars["LastGPS-Y"].." "..DMAUserVars["LastGPS-Z"];
+	--print(msg)
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
 -- 1.5707975 - 3.141595 + 1.5707975

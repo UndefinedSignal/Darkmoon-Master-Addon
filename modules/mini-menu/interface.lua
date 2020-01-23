@@ -250,7 +250,7 @@ function DMA:UpdateEditBoxXYZ()
 end
 
 function DMA:ProcessGPSMove()
-	local py, px = DMA.HBD:GetPlayerWorldPosition();
+	local px, py = DMA.HBD:GetRawPlayerWorldPosition();
 	local pa = GetPlayerFacing();
 
 	if not (math.floor(DMAUserVars["LastGPS-X"]) == math.floor(px) and math.floor(DMAUserVars["LastGPS-Y"]) == math.floor(py) and DMAUserVars["LastGPS-O"] == pa) then

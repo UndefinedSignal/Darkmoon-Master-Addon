@@ -1,4 +1,4 @@
-﻿
+﻿-- Вероятно уже не актуально
 function ReturnMapName(MapID)				
     if MapID == "0" then return "Eastern Kingdoms"
     elseif MapID == "1" then return "Kalimdor"

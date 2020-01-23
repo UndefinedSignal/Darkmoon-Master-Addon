@@ -33,7 +33,7 @@ MINOR_VERSION = "$Revision: 3 $";
 ROOT_PATH     = "Interface\\AddOns\\DMA\\";
 
 DMA = LibStub("AceAddon-3.0"):NewAddon("DMA", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0");
-DMA.HBD = LibStub("HereBeDragons-2.0");
+DMA.HBD = LibStub("HereBeDragons-2.0d");
 DMA.Linkifier = DMA;
 DMA.User = {};
 DMA.Debug = false;
