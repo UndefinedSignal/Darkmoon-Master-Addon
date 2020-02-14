@@ -298,3 +298,23 @@ function DMA:ProcessPlayerMoveIncDecrement(frame_name)
 	end
 	DMA:ProcessManualXYZInput();
 end
+
+function DMA:GameObjectSearchOnEnterPressed()
+	DMA.Linkifier.isShowing = false;
+	local msg = ".look obj "..DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText();
+	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+	self:ScheduleTimer("SYSMSGEnable", 2)
+	DMA:GameObjectSearchClearResults();
+	DMA:GenerateObjScrollMenu();
+end
+
+function DMA:GameObjectSearchClearResults()
+	DMA.GOB.ObjectList = {};
+	DMA.GOB.ObjectList.ToShow = {};
+	DMA.GOB.Counter = 1;
+end
+
+function DMA:SYSMSGEnable()
+	DMA.Linkifier.isShowing = true;
+	DMA:GenerateObjectsScrollMenu();
+end

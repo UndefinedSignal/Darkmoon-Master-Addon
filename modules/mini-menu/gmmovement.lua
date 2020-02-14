@@ -63,23 +63,23 @@ end
 
 
 function DMA:GenerateObjScrollMenu()
-  FauxScrollFrame_Update(DMA_MiniMenuContentGameobjectObjectSceneScrollBar,#RPSEmoteFramework.EmoteList.ToShow,10,32);
+	FauxScrollFrame_Update(DMA_MiniMenuContentGameobjectObjectSceneScrollBar,#RPSEmoteFramework.EmoteList.ToShow,10,32);
 
-  for jBtn=1, 12 do
-    lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DMA_MiniMenuContentGameobjectObjectSceneScrollBar);
-    DMA.lineplusoffset[jBtn] = tonumber(lineplusoffset)
-    --print("RPSEmoteFramework.EmoteList.lineplusoffset["..jBtn.."]:"..RPSEmoteFramework.EmoteList.lineplusoffset[jBtn])
-  end
+	for jBtn=1, 12 do
+		lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DMA_MiniMenuContentGameobjectObjectSceneScrollBar);
+		DMA.lineplusoffset[jBtn] = tonumber(lineplusoffset)
+		--print("RPSEmoteFramework.EmoteList.lineplusoffset["..jBtn.."]:"..RPSEmoteFramework.EmoteList.lineplusoffset[jBtn])
+	end
 
-  DMA:GObjectScrollBar_Update()
+	DMA:GObjectScrollBar_Update()
 end
 
 
 function DMA:GObjectScrollBar_Update()
-    if DMA.GObjectListInitialized then
+    if DMA.GOB.ObjectListInitialized then
         for line=1,#DMA.lineplusoffset do
             local lineplusoffset = DMA.lineplusoffset[line];
-            if lineplusoffset <= #DMA.GObjectList.ToShow then
+            if lineplusoffset <= #DMA.GOB.ObjectList.ToShow then
                 _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:SetText("[ |cFFFD8A00" .. line .. "|r ] ");
                 --_G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:Show();
             else

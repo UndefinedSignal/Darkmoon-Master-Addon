@@ -28,13 +28,14 @@
 -- Made by TestUnit
 ]]--
 
-MAJOR_VERSION = "Darkmoon Master Addon |cFF38FE62Legion|r v0.9.5";
+MAJOR_VERSION = "Darkmoon Master Addon |cFF38FE62BFA|r v0.9.5";
 MINOR_VERSION = "$Revision: 3 $";
 ROOT_PATH     = "Interface\\AddOns\\DMA\\";
 
 DMA = LibStub("AceAddon-3.0"):NewAddon("DMA", "AceConsole-3.0", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0");
 DMA.HBD = LibStub("HereBeDragons-2.0d");
 DMA.Linkifier = DMA;
+DMA.Prefix = "DMA";
 DMA.User = {};
 DMA.Debug = false;
 DMA.Timers = {};
@@ -42,13 +43,14 @@ DMA.Timers["GPS-Timer"] = nil;
 
 DMA.PlayerMovement = {}
 DMA.PlayerMovement.Distance = 1;
-DMA.Version = 0.87;
+DMA.Version = 0.88;
 
-DMA.GObjectListInitialized = false
---DMA.GObjectList[number] = { id, name }
-DMA.GOBCounter = 1;
-DMA.GObjectList = {};
-DMA.GObjectList.ToShow = {};
+DMA.GOB = {}
+DMA.GOB.Counter = 1;
+DMA.GOB.ObjectListInitialized = false
+--DMA.GOB.ObjectList[number] = { id, name }
+DMA.GOB.ObjectList = {};
+DMA.GOB.ObjectList.ToShow = {};
 DMA.lineplusoffset = {
   [1] = 1,
   [2] = 2,
@@ -63,6 +65,7 @@ DMA.lineplusoffset = {
   [11] = 11,
   [12] = 12
 }
+DMA.Linkifier.isShowing = true;
 
 if DMAUserVars == nil then
 	DMAUserVars = {};
@@ -90,6 +93,7 @@ function DMA:OnEnable()
 	DMA:AlphaSlider();
 	DMA:BackGroundAlphaInitialize();
 	DMA:AddMinimapIcon();
-	DMA.GObjectListInitialized = true;
+	DMA.GOB.ObjectListInitialized = true;
 	DMA:GenerateObjScrollMenu();
+	C_ChatInfo.RegisterAddonMessagePrefix(RPSCoreFramework.Prefix);
 end

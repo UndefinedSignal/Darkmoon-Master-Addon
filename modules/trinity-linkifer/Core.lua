@@ -68,69 +68,12 @@ local cont = ""
 local defaults = {
   char = {
    functionQueue = {},
-   requests = {
-      tpinfo = false,
-      ticket = false,
-      ticketbody = 0,
-      item = false,
-      favitem = false,
-      itemset = false,
-      spell = false,
-      skill = false,
-      quest = false,
-      creature = false,
-      object = false,
-      tele = false,
-      toggle = false
-   },
-   nextGridWay = "ahead",
-   selectedZone = nil,
-   newTicketQueue = {},
-   instantKillMode = false,
    msgDeltaTime = time(),  
   },
   profile = {
-      language = nil,
-      localesearchstring = true,
-      favorites = {
-       items = {},
-       itemsets = {},
-       spells = {},
-       skills = {},
-       quests = {},
-       creatures = {},
-       objects = {},
-       teles = {}
-      },
-      buffer = {
-       tickets = {},
-       items = {},
-       itemsets = {},
-       spells = {},
-       skills = {},
-       quests = {},
-       creatures = {},
-       objects = {},
-       teles = {},
-       counter = 0
-      },
-      tickets = {
-       selected = 0,
-       count = 0,
-       requested = 0,
-       playerinfo = {},
-       loading = false
-      },
       style = {
-       updatedelay = "4000",
        showtooltips = false,
        showchat = false,
-       showminimenu = false,
-       transparency = {
-         buttons = 1.0,
-         frames = 0.7,
-         backgrounds = 0.5
-       },
        color = {
          buffer = {},
          buttons = {
@@ -167,54 +110,23 @@ Strings      = ReturnStrings_enUS()
 function DMA.Linkifier:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("DMA.LinkifierDB", defaults)
 
-  -- initializing DMA.Linkifier
-  --self:CreateFrames()
-  --self:RegisterChatCommand(Locale["slashcmds"], self.consoleOpts) -- this registers the chat commands
-  --self:InitButtons()  -- this prepares the actions and tooltips of nearly all DMA.Linkifier buttons  
-  --InitControls()
-  --self:SearchReset()
-  DMA.Linkifier.db.profile.buffer.who = {}
-  -- FuBar plugin config
---[[  DMA.Linkifier.hasNoColor = true
-  DMA.Linkifier.hasNoText = false
-  DMA.Linkifier.clickableTooltip = true
-  DMA.Linkifier.hasIcon = true
-  DMA.Linkifier.hideWithoutStandby = true
-  DMA.Linkifier:SetIcon(ROOT_PATH.."Textures\\icon.tga")
-  -- make DMA.Linkifier frames closable with escape key
-  tinsert(UISpecialFrames,"ma_bgframe")
-  tinsert(UISpecialFrames,"ma_popupframe")]]
-  -- those all hook the AddMessage method of the chat frames.
-  -- They will be redirected to DMA.Linkifier:AddMessage(...)
-  for i=1,NUM_CHAT_WINDOWS do
-   local cf = getglobal("ChatFrame"..i)
-   self:RawHook(cf, "AddMessage", true)
-  end
-  --[[ initializing Frames, like DropDowns, Sliders, aso
-  self:InitDropDowns()
-  self:InitSliders()
-  self:InitScrollFrames()
-  self:InitCheckButtons()
-  ma_gobmovedistforwardback:SetText("1")
-  ma_gobmovedistleftright:SetText("1")
-  ma_gobmovedistupdown:SetText("1")]]
-  DMA.Linkifier.db.profile.buffer.who = {}
-  --clear color buffer
-  self.db.profile.style.color.buffer = {}
-  --altering the function setitemref, to make it possible to click links
-  MangLinkifier_SetItemRef_Original = SetItemRef
-  SetItemRef = MangLinkifier_SetItemRef
+   for i=1,NUM_CHAT_WINDOWS do
+      local cf = getglobal("ChatFrame"..i)
+      self:RawHook(cf, "AddMessage", true)
+   end
+
+   --clear color buffer
+   self.db.profile.style.color.buffer = {}
+   --altering the function setitemref, to make it possible to click links
+   MangLinkifier_SetItemRef_Original = SetItemRef
+   SetItemRef = MangLinkifier_SetItemRef
 end
 
 function DMA.Linkifier:AddMessage(frame, text, r, g, b, id)
   -- frame is the object that was hooked (one of the ChatFrames)  
   local catchedSth = false
-  local output = DMA.Linkifier.db.profile.style.showchat
+  local output = false
   if id == 1 then --make sure that the message comes from the server, message id = 1
-   --Catches if Toggle is still on for some reason, but search frame is not up, and disables it so messages arent caught
-   if self.db.char.requests.toggle then
-      self.db.char.requests.toggle = false
-   end
 
 --***************************************************************   
    -- hook .gps for gridnavigation
@@ -317,22 +229,26 @@ function DMA.Linkifier:AddMessage(frame, text, r, g, b, id)
    -- Check for possible UrlModification
    if catchedSth then
       if output == false then
-       -- don't output anything
+      -- don't output anything
       elseif output == true then
-       text = MangLinkifier_Decompose(text)
-       self.hooks[frame].AddMessage(frame, text, r, g, b, id)
+         text = MangLinkifier_Decompose(text)
+         if DMA.Linkifier.isShowing then
+            self.hooks[frame].AddMessage(frame, text, r, g, b, id)
+         end
       end
    else
       text = MangLinkifier_Decompose(text)
-      self.hooks[frame].AddMessage(frame, text, r, g, b, id)
+      if DMA.Linkifier.isShowing then
+         self.hooks[frame].AddMessage(frame, text, r, g, b, id)
+      end
    end
   else
-   -- message is not from server
-   --Linkifier should be used on non server messages as well to catch links suc as items in chat
-   text = MangLinkifier_Decompose(text)
-   -- Returns the message to the client, or else the chat frame never shows it
-   self.hooks[frame].AddMessage(frame, text, r, g, b, id)
-  end
+      -- message is not from server
+      --Linkifier should be used on non server messages as well to catch links suc as items in chat
+      text = MangLinkifier_Decompose(text)
+      -- Returns the message to the client, or else the chat frame never shows it
+      self.hooks[frame].AddMessage(frame, text, r, g, b, id)
+   end
 end
 
 function DMA.Linkifier:ChatMsg(msg, msgt, recipient)
@@ -445,9 +361,4 @@ local val = ""
    end
    
    return val
-end
-
-function DMA.Linkifier:SendCoreMessage(msg)
-  msg = "."..msg;
-  SendAddonMessage("RPS", msg, "WHISPER", UnitName("player"));
 end

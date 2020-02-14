@@ -1067,30 +1067,31 @@
 						              <Anchor point="TOPRIGHT" x="0" y="25"/>
 						          </Anchors>
 						          <Scripts>
-						              <OnShow/>
-						              <OnEnterPressed>
-						                  --RPSEmoteFramework:EmotesSearch(RPSEmoteFramework.EmoteList, self:GetText())
-						                  --RPSEmoteFramework:GenerateScrollMenu()
-						                  self:ClearFocus();
-						              </OnEnterPressed>
-						              <OnTextChanged>
-						                  --DMA:GenerateObjectsScrollMenu()
-						                  SearchBoxTemplate_OnTextChanged(self);
-						              </OnTextChanged>
-						              <OnEditFocusLost/>
-						              <OnEditFocusGained/>
-						              <OnKeyDown/>
-						            <OnEnter>
-						                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-						                GameTooltip:AddLine("|cFFFFFFFFО боже! Что же это?|r")
-						                GameTooltip:AddLine("")
-						                GameTooltip:AddLine("Поиск ГОшек?! ОХУЕТЬ!")
-						                GameTooltip:Show()
-						            </OnEnter>
-						            <OnLeave>
-						                GameTooltip:Hide()
-						            </OnLeave>
-						          </Scripts>
+										<OnShow/>
+										<OnEnterPressed>
+											--RPSEmoteFramework:EmotesSearch(RPSEmoteFramework.EmoteList, self:GetText())
+											--RPSEmoteFramework:GenerateScrollMenu()
+											DMA:GameObjectSearchOnEnterPressed();
+											self:ClearFocus();
+										</OnEnterPressed>
+										<OnTextChanged>
+											--DMA:GenerateObjectsScrollMenu()
+											SearchBoxTemplate_OnTextChanged(self);
+										</OnTextChanged>
+										<OnEditFocusLost/>
+										<OnEditFocusGained/>DMA.Linkifier.isShowing
+										<OnKeyDown/>
+										<OnEnter>
+											GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+											GameTooltip:AddLine("|cFFFFFFFFО боже! Что же это?|r")
+											GameTooltip:AddLine("")
+											GameTooltip:AddLine("Поиск ГОшек?! ОХУЕТЬ!")
+											GameTooltip:Show()
+										</OnEnter>
+										<OnLeave>
+							                GameTooltip:Hide()
+										</OnLeave>
+									</Scripts>
 						    </EditBox>
 
 							<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate" hidden="false">
@@ -1108,7 +1109,7 @@
 										end
 									</OnVerticalScroll>
 									<OnShow>
-										DMA.GObjectListInitialized = true;
+										DMA.GOB.ObjectListInitialized = true;
 										DMA:GenerateObjectsScrollMenu();
 									</OnShow>
 								</Scripts>
