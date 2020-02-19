@@ -1079,7 +1079,7 @@
 											SearchBoxTemplate_OnTextChanged(self);
 										</OnTextChanged>
 										<OnEditFocusLost/>
-										<OnEditFocusGained/>DMA.Linkifier.isShowing
+										<OnEditFocusGained/>
 										<OnKeyDown/>
 										<OnEnter>
 											GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
@@ -1188,6 +1188,27 @@
 							</OnShow>
 						</Scripts>
 					</Frame>
+
+		        	<Button name="$parentClear" inherits="DMA_MenuButtonTemplate" text="Clear">
+		        		<Size x="75" y="20"/>
+				        <Anchors>
+				            <Anchor relativeTo="$parent" point="TOP" x="62" y="-4"/>
+				        </Anchors>
+				        <Scripts>
+				        	<OnClick>
+				        		DMA:GameObjectSearchClearResults();
+				        		DMA:GenerateObjectsScrollMenu();
+				        	</OnClick>
+				        </Scripts>
+		        	</Button>
+
+		        	<Button name="$parentShit" inherits="DMA_MenuButtonTemplate" text="Объект">
+		        		<Size x="75" y="20"/>
+				        <Anchors>
+				            <Anchor relativeTo="$parent" point="TOP" x="-62" y="-4"/>
+				        </Anchors>
+		        	</Button>
+
 			    </Frames>
 
 			</Frame>

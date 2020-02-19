@@ -300,16 +300,21 @@ function DMA:ProcessPlayerMoveIncDecrement(frame_name)
 end
 
 function DMA:GameObjectSearchOnEnterPressed()
-	DMA.Linkifier.isShowing = false;
-	local msg = ".look obj "..DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText();
-	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
-	self:ScheduleTimer("SYSMSGEnable", 2)
-	DMA:GameObjectSearchClearResults();
-	DMA:GenerateObjScrollMenu();
+	if (#DMA.GOB.ObjectList.Data > 0) then
+		DMA:ObjectSearch(DMA.GOB.ObjectList.Data, DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText());
+		DMA.GOB.Counter = 1;
+	else
+		DMA:GameObjectSearchClearResults();
+		DMA.Linkifier.isShowing = false;
+		local msg = ".look obj "..DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText();
+		SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+		self:ScheduleTimer("SYSMSGEnable", 2);
+	end
+	DMA:GenerateObjectsScrollMenu();
 end
 
 function DMA:GameObjectSearchClearResults()
-	DMA.GOB.ObjectList = {};
+	DMA.GOB.ObjectList.Data = {};
 	DMA.GOB.ObjectList.ToShow = {};
 	DMA.GOB.Counter = 1;
 end
@@ -317,4 +322,15 @@ end
 function DMA:SYSMSGEnable()
 	DMA.Linkifier.isShowing = true;
 	DMA:GenerateObjectsScrollMenu();
+end
+
+function DMA:ObjectSearch(input, key)
+	DMA.GOB.ObjectList.ToShow = {};
+	for i=1, #input do
+		if string.find(strlower(input[i][3]),strlower(key)) ~= nil then -- name
+			table.insert(DMA.GOB.ObjectList.ToShow, DMA.GOB.ObjectList.Data[i]);
+		elseif string.find(strlower(input[i][2]),strlower(key)) ~= nil then -- id
+			table.insert(DMA.GOB.ObjectList.ToShow, DMA.GOB.ObjectList.Data[i]);
+		end
+	end
 end

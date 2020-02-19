@@ -50,6 +50,7 @@ DMA.GOB.Counter = 1;
 DMA.GOB.ObjectListInitialized = false
 --DMA.GOB.ObjectList[number] = { id, name }
 DMA.GOB.ObjectList = {};
+DMA.GOB.ObjectList.Data = {};
 DMA.GOB.ObjectList.ToShow = {};
 DMA.lineplusoffset = {
   [1] = 1,
@@ -94,6 +95,6 @@ function DMA:OnEnable()
 	DMA:BackGroundAlphaInitialize();
 	DMA:AddMinimapIcon();
 	DMA.GOB.ObjectListInitialized = true;
-	DMA:GenerateObjScrollMenu();
+	DMA:GenerateObjectsScrollMenu();
 	C_ChatInfo.RegisterAddonMessagePrefix(RPSCoreFramework.Prefix);
 end
