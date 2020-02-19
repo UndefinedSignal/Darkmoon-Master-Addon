@@ -38,13 +38,13 @@ function DMA:MoveCharacterXYZ(mode)
 		distance = distance * -1;
 	end
 	if mode == 3 then -- Left
-		angle = math.abs(angle - 1.5707975)
+		angle = math.abs(angle - 1.5708);
 	elseif mode == 4 then -- Right
-		angle = math.abs(angle + 1.5707975)
+		angle = math.abs(angle + 1.5708);
 	end
 	local sin = math.sin(angle);
 	local cos = math.cos(angle);
-	local px, py = DMA.HBD:GetRawPlayerWorldPosition();
+	local py, px = DMA.HBD:GetRawPlayerWorldPosition();
 	px = px + distance * cos;
 	py = py + distance * sin;
 
