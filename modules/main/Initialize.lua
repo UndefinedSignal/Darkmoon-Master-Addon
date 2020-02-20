@@ -85,8 +85,11 @@ if DMAUserVars == nil then
 	DMAUserVars["MoveDistance"] = 1;
 	DMAUserVars["GPS-Scan"] = true;
 	DMAUserVars["LastNPC"] = nil;
-	DMAUserVars["LastGOBID"] = nil;
-	DMAUserVars["LastGOBGUID"] = nil;
+	DMAUserVars["LastGOB-ID"] = 0;
+	DMAUserVars["LastGOB-GUID"] = 0;
+	DMAUserVars["LastGOB-X"] = 0;
+	DMAUserVars["LastGOB-Y"] = 0;
+	DMAUserVars["LastGOB-Z"] = 0;
 end
 
 function DMA:OnEnable()

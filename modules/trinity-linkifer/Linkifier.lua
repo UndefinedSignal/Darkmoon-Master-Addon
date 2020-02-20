@@ -59,6 +59,11 @@ function MangLinkifier_Decompose(chatstring)
     end
     for guid in string.gmatch(chatstring, Strings["lfer_AddGoxyz1"]) do --ADDGO XYZ
       chatstring = string.gsub (chatstring, Strings["lfer_AddGoxyz2"], MangLinkifier_Link(Strings["lfer_AddGoxyz3"], "%1 %2 %3", "addgoxyz"))
+      DMAUserVars["DMASave"] = chatstring;
+      DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "Haddgoxyz:(%d+%.%d+)%s(%d+%.%d+)%s(%d+%.%d+)|h");
+      DMAUserVars["LastGOB-GUID"] = string.match(chatstring, "|cff008c7f|Haddgoguidgo:(%d+)|h");
+      DMAUserVars["LastGOB-ID"] = string.match(chatstring, "|cff008c7f|Haddgoid:(%d+)|h");
+      DMA:UpdateGOBEditBox();
     end
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ

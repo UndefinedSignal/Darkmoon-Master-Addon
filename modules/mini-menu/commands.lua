@@ -46,7 +46,6 @@ commands["DMA_MiniMenuContentGMTAXICHEATOFF"] = {".cheat taxi off"};
 commands["DMA_MiniMenuContentGMWATERWALKOFF"] = {".cheat waterwalk off"};
 commands["DMA_MiniMenuContentGMVIEWALLMAPSOFF"] = {".cheat explore 0"};
 
-
 commands["DMA_MiniMenuLeftPick1"] = {"/DMA:HideMiniMenuFrames();	DMA_MiniMenuContentGM:Show();"}; -- GM
 commands["DMA_MiniMenuLeftPick2"] = {"/DMA:HideMiniMenuFrames();	DMACharacterFrame:Show();"}; -- Char
 commands["DMA_MiniMenuLeftPick3"] = {"/print(\"WIP\")"}; -- Char2

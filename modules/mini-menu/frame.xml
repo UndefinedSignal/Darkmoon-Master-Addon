@@ -443,18 +443,18 @@
 						</Anchors>
 						<Scripts><!--TestUnit-->
 							<OnLoad>
-								DMAPlayerMoveFrameCoordXName:SetText("X")
+								DMAPlayerMoveFrameCoordXName:SetText("X:");
 							</OnLoad>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFКоордината X|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината X|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 					    	<OnEnterPressed>
-					    		DMA:ProcessManualXYZInput()
+					    		DMA:ProcessManualXYZInput();
 					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
@@ -464,18 +464,18 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								DMAPlayerMoveFrameCoordYName:SetText("Y")
+								DMAPlayerMoveFrameCoordYName:SetText("Y:");
 							</OnLoad>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFКоордината Y|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината Y|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 					    	<OnEnterPressed>
-					    		DMA:ProcessManualXYZInput()
+					    		DMA:ProcessManualXYZInput();
 					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
@@ -485,18 +485,18 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								DMAPlayerMoveFrameCoordZName:SetText("Z")
+								DMAPlayerMoveFrameCoordZName:SetText("Z:");
 							</OnLoad>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFКоордината Z|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFКоордината Z|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 					    	<OnEnterPressed>
-					    		DMA:ProcessManualXYZInput()
+					    		DMA:ProcessManualXYZInput();
 					    	</OnEnterPressed>
 						</Scripts>
 				    </EditBox>
@@ -506,18 +506,18 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								DMAPlayerMoveFrameCoordOName:SetText("O")
+								DMAPlayerMoveFrameCoordOName:SetText("O:");
 							</OnLoad>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFНаправление взгляда в радианах|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFНаправление взгляда в радианах|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 					    	<OnEnterPressed>
-					    		DMA:ProcessManualOrientationInput()
+					    		DMA:ProcessManualOrientationInput();
 					    	</OnEnterPressed>
 						</Scripts>
 
@@ -529,16 +529,16 @@
 						</Anchors>
 						<Scripts>
 							<OnLoad>
-								DMAPlayerMoveFrameDistanceName:SetText("D")
-								DMAPlayerMoveFrameDistance:SetText(DMAUserVars["MoveDistance"])
+								DMAPlayerMoveFrameDistanceName:SetText("Dist:");
+								DMAPlayerMoveFrameDistance:SetText(DMAUserVars["MoveDistance"]);
 							</OnLoad>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFДистанция|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFДистанция|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 					    	<OnEnterPressed>
 					    		DMAUserVars["MoveDistance"] = self:GetText();
@@ -560,12 +560,12 @@
 								DMA:MoveCharacterXYZ(1);
 							</OnClick>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFПереместиться вперёд|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFПереместиться вперёд|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 						</Scripts>
 					</CheckButton>
@@ -587,12 +587,12 @@
 								DMA:UpdateEditBoxXYZ();
 							</OnClick>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFF!!!ВАЖНО!!!|nОбновляет текущие координаты|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFF!!!ВАЖНО!!!|nОбновляет текущие координаты|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 						</Scripts>
 					</CheckButton>
@@ -611,12 +611,12 @@
 								DMA:MoveCharacterXYZ(2);
 							</OnClick>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFПереместиться назад|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFПереместиться назад|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 						</Scripts>
 					</CheckButton>
@@ -634,12 +634,12 @@
 								DMA:MoveCharacterXYZ(4);
 							</OnClick>
 				            <OnEnter>
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться влево|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться влево|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 						</Scripts>
 					</CheckButton>
@@ -657,12 +657,12 @@
 								DMA:MoveCharacterXYZ(3);
 							</OnClick>
 				            <OnEnter><!--TestUnit-->
-				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться вправо|r")
-				                GameTooltip:Show()
+				                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться вправо|r");
+				                GameTooltip:Show();
 				            </OnEnter>
 				            <OnLeave>
-				                GameTooltip:Hide()
+				                GameTooltip:Hide();
 				            </OnLeave>
 						</Scripts>
 					</CheckButton>
@@ -1046,7 +1046,7 @@
 				</Anchors>
 
 			    <Frames>
-					<Frame name="$parentObjectScene" hidden="false">
+					<Frame name="$parentObjectSearchScene" hidden="false">
 						<Anchors>
 				            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-45"/>
 				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
@@ -1068,15 +1068,18 @@
 						          </Anchors>
 						          <Scripts>
 										<OnShow/>
+										<OnLoad>
+											self:SetTextColor(1,1,1,1);
+										</OnLoad>
 										<OnEnterPressed>
-											--RPSEmoteFramework:EmotesSearch(RPSEmoteFramework.EmoteList, self:GetText())
-											--RPSEmoteFramework:GenerateScrollMenu()
-											DMA:GameObjectSearchOnEnterPressed();
+											local text = self:GetText();
+											if (text == "" or string.len(text) > 3) then
+												DMA:GameObjectSearchOnEnterPressed();
+											end
 											self:ClearFocus();
 										</OnEnterPressed>
 										<OnTextChanged>
-											--DMA:GenerateObjectsScrollMenu()
-											SearchBoxTemplate_OnTextChanged(self);
+											DMA:SearchBoxTemplate_OnTextChanged(self);
 										</OnTextChanged>
 										<OnEditFocusLost/>
 										<OnEditFocusGained/>
@@ -1101,7 +1104,7 @@
 								</Anchors>
 								<Scripts>
 									<OnVerticalScroll>
-										if (DMA_MiniMenuContentGameobjectObjectSceneGOB13:IsShown()) then
+										if (DMA_MiniMenuContentGameobjectObjectSearchSceneGOB13:IsShown()) then
 											FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
 											FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
 										else
@@ -1180,13 +1183,247 @@
 									<Anchor relativeTo="$parentGOB12" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-
 						</Frames>
 						<Scripts>
 							<OnShow>
 								DMA:GenerateObjectsScrollMenu();
 							</OnShow>
 						</Scripts>
+					</Frame>
+
+
+					<Frame name="$parentObjectInfoScene" hidden="true">
+						<Anchors>
+				            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-25"/>
+				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
+						</Anchors>
+
+						<Frames>
+                            <ScrollFrame name="$parentSlider1" inherits="UIPanelScrollFrameTemplate">
+                                <Size x="240" y="245"/>
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="2" y="0" />
+                                    <Anchor point="BOTTOMRIGHT" x="-8" y="0" />
+                                </Anchors>
+                                <ScrollChild>
+                                    <Frame name="$parentChild">
+                                        <Size x="240" y="230"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Frames>
+										    <EditBox name="$parentGOBGuid" inherits="OBJXYZBox">
+												<Anchors>
+													<Anchor point="TOP" x="-25" y="-10"/>
+												</Anchors>
+												<Scripts><!--TestUnit-->
+													<OnLoad>
+														self.Name:SetText("GUID:")
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFGUID объекта|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+											    	<OnEnterPressed>
+											    		--DMA:ProcessManualXYZGOBInput()
+											    	</OnEnterPressed>
+												</Scripts>
+										    </EditBox>
+										    <EditBox name="$parentCoordX" inherits="OBJXYZBox">
+												<Anchors>
+													<Anchor relativeTo="$parentGOBGuid" point="BOTTOMLEFT" x="0" y="-20"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														self.Name:SetText("X:")
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFКоордината X|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+											    	<OnEnterPressed>
+											    		DMA:ProcessManualXYZGOBInput()
+											    	</OnEnterPressed>
+												</Scripts>
+										    </EditBox>
+										    <EditBox name="$parentCoordY" inherits="OBJXYZBox">
+												<Anchors>
+													<Anchor relativeTo="$parentCoordX" point="BOTTOMLEFT" x="0" y="-20"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														self.Name:SetText("Y:")
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFКоордината Y|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+											    	<OnEnterPressed>
+											    		DMA:ProcessManualXYZGOBInput()
+											    	</OnEnterPressed>
+												</Scripts>
+										    </EditBox>
+										    <EditBox name="$parentCoordZ" inherits="OBJXYZBox">
+												<Anchors>
+													<Anchor relativeTo="$parentCoordY" point="BOTTOMLEFT" x="0" y="-20"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														self.Name:SetText("Z:")
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFКоордината Z|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+											    	<OnEnterPressed>
+											    		DMA:ProcessManualXYZGOBInput()
+											    	</OnEnterPressed>
+												</Scripts>
+										    </EditBox>
+										    <EditBox name="$parentDistance" inherits="OBJXYZBox">
+												<Anchors>
+													<Anchor relativeTo="$parentCoordZ" point="BOTTOMLEFT" x="0" y="-20"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														self.Name:SetText("Dist:")
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFДистанция на коотрую переместится GObject|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+											    	<OnEnterPressed>
+											    		--DMA:ProcessManualOrientationInput()
+											    	</OnEnterPressed>
+												</Scripts>
+										    </EditBox>
+
+											<CheckButton name="$parentMoveForward" inherits="DMAGobMoveCheckboxTemplate">
+												<Anchors>
+													<Anchor point="BOTTOM" x="-25" y="-10"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														SquareButton_SetIcon(self, "UP");
+														self:RegisterForClicks("AnyUp");
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFПереместить вперёд|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+												</Scripts>
+											</CheckButton>
+
+											<CheckButton name="$parentUpdateCoords" inherits="DMAGobMoveCheckboxTemplate">
+												<Size x="38" y="38" />
+												<Anchors>
+													<Anchor point="LEFT" relativeTo="$parentMoveForward" relativePoint="LEFT" x="-38" y="0"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														self.icon:SetTexture("Interface\\Buttons\\UI-RotationRight-Button-Up");
+														self.icon:SetTexCoord(0,1,0,1);
+														self.icon:SetSize(38,38);
+														self:RegisterForClicks("AnyUp");
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFF!!!ВАЖНО!!!|nОбновляет текущие координаты|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+												</Scripts>
+											</CheckButton>
+
+											<CheckButton name="$parentMoveBackward" inherits="DMAGobMoveCheckboxTemplate">
+												<Anchors>
+													<Anchor point="BOTTOM" relativeTo="$parentMoveForward" relativePoint="BOTTOM" x="0" y="-38"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														SquareButton_SetIcon(self, "DOWN");
+														self:RegisterForClicks("AnyUp");
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFПереместиться назад|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+												</Scripts>
+											</CheckButton>
+											<CheckButton name="$parentStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
+												<Anchors>
+													<Anchor point="RIGHT" relativeTo="$parentMoveBackward" relativePoint="LEFT"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														SquareButton_SetIcon(self, "LEFT");
+														self:RegisterForClicks("AnyUp");
+													</OnLoad>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться влево|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+												</Scripts>
+											</CheckButton>
+											<CheckButton name="$parentStrafeRight" inherits="DMAGobMoveCheckboxTemplate">
+												<Anchors>
+													<Anchor point="LEFT" relativeTo="$parentMoveBackward" relativePoint="RIGHT"/>
+												</Anchors>
+												<Scripts>
+													<OnLoad>
+														SquareButton_SetIcon(self, "RIGHT");
+														self:RegisterForClicks("AnyUp");
+													</OnLoad>
+										            <OnEnter><!--TestUnit-->
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+										                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться вправо|r")
+										                GameTooltip:Show()
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide()
+										            </OnLeave>
+												</Scripts>
+											</CheckButton>
+										</Frames>
+									</Frame>
+								</ScrollChild>
+							</ScrollFrame>
+						</Frames>
 					</Frame>
 
 		        	<Button name="$parentClear" inherits="DMA_MenuButtonTemplate" text="Clear">
@@ -1202,11 +1439,25 @@
 				        </Scripts>
 		        	</Button>
 
-		        	<Button name="$parentShit" inherits="DMA_MenuButtonTemplate" text="Объект">
+		        	<Button name="$parentChangeMode" inherits="DMA_MenuButtonTemplate" text="Объект">
 		        		<Size x="75" y="20"/>
 				        <Anchors>
 				            <Anchor relativeTo="$parent" point="TOP" x="-62" y="-4"/>
 				        </Anchors>
+				        <Scripts>
+				        	<OnClick>
+				        		if (DMA_MiniMenuContentGameobjectObjectSearchScene:IsShown()) then
+				        			--DMA_MiniMenuContentGameobjectChangeMode:SetText("Объект");
+				        			self:SetText("Поиск");
+				        			DMA_MiniMenuContentGameobjectObjectInfoScene:Show();
+				        			DMA_MiniMenuContentGameobjectObjectSearchScene:Hide();
+				        		else
+				        			self:SetText("Объект");
+				        			DMA_MiniMenuContentGameobjectObjectInfoScene:Hide();
+				        			DMA_MiniMenuContentGameobjectObjectSearchScene:Show();
+				        		end
+				        	</OnClick>
+				        </Scripts>
 		        	</Button>
 
 			    </Frames>

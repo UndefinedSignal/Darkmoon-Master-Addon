@@ -27,6 +27,7 @@
 ───────────────▓▓▓▓▓▓▓▓
 -- Made by TestUnit
 ]]--
+
 function DMA:DMA_MiniMenuExposeLeftOnEnter(self)
 	SetCursor("Interface/CURSOR/Inspect");
 end
@@ -249,6 +250,13 @@ function DMA:UpdateEditBoxXYZ()
 	DMAPlayerMoveFrameCoordO:SetText(DMAUserVars["LastGPS-O"]);
 end
 
+function DMA:UpdateGOBEditBox()
+	DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuid:SetText(DMAUserVars["LastGOB-GUID"]);
+	DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:SetText(DMAUserVars["LastGOB-X"]);
+	DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:SetText(DMAUserVars["LastGOB-Y"]);
+	DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:SetText(DMAUserVars["LastGOB-Z"]);
+end
+
 function DMA:ProcessGPSMove()
 	local px, py = DMA.HBD:GetRawPlayerWorldPosition();
 	local pa = GetPlayerFacing();
@@ -268,6 +276,12 @@ end
 
 function DMA:ProcessManualXYZInput()
 	local msg = ".go xyz "..DMAPlayerMoveFrameCoordX:GetText().." "..DMAPlayerMoveFrameCoordY:GetText().." "..DMAPlayerMoveFrameCoordZ:GetText();
+	print(msg)
+	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+end
+
+function DMA:ProcessManualXYZGOBInput()
+	local msg = ".gob move "..DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuid:GetText().." "..DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:GetText().." "..DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:GetText().." "..DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:GetText();
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
 
@@ -291,6 +305,27 @@ DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordODecrement"] = "print(\"WIP\")";
 DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceIncrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())+tonumber(1))";
 DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceDecrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())-tonumber(1))";
 
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidIncrement"] = "print(\"WIP\")";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidDecrement"] = "print(\"WIP\")";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordXIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordXDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordX:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordYIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordYDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+
+
+function DMA:ProcessGOBMoveIncDecrement(frame_name)
+	RunScript(DMAMoveIncrementFrames[frame_name]);
+	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") then
+		return
+	end
+	DMA:ProcessManualXYZGOBInput();
+end
+
+
 function DMA:ProcessPlayerMoveIncDecrement(frame_name)
 	RunScript(DMAMoveIncrementFrames[frame_name]);
 	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") then
@@ -301,13 +336,14 @@ end
 
 function DMA:GameObjectSearchOnEnterPressed()
 	if (#DMA.GOB.ObjectList.Data > 0) then
-		DMA:ObjectSearch(DMA.GOB.ObjectList.Data, DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText());
+		DMA:ObjectSearch(DMA.GOB.ObjectList.Data, DMA_MiniMenuContentGameobjectObjectSearchSceneEditBox:GetText());
 		DMA.GOB.Counter = 1;
 	else
 		DMA:GameObjectSearchClearResults();
 		DMA.Linkifier.isShowing = false;
-		local msg = ".look obj "..DMA_MiniMenuContentGameobjectObjectSceneEditBox:GetText();
+		local msg = ".look obj "..DMA_MiniMenuContentGameobjectObjectSearchSceneEditBox:GetText();
 		SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+		SetCursor("Interface/CURSOR/Interact");
 		self:ScheduleTimer("SYSMSGEnable", 2);
 	end
 	DMA:GenerateObjectsScrollMenu();
@@ -322,6 +358,7 @@ end
 function DMA:SYSMSGEnable()
 	DMA.Linkifier.isShowing = true;
 	DMA:GenerateObjectsScrollMenu();
+	SetCursor(nil);
 end
 
 function DMA:ObjectSearch(input, key)
@@ -333,4 +370,21 @@ function DMA:ObjectSearch(input, key)
 			table.insert(DMA.GOB.ObjectList.ToShow, DMA.GOB.ObjectList.Data[i]);
 		end
 	end
+end
+
+function DMA:SearchBoxTemplate_OnTextChanged(self)
+	if ( not self:HasFocus() and string.len(self:GetText()) == 0 ) then
+		self.searchIcon:SetVertexColor(0.6, 0.6, 0.6);
+		self.searchIcon:Show();
+		self.clearButton:Hide();
+	else
+		self.searchIcon:SetVertexColor(1.0, 1.0, 1.0);
+		self.searchIcon:Hide();
+		self.clearButton:Show();
+	end
+	DMA:InputBoxInstructions_OnTextChanged(self);
+end
+
+function DMA:InputBoxInstructions_OnTextChanged(self)
+	self.Instructions:SetShown(self:GetText() == "")
 end

@@ -7,10 +7,10 @@ function DMA:ProcessDMAGobjectList(chatstring)
 end
 
 function DMA:GenerateObjectsScrollMenu()
-  FauxScrollFrame_Update(DMA_MiniMenuContentGameobjectObjectSceneScrollBar,#DMA.GOB.ObjectList.ToShow,13,32);
+  FauxScrollFrame_Update(DMA_MiniMenuContentGameobjectObjectSearchSceneScrollBar,#DMA.GOB.ObjectList.ToShow,13,32);
 
   for jBtn=1, 13 do
-    lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DMA_MiniMenuContentGameobjectObjectSceneScrollBar);
+    lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DMA_MiniMenuContentGameobjectObjectSearchSceneScrollBar);
     DMA.lineplusoffset[jBtn] = tonumber(lineplusoffset);
   end
 
@@ -22,11 +22,11 @@ function DMA:ObjectsScrollBar_Update()
       for line=1,#DMA.lineplusoffset do
           local lineplusoffset = DMA.lineplusoffset[line];
           if (lineplusoffset <= #DMA.GOB.ObjectList.ToShow) then
-              _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line.."Number"]:SetText("|cFFFD8A00" .. lineplusoffset .. "|r");
-              _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line.."Name"]:SetText(DMA.GOB.ObjectList.ToShow[lineplusoffset][3]);
-              _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:Show();
+              _G["DMA_MiniMenuContentGameobjectObjectSearchSceneGOB"..line.."Number"]:SetText("|cFFFD8A00" .. lineplusoffset .. "|r");
+              _G["DMA_MiniMenuContentGameobjectObjectSearchSceneGOB"..line.."Name"]:SetText(DMA.GOB.ObjectList.ToShow[lineplusoffset][3]);
+              _G["DMA_MiniMenuContentGameobjectObjectSearchSceneGOB"..line]:Show();
           else
-              _G["DMA_MiniMenuContentGameobjectObjectSceneGOB"..line]:Hide();
+              _G["DMA_MiniMenuContentGameobjectObjectSearchSceneGOB"..line]:Hide();
           end
       end
   end
