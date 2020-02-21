@@ -276,7 +276,6 @@ end
 
 function DMA:ProcessManualXYZInput()
 	local msg = ".go xyz "..DMAPlayerMoveFrameCoordX:GetText().." "..DMAPlayerMoveFrameCoordY:GetText().." "..DMAPlayerMoveFrameCoordZ:GetText();
-	print(msg)
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
 

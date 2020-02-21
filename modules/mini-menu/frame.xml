@@ -1433,8 +1433,17 @@
 				        </Anchors>
 				        <Scripts>
 				        	<OnClick>
-				        		DMA:GameObjectSearchClearResults();
-				        		DMA:GenerateObjectsScrollMenu();
+				        		if (DMA_MiniMenuContentGameobjectObjectSearchScene:IsShown()) then
+					        		DMA:GameObjectSearchClearResults();
+					        		DMA:GenerateObjectsScrollMenu();
+				        		else
+				        			DMAUserVars["LastGOB-GUID"] = 0;
+									DMAUserVars["LastGOB-X"] = 0;
+									DMAUserVars["LastGOB-Y"] = 0;
+									DMAUserVars["LastGOB-Z"] = 0;
+									DMA:UpdateGOBEditBox();
+
+				        		end
 				        	</OnClick>
 				        </Scripts>
 		        	</Button>
