@@ -43,7 +43,7 @@ DMA.Timers["GPS-Timer"] = nil;
 
 DMA.PlayerMovement = {}
 DMA.PlayerMovement.Distance = 1;
-DMA.Version = 0.88;
+DMA.Version = 0.91;
 
 DMA.GOB = {}
 DMA.GOB.Counter = 1;
@@ -68,29 +68,34 @@ DMA.lineplusoffset = {
 }
 DMA.Linkifier.isShowing = true;
 
-if DMAUserVars == nil then
-	DMAUserVars = {};
-	DMAUserVars["Version"] = DMA.Version;
-	DMAUserVars["Darkmoon"] = true;
-	DMAUserVars["BackgroundAlpha"] = 1;
-	DMAUserVars["Gm-mode"] = false;
-	DMAUserVars["Fly-mode"] = false;
-	DMAUserVars["Whisper"] = false;
-	DMAUserVars["GmChat"] = false;
-	DMAUserVars["Invisibility"] = false;
-	DMAUserVars["LastGPS-X"] = 0;
-	DMAUserVars["LastGPS-Y"] = 0;
-	DMAUserVars["LastGPS-Z"] = 0;
-	DMAUserVars["LastGPS-O"] = 0;
-	DMAUserVars["MoveDistance"] = 1;
-	DMAUserVars["GPS-Scan"] = true;
-	DMAUserVars["LastNPC"] = nil;
-	DMAUserVars["LastGOB-ID"] = 0;
-	DMAUserVars["LastGOB-GUID"] = 0;
-	DMAUserVars["LastGOB-X"] = 0;
-	DMAUserVars["LastGOB-Y"] = 0;
-	DMAUserVars["LastGOB-Z"] = 0;
-end
+DMAUserVars = {};
+DMAUserVars["Version"] = DMA.Version;
+DMAUserVars["Darkmoon"] = true;
+DMAUserVars["BackgroundAlpha"] = 1;
+DMAUserVars["Gm-mode"] = false;
+DMAUserVars["Fly-mode"] = false;
+DMAUserVars["Whisper"] = false;
+DMAUserVars["GmChat"] = false;
+DMAUserVars["Invisibility"] = false;
+DMAUserVars["LastGPS-X"] = 0;
+DMAUserVars["LastGPS-Y"] = 0;
+DMAUserVars["LastGPS-Z"] = 0;
+DMAUserVars["LastGPS-O"] = 0;
+DMAUserVars["MoveDistance"] = 1;
+DMAUserVars["GPS-Scan"] = true;
+DMAUserVars["LastNPC"] = nil;
+DMAUserVars["LastGOB-ID"] = 0;
+DMAUserVars["LastGOB-GUID"] = 0;
+DMAUserVars["LastGOB-X"] = 0;
+DMAUserVars["LastGOB-Y"] = 0;
+DMAUserVars["LastGOB-Z"] = 0;
+DMAUserVars["LastGOB-SCALE"] = 1;
+-- Rotate
+DMAUserVars["LastGOB-OX"] = 0;
+DMAUserVars["LastGOB-OY"] = 0;
+DMAUserVars["LastGOB-OZ"] = 0;
+
+DMAGOBButtons = {};
 
 function DMA:OnEnable()
 	DMA:InitializeHooks();

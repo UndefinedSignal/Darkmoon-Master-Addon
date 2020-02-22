@@ -301,7 +301,7 @@
 					</OnClick>
 		            <OnEnter>
 		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-		                GameTooltip:AddLine("|cFFFFFFFFУвеличить переменную|r"..self:GetName());
+		                GameTooltip:AddLine("|cFFFFFFFFУвеличить переменную|r");
 		                GameTooltip:Show();
 		            </OnEnter>
 		            <OnLeave>
@@ -350,4 +350,34 @@
 	    </Scripts>
 	    <FontString inherits="ChatFontNormal" />
     </EditBox>
+
+	<Slider name="DMA_RotateSliderTemplate" orientation="HORIZONTAL" enableMouse="true" hidden="false" defaultValue="0" minValue="-3.0" maxValue="3.0" valueStep="0.1" virtual="true">
+		<Size x="145" y="20"/>
+		<HitRectInsets left="0" right="0" top="-10" bottom="-10"/>
+		<Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background"
+					edgeFile="Interface\Buttons\UI-SliderBar-Border" tile="true">
+			<EdgeSize val="8"/>
+			<TileSize val="8"/>
+			<BackgroundInsets left="3" right="3" top="6" bottom="6"/>
+		</Backdrop>
+		<ThumbTexture name="$parentThumb" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+			<Size x="32" y="32"/>
+		</ThumbTexture>
+
+	    <Layers>	
+	        <Layer>
+	            <FontString name="$parentHeader" font="Fonts\FRIZQT___CYR.TTF" text="OZ: " justifyH="CENTER" justifyV="CENTER" parentKey="Name">
+	                <Color r="1" g="1" b="1" a="1"/>
+	                <FontHeight val="12"/>
+	                <Anchors>
+	                    <Anchor point="BOTTOM" relativeTo="$parent" x="-35" y="19" />
+	                </Anchors>
+	                <Shadow>
+	                    <Offset x="1" y="1" />
+	                    <Color r="0" g="0" b="0"/>
+	                </Shadow>
+	            </FontString>
+	        </Layer>
+	    </Layers>
+	</Slider>
 </Ui>

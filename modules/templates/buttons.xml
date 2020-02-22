@@ -62,6 +62,20 @@
                 </FontString>
             </Layer>
         </Layers>
+        <Scripts>
+            <OnEnter>
+                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                GameTooltip:AddDoubleLine(DMAGOBButtons[tonumber(self:GetID())][1], DMAGOBButtons[tonumber(self:GetID())][2], 1, 1, 1, 1, 0.96, 0.41);
+                GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                local msg = ".gob add "..DMAGOBButtons[tonumber(self:GetID())][2];
+                SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+            </OnClick>
+        </Scripts>
     </Button>
 
 	<Button name="DMA_TriggerButton" virtual="true" inherits="UIMenuButtonStretchTemplate">

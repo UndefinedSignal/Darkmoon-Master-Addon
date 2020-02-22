@@ -62,8 +62,8 @@ end
 
 function DMA:DMA_MiniMenuOnLoad(self)
 	self:RegisterForDrag("LeftButton");
-	tinsert(UISpecialFrames, self:GetName());
 	self:Show();
+	tinsert(UISpecialFrames, self:GetName());
 end
 
 function DMA:DMA_MiniMenuOnDragStart(self)
@@ -301,8 +301,8 @@ DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordZIncrement"] = "DMAPlayerMoveFram
 DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordZDecrement"] = "DMAPlayerMoveFrameCoordZ:SetText(tonumber(DMAPlayerMoveFrameCoordZ:GetText())-tonumber(DMAPlayerMoveFrameDistance:GetText()))";
 DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordOIncrement"] = "print(\"WIP\")";
 DMAMoveIncrementFrames["DMAPlayerMoveFrameCoordODecrement"] = "print(\"WIP\")";
-DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceIncrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())+tonumber(1))";
-DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceDecrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())-tonumber(1))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceIncrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())+tonumber(0.1))";
+DMAMoveIncrementFrames["DMAPlayerMoveFrameDistanceDecrement"] = "DMAPlayerMoveFrameDistance:SetText(tonumber(DMAPlayerMoveFrameDistance:GetText())-tonumber(0.1))";
 
 DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidIncrement"] = "print(\"WIP\")";
 DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidDecrement"] = "print(\"WIP\")";
@@ -312,22 +312,21 @@ DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1Child
 DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordYDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordY:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
 DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
 DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildCoordZ:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
-DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())+tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
-DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())-tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText()))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceIncrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())+tonumber(0.1))";
+DMAMoveIncrementFrames["DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceDecrement"] = "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:SetText(tonumber(DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistance:GetText())-tonumber(0.1))";
 
 
 function DMA:ProcessGOBMoveIncDecrement(frame_name)
 	RunScript(DMAMoveIncrementFrames[frame_name]);
-	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") then
+	if (frame_name == "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidIncrement") or (frame_name == "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildGOBGuidDecrement") or (frame_name == "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceIncrement") or (frame_name == "DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildDistanceDecrement") then
 		return
 	end
 	DMA:ProcessManualXYZGOBInput();
 end
 
-
 function DMA:ProcessPlayerMoveIncDecrement(frame_name)
 	RunScript(DMAMoveIncrementFrames[frame_name]);
-	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") then
+	if (frame_name == "DMAPlayerMoveFrameCoordOIncrement") or (frame_name == "DMAPlayerMoveFrameCoordODecrement") or (frame_name == "DMAPlayerMoveFrameDistanceIncrement") or (frame_name == "DMAPlayerMoveFrameDistanceDecrement") then
 		return
 	end
 	DMA:ProcessManualXYZInput();

@@ -30,12 +30,14 @@ function MangLinkifier_Decompose(chatstring)
     ----------====~~GO Target Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GOtargid1"]) do --TARGET ID
       chatstring = string.gsub (chatstring, Strings["lfer_GOtargid2"], MangLinkifier_Link(Strings["lfer_GOtargid3"], "%2", "targid"))
+      DMA:ProcessDMAGOBTargetGUIDID(chatstring);
     end
     for guid in string.gmatch(chatstring, Strings["lfer_GOtargguid1"]) do --TARGET GUID
       chatstring = string.gsub (chatstring, Strings["lfer_GOtargguid1"], MangLinkifier_Link(Strings["lfer_GOtargguid3"], "%1", "targguid"))
     end
     for guid in string.gmatch(chatstring, Strings["lfer_GOtargxyz1"]) do --TARGET XYZ
-      chatstring = string.gsub (chatstring, Strings["lfer_GOtargxyz2"], MangLinkifier_Link(Strings["lfer_GOtargxyz3"], "1 %2 %3 %4", "targxyz"))
+      chatstring = string.gsub(chatstring, Strings["lfer_GOtargxyz2"], MangLinkifier_Link(Strings["lfer_GOtargxyz3"], "%1 %2 %3 %4", "targxyz"))
+      DMA:ProcessDMAGOBTargetXYZ(chatstring);
     end
     ----------====~~ NPC Info Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_NPCInfoguid1"]) do --NPCINFO GUID
@@ -64,10 +66,7 @@ function MangLinkifier_Decompose(chatstring)
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ
       chatstring = string.gsub(chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
-
-      DMAUserVars["LastGPS-X"] = strsub(chatstring, string.find(chatstring, "X: ")+3, string.find(chatstring, " Y: ")-1);
-      DMAUserVars["LastGPS-Y"] = strsub(chatstring, string.find(chatstring, " Y: ")+4, string.find(chatstring, " Z: ")-1);
-      DMAUserVars["LastGPS-Z"] = strsub(chatstring, string.find(chatstring, " Z: ")+4, string.find(chatstring, " - |cff")-3);
+      DMAUserVars["LastGPS-X"], DMAUserVars["LastGPS-Y"], DMAUserVars["LastGPS-Z"] = string.match(chatstring, "X:%s([0-9 -]+.%d+)%sY:%s([0-9 -]+.%d+)%sZ:%s([0-9 -]+.%d+)%s-");
       DMAUserVars["GPS-Scan"] = false;
       DMA:UpdateEditBoxXYZ();
     end

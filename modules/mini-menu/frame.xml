@@ -72,7 +72,7 @@
                         GameTooltip:AddDoubleLine("Created by:", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
                         GameTooltip:AddLine(" ");
                         GameTooltip:AddDoubleLine("Thanks to:", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
-                        GameTooltip:AddDoubleLine("Версия:", "0.87 BFA", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine("Версия:", "0.91 BFA", 1, 1, 1, 1, 0.96, 0.41);
 		                GameTooltip:Show();
 					</OnEnter>
 					<OnLeave>
@@ -1073,7 +1073,7 @@
 										</OnLoad>
 										<OnEnterPressed>
 											local text = self:GetText();
-											if (text == "" or string.len(text) > 3) then
+											if (text == "" or string.len(text) >= 3) then
 												DMA:GameObjectSearchOnEnterPressed();
 											end
 											self:ClearFocus();
@@ -1086,9 +1086,9 @@
 										<OnKeyDown/>
 										<OnEnter>
 											GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-											GameTooltip:AddLine("|cFFFFFFFFО боже! Что же это?|r")
+											GameTooltip:AddLine("|cFFFFFFFFПоиск игровых объектов|r")
 											GameTooltip:AddLine("")
-											GameTooltip:AddLine("Поиск ГОшек?! ОХУЕТЬ!")
+											GameTooltip:AddLine("Первый поиск основной, последующий ввод будет уточняющим.|nЧтобы начать поиск по новому названию нажмите «Clear»")
 											GameTooltip:Show()
 										</OnEnter>
 										<OnLeave>
@@ -1118,67 +1118,67 @@
 								</Scripts>
 							</ScrollFrame>
 
-							<Button name="$parentGOB1" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB1" id="1" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentScrollBar" point="TOP" x="5" y="-2"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB2" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB2" id="2" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB1" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB3" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB3" id="3" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB2" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB4" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB4" id="4" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB3" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB5" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB5" id="5" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB4" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB6" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB6" id="6" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB5" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB7" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB7" id="7" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB6" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB8" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB8" id="8" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB7" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB9" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB9" id="9" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB8" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB10" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB10" id="10" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB9" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB11" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB11" id="11" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB10" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB12" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB12" id="12" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB11" point="TOP" x="0" y="-20"/>
 								</Anchors>
 							</Button>
-							<Button name="$parentGOB13" inherits="DMA_GOBButtonTemplate" hidden="false">
+							<Button name="$parentGOB13" id="13" inherits="DMA_GOBButtonTemplate" hidden="false">
 								<Anchors>
 									<Anchor relativeTo="$parentGOB12" point="TOP" x="0" y="-20"/>
 								</Anchors>
@@ -1199,7 +1199,7 @@
 						</Anchors>
 
 						<Frames>
-                            <ScrollFrame name="$parentSlider1" inherits="UIPanelScrollFrameTemplate">
+                            <ScrollFrame name="$parentSlider1" inherits="UIPanelScrollFrameTemplate" frameLevel="3">
                                 <Size x="240" y="245"/>
                                 <Anchors>
                                     <Anchor point="TOPLEFT" x="2" y="0" />
@@ -1215,7 +1215,7 @@
                                         <Frames>
 										    <EditBox name="$parentGOBGuid" inherits="OBJXYZBox">
 												<Anchors>
-													<Anchor point="TOP" x="-25" y="-10"/>
+													<Anchor point="TOP" x="-22" y="-20"/>
 												</Anchors>
 												<Scripts><!--TestUnit-->
 													<OnLoad>
@@ -1319,106 +1319,474 @@
 												</Scripts>
 										    </EditBox>
 
-											<CheckButton name="$parentMoveForward" inherits="DMAGobMoveCheckboxTemplate">
+											<Slider name="DMA_GOBScaleSlider" inherits="DMA_RotateSliderTemplate" defaultValue="1" minValue="0.1" maxValue="10">
 												<Anchors>
-													<Anchor point="BOTTOM" x="-25" y="-10"/>
+													<Anchor relativeTo="$parentDistance" point="BOTTOMLEFT" x="-5" y="-50"/>
 												</Anchors>
 												<Scripts>
 													<OnLoad>
-														SquareButton_SetIcon(self, "UP");
-														self:RegisterForClicks("AnyUp");
+														self.Name:SetText("Scale: ");
+														DMAUserVars["LastGOB-SCALE"] = 1;
 													</OnLoad>
-										            <OnEnter>
-										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-										                GameTooltip:AddLine("|cFFFFFFFFПереместить вперёд|r")
-										                GameTooltip:Show()
-										            </OnEnter>
-										            <OnLeave>
-										                GameTooltip:Hide()
-										            </OnLeave>
+													<OnMouseUp>
+														DMAUserVars["LastGOB-SCALE"] = self.Counter:GetText();
+														DMA:SetGOBScale();
+													</OnMouseUp>
+													<OnValueChanged> 
+														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+													</OnValueChanged>
 												</Scripts>
-											</CheckButton>
+												<Frames>
+													<Button name="$parentReload">
+														<Anchors>
+															<Anchor point="LEFT" x="-15" y="-1"/>
+														</Anchors>
+														<Size x="24" y="24"/>
+														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+														<Scripts>
+															<OnClick>
+																self.Counter = 1;
+																DMAUserVars["LastGOB-SCALE"] = 1;
+																DMA:SetGOBScale();
+															</OnClick>
+												            <OnEnter>
+												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r")
+												                GameTooltip:Show()
+												            </OnEnter>
+												            <OnLeave>
+												                GameTooltip:Hide()
+												            </OnLeave>
+														</Scripts>
+													</Button>
+       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
+											            <Size x="32" y="32"/>
+														<Anchors>
+															<Anchor point="TOP" x="0" y="22"/>
+														</Anchors>
 
-											<CheckButton name="$parentUpdateCoords" inherits="DMAGobMoveCheckboxTemplate">
-												<Size x="38" y="38" />
-												<Anchors>
-													<Anchor point="LEFT" relativeTo="$parentMoveForward" relativePoint="LEFT" x="-38" y="0"/>
-												</Anchors>
-												<Scripts>
-													<OnLoad>
-														self.icon:SetTexture("Interface\\Buttons\\UI-RotationRight-Button-Up");
-														self.icon:SetTexCoord(0,1,0,1);
-														self.icon:SetSize(38,38);
-														self:RegisterForClicks("AnyUp");
-													</OnLoad>
-										            <OnEnter>
-										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-										                GameTooltip:AddLine("|cFFFFFFFF!!!ВАЖНО!!!|nОбновляет текущие координаты|r")
-										                GameTooltip:Show()
-										            </OnEnter>
-										            <OnLeave>
-										                GameTooltip:Hide()
-										            </OnLeave>
-												</Scripts>
-											</CheckButton>
+														<Layers>
+															<Layer level="BACKGROUND">
+																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" x="-5" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="RIGHT" x="0" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+																	<Size x="10" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+																	</Anchors>
+																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+																</Texture>
+															</Layer>
+														</Layers>
+														<Scripts>
+															<OnEditFocusGained>
+																self.startNumber = self:GetText();
+															</OnEditFocusGained>
+															<OnEnterPressed>
+																self:ClearFocus();
+															</OnEnterPressed>
+															<OnEscapePressed>
+																self:SetText(self.startNumber);
+																self:SetTextColor(1, 1, 1, 1);
+																self:ClearFocus();
+															</OnEscapePressed>
+															<OnEditFocusLost>
+																local text = self:GetText();
+																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+																	DMAUserVars["LastGOB-SCALE"] = text;
+																	self:SetText(tonumber(text));
+																	DMA:SetGOBScale();
+																else
+																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																		DMAUserVars["LastGOB-SCALE"] = self.startNumber;
+																		self:SetText(self.startNumber);
+																		DMA:SetGOBScale();
+																	else
+																		self:SetText("1");
+																		DMAUserVars["LastGOB-SCALE"] = 1;
+																	end
+																end
+																self:SetTextColor(1, 1, 1, 1);
+															</OnEditFocusLost>
+															<OnTextChanged>
+																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+																	self:SetTextColor(1, 1, 1, 1);
+																else
+																	self:SetTextColor(1,0,0,1);
+																end
+															</OnTextChanged>
+														</Scripts>
+													    <FontString inherits="ChatFontNormal" />
+											        </EditBox>
+												</Frames>
 
-											<CheckButton name="$parentMoveBackward" inherits="DMAGobMoveCheckboxTemplate">
+											</Slider>
+
+											<Slider name="DMA_GOBRotateSlider_OX" inherits="DMA_RotateSliderTemplate" >
 												<Anchors>
-													<Anchor point="BOTTOM" relativeTo="$parentMoveForward" relativePoint="BOTTOM" x="0" y="-38"/>
+													<Anchor relativeTo="DMA_GOBScaleSlider" point="BOTTOMLEFT" x="0" y="-40"/>
 												</Anchors>
 												<Scripts>
 													<OnLoad>
-														SquareButton_SetIcon(self, "DOWN");
-														self:RegisterForClicks("AnyUp");
+														self.Name:SetText("OX: ");
+														DMAUserVars["LastGOB-OX"] = 0;
 													</OnLoad>
-										            <OnEnter>
-										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-										                GameTooltip:AddLine("|cFFFFFFFFПереместиться назад|r")
-										                GameTooltip:Show()
-										            </OnEnter>
-										            <OnLeave>
-										                GameTooltip:Hide()
-										            </OnLeave>
+													<OnMouseUp>
+														DMAUserVars["LastGOB-OX"] = self.Counter:GetText();
+														DMA:SetGOBManipulation();
+													</OnMouseUp>
+													<OnValueChanged> 
+														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+													</OnValueChanged>
 												</Scripts>
-											</CheckButton>
-											<CheckButton name="$parentStrafeLeft" inherits="DMAGobMoveCheckboxTemplate">
+												<Frames>
+													<Button name="$parentReload">
+														<Anchors>
+															<Anchor point="LEFT" x="-15" y="-1"/>
+														</Anchors>
+														<Size x="24" y="24"/>
+														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+														<Scripts>
+															<OnClick>
+																self.Counter = 0;
+																DMAUserVars["LastGOB-OX"] = 0;
+																DMA:SetGOBManipulation();
+															</OnClick>
+												            <OnEnter>
+												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
+												                GameTooltip:Show();
+												            </OnEnter>
+												            <OnLeave>
+												                GameTooltip:Hide();
+												            </OnLeave>
+														</Scripts>
+													</Button>
+       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
+											            <Size x="32" y="32"/>
+														<Anchors>
+															<Anchor point="TOP" x="0" y="22"/>
+														</Anchors>
+
+														<Layers>
+															<Layer level="BACKGROUND">
+																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" x="-5" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="RIGHT" x="0" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+																	<Size x="10" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+																	</Anchors>
+																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+																</Texture>
+															</Layer>
+														</Layers>
+														<Scripts>
+															<OnEditFocusGained>
+																self.startNumber = self:GetText();
+															</OnEditFocusGained>
+															<OnEnterPressed>
+																self:ClearFocus();
+															</OnEnterPressed>
+															<OnEscapePressed>
+																self:SetText(self.startNumber);
+																self:SetTextColor(1, 1, 1, 1);
+																self:ClearFocus();
+															</OnEscapePressed>
+															<OnEditFocusLost>
+																local text = self:GetText();
+																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+																	DMAUserVars["LastGOB-OX"] = text;
+																	self:SetText(tonumber(text));
+																	DMA:SetGOBManipulation();
+																else
+																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																		DMAUserVars["LastGOB-OX"] = self.startNumber;
+																		self:SetText(self.startNumber);
+																		DMA:SetGOBManipulation();
+																	else
+																		self:SetText("0");
+																		DMAUserVars["LastGOB-OX"] = 0;
+																	end
+																end
+																self:SetTextColor(1, 1, 1, 1);
+															</OnEditFocusLost>
+															<OnTextChanged>
+																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+																	self:SetTextColor(1, 1, 1, 1);
+																else
+																	self:SetTextColor(1,0,0,1);
+																end
+															</OnTextChanged>
+														</Scripts>
+													    <FontString inherits="ChatFontNormal" />
+											        </EditBox>
+												</Frames>
+											</Slider>
+
+											<Slider name="DMA_GOBRotateSlider_OY" inherits="DMA_RotateSliderTemplate" >
 												<Anchors>
-													<Anchor point="RIGHT" relativeTo="$parentMoveBackward" relativePoint="LEFT"/>
+													<Anchor relativeTo="DMA_GOBRotateSlider_OX" point="BOTTOMLEFT" x="0" y="-40"/>
 												</Anchors>
 												<Scripts>
 													<OnLoad>
-														SquareButton_SetIcon(self, "LEFT");
-														self:RegisterForClicks("AnyUp");
+														self.Name:SetText("OY: ");
+														DMAUserVars["LastGOB-OY"] = 0;
 													</OnLoad>
-										            <OnEnter>
-										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-										                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться влево|r")
-										                GameTooltip:Show()
-										            </OnEnter>
-										            <OnLeave>
-										                GameTooltip:Hide()
-										            </OnLeave>
+													<OnMouseUp>
+														DMAUserVars["LastGOB-OY"] = self.Counter:GetText();
+														DMA:SetGOBManipulation();
+													</OnMouseUp>
+													<OnValueChanged> 
+														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+													</OnValueChanged>
 												</Scripts>
-											</CheckButton>
-											<CheckButton name="$parentStrafeRight" inherits="DMAGobMoveCheckboxTemplate">
+												<Frames>
+													<Button name="$parentReload">
+														<Anchors>
+															<Anchor point="LEFT" x="-15" y="-1"/>
+														</Anchors>
+														<Size x="24" y="24"/>
+														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+														<Scripts>
+															<OnClick>
+																self.Counter = 0;
+																DMAUserVars["LastGOB-OY"] = 0;
+																DMA:SetGOBManipulation();
+															</OnClick>
+												            <OnEnter>
+												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
+												                GameTooltip:Show();
+												            </OnEnter>
+												            <OnLeave>
+												                GameTooltip:Hide();
+												            </OnLeave>
+														</Scripts>
+													</Button>
+       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
+											            <Size x="32" y="32"/>
+														<Anchors>
+															<Anchor point="TOP" x="0" y="22"/>
+														</Anchors>
+
+														<Layers>
+															<Layer level="BACKGROUND">
+																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" x="-5" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="RIGHT" x="0" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+																	<Size x="10" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+																	</Anchors>
+																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+																</Texture>
+															</Layer>
+														</Layers>
+														<Scripts>
+															<OnEditFocusGained>
+																self.startNumber = self:GetText();
+															</OnEditFocusGained>
+															<OnEnterPressed>
+																self:ClearFocus();
+															</OnEnterPressed>
+															<OnEscapePressed>
+																self:SetText(self.startNumber);
+																self:SetTextColor(1, 1, 1, 1);
+																self:ClearFocus();
+															</OnEscapePressed>
+															<OnEditFocusLost>
+																local text = self:GetText();
+																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+																	DMAUserVars["LastGOB-OY"] = text;
+																	self:SetText(tonumber(text));
+																	DMA:SetGOBManipulation();
+																else
+																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																		DMAUserVars["LastGOB-OY"] = self.startNumber;
+																		self:SetText(self.startNumber);
+																		DMA:SetGOBManipulation();
+																	else
+																		self:SetText("0");
+																		DMAUserVars["LastGOB-OY"] = 0;
+																	end
+																end
+																self:SetTextColor(1, 1, 1, 1);
+															</OnEditFocusLost>
+															<OnTextChanged>
+																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+																	self:SetTextColor(1, 1, 1, 1);
+																else
+																	self:SetTextColor(1,0,0,1);
+																end
+															</OnTextChanged>
+														</Scripts>
+													    <FontString inherits="ChatFontNormal" />
+											        </EditBox>
+												</Frames>
+											</Slider>
+
+											<Slider name="DMA_GOBRotateSlider_OZ" inherits="DMA_RotateSliderTemplate">
 												<Anchors>
-													<Anchor point="LEFT" relativeTo="$parentMoveBackward" relativePoint="RIGHT"/>
+													<Anchor relativeTo="DMA_GOBRotateSlider_OY" point="BOTTOMLEFT" x="0" y="-40"/>
 												</Anchors>
 												<Scripts>
 													<OnLoad>
-														SquareButton_SetIcon(self, "RIGHT");
-														self:RegisterForClicks("AnyUp");
+														self.Name:SetText("OZ: ");
+														DMAUserVars["LastGOB-OZ"] = 0;
 													</OnLoad>
-										            <OnEnter><!--TestUnit-->
-										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-										                GameTooltip:AddLine("|cFFFFFFFFВозможна некорретная работа|nПереместиться вправо|r")
-										                GameTooltip:Show()
-										            </OnEnter>
-										            <OnLeave>
-										                GameTooltip:Hide()
-										            </OnLeave>
+													<OnMouseUp>
+														DMAUserVars["LastGOB-OZ"] = self.Counter:GetText();
+														DMA:SetGOBManipulation();
+													</OnMouseUp>
+													<OnValueChanged> 
+														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
+													</OnValueChanged>
 												</Scripts>
-											</CheckButton>
+												<Frames>
+													<Button name="$parentReload">
+														<Anchors>
+															<Anchor point="LEFT" x="-15" y="-1"/>
+														</Anchors>
+														<Size x="24" y="24"/>
+														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
+														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
+														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+														<Scripts>
+															<OnClick>
+																self.Counter = 0;
+																DMAUserVars["LastGOB-OZ"] = 0;
+																DMA:SetGOBManipulation();
+															</OnClick>
+												            <OnEnter>
+												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
+												                GameTooltip:Show();
+												            </OnEnter>
+												            <OnLeave>
+												                GameTooltip:Hide();
+												            </OnLeave>
+														</Scripts>
+													</Button>
+       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
+											            <Size x="32" y="32"/>
+														<Anchors>
+															<Anchor point="TOP" x="0" y="22"/>
+														</Anchors>
+
+														<Layers>
+															<Layer level="BACKGROUND">
+																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" x="-5" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+																	<Size x="8" y="20"/>
+																	<Anchors>
+																		<Anchor point="RIGHT" x="0" y="0"/>
+																	</Anchors>
+																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+																</Texture>
+																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+																	<Size x="10" y="20"/>
+																	<Anchors>
+																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+																	</Anchors>
+																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+																</Texture>
+															</Layer>
+														</Layers>
+														<Scripts>
+															<OnEditFocusGained>
+																self.startNumber = self:GetText();
+															</OnEditFocusGained>
+															<OnEnterPressed>
+																self:ClearFocus();
+															</OnEnterPressed>
+															<OnEscapePressed>
+																self:SetText(self.startNumber);
+																self:SetTextColor(1, 1, 1, 1);
+																self:ClearFocus();
+															</OnEscapePressed>
+															<OnEditFocusLost>
+																local text = self:GetText();
+																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+																	DMAUserVars["LastGOB-OZ"] = text;
+																	self:SetText(tonumber(text));
+																	DMA:SetGOBManipulation();
+																else
+																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																		DMAUserVars["LastGOB-OZ"] = self.startNumber;
+																		self:SetText(self.startNumber);
+																		DMA:SetGOBManipulation();
+																	else
+																		self:SetText("0");
+																		DMAUserVars["LastGOB-OZ"] = 0;
+																	end
+																end
+																self:SetTextColor(1, 1, 1, 1);
+															</OnEditFocusLost>
+															<OnTextChanged>
+																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+																	self:SetTextColor(1, 1, 1, 1);
+																else
+																	self:SetTextColor(1,0,0,1);
+																end
+															</OnTextChanged>
+														</Scripts>
+													    <FontString inherits="ChatFontNormal" />
+											        </EditBox>
+												</Frames>
+											</Slider>
 										</Frames>
 									</Frame>
 								</ScrollChild>
@@ -1441,10 +1809,47 @@
 									DMAUserVars["LastGOB-X"] = 0;
 									DMAUserVars["LastGOB-Y"] = 0;
 									DMAUserVars["LastGOB-Z"] = 0;
+									DMAUserVars["LastGOB-SCALE"] = 1;
+									DMAUserVars["LastGOB-OX"] = 0;
+									DMAUserVars["LastGOB-OY"] = 0;
+									DMAUserVars["LastGOB-OZ"] = 0;
 									DMA:UpdateGOBEditBox();
-
+									DMA:UpdateGOBParameters();
 				        		end
 				        	</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+								GameTooltip:AddLine("|cFFFFFFFFОчистить данные|r")
+								GameTooltip:AddLine("")
+								GameTooltip:AddLine("Очищает данные поиска и данные выбранного игрового объекта.")
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+				                GameTooltip:Hide()
+							</OnLeave>
+				        </Scripts>
+		        	</Button>
+
+
+		        	<Button name="$parentGobTar" inherits="DMA_MenuButtonTemplate" text="Target" hidden="true">
+		        		<Size x="75" y="20"/>
+				        <Anchors>
+				            <Anchor relativeTo="$parent" point="TOP" x="0" y="-21"/>
+				        </Anchors>
+				        <Scripts>
+				        	<OnClick>
+					        	SendChatMessage(".gob tar", "WHISPER", nil, GetUnitName("PLAYER"));
+				        	</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+								GameTooltip:AddLine("|cFFFFFFFFВыбрать игровой объект|r")
+								GameTooltip:AddLine("")
+								GameTooltip:AddLine("Выбирает ближайший игровой объект")
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+				                GameTooltip:Hide()
+							</OnLeave>
 				        </Scripts>
 		        	</Button>
 
@@ -1460,12 +1865,31 @@
 				        			self:SetText("Поиск");
 				        			DMA_MiniMenuContentGameobjectObjectInfoScene:Show();
 				        			DMA_MiniMenuContentGameobjectObjectSearchScene:Hide();
+				        			DMA_MiniMenuContentGameobjectGobTar:Show();
 				        		else
 				        			self:SetText("Объект");
 				        			DMA_MiniMenuContentGameobjectObjectInfoScene:Hide();
 				        			DMA_MiniMenuContentGameobjectObjectSearchScene:Show();
+				        			DMA_MiniMenuContentGameobjectGobTar:Hide();
 				        		end
 				        	</OnClick>
+							<OnEnter>
+								GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+				        		if (DMA_MiniMenuContentGameobjectObjectSearchScene:IsShown()) then
+									GameTooltip:AddLine("|cFFFFFFFFПереключиться на окно игрового объекта|r")
+									GameTooltip:AddLine("")
+									GameTooltip:AddLine("Окно позволяет передвигать\крутить игровые объекты, а также менять их размер.")
+				        		else
+									GameTooltip:AddLine("|cFFFFFFFFПереключиться на окно поиска игровых объектов|r")
+									GameTooltip:AddLine("")
+									GameTooltip:AddLine("Окно не ограничена лимитом чата и позволяет производить основной и уточняющий поиск по игровым объектам.")
+				        		end
+								GameTooltip:Show()
+							</OnEnter>
+							<OnLeave>
+				                GameTooltip:Hide()
+							</OnLeave>
+
 				        </Scripts>
 		        	</Button>
 

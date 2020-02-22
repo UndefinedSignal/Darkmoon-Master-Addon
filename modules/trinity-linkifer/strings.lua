@@ -50,8 +50,8 @@ function ReturnStrings_enUS()
     ["lfer_GOtargguid1"] = "GUID: (%d+) ID",
     ["lfer_GOtargguid1"] = "GUID: (%d+) ",
     ["lfer_GOtargguid3"] = "GUID: %1", "%1",
-    ["lfer_GOtargxyz1"] = "X: ([%p%d.%d]+) Y: ([%p%d.%d]+) Z: ([%p%d.%d]+) MapId: (%d+)",
-    ["lfer_GOtargxyz2"] = "X: ([%p%d.%d]+) Y: ([%p%d.%d]+) Z: ([%p%d.%d]+) MapId: (%d+)",
+    ["lfer_GOtargxyz1"] = "X: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r Y: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r Z: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r MapId: |cffffffff|Hpos:|h(%d+)",
+    ["lfer_GOtargxyz2"] = "X: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r Y: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r Z: |cffffffff|Hpos:|h([0-9 -]+.%d+)|h|r MapId: |cffffffff|Hpos:|h(%d+)",
     ["lfer_GOtargxyz3"] = "X: %1  Y: %2  Z: %3 MapId: %4", "%1 %2 %3 %4",
     ----------====~~ NPC Info Command Match Text ~~====----------
     ["lfer_NPCInfoguid1"] = "GUID: (%d+)%.",
