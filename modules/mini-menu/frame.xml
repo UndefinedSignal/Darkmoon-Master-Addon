@@ -1819,9 +1819,15 @@
 				        	</OnClick>
 							<OnEnter>
 								GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-								GameTooltip:AddLine("|cFFFFFFFFОчистить данные|r")
-								GameTooltip:AddLine("")
-								GameTooltip:AddLine("Очищает данные поиска и данные выбранного игрового объекта.")
+				        		if (DMA_MiniMenuContentGameobjectObjectSearchScene:IsShown()) then
+									GameTooltip:AddLine("|cFFFFFFFFОчистить данные поиска|r")
+									GameTooltip:AddLine("")
+				        			GameTooltip:AddLine("Очищает данные поиска. Необходимое действие для «основного» поиска.")
+				        		else
+									GameTooltip:AddLine("|cFFFFFFFFОчистить данные объекта|r")
+									GameTooltip:AddLine("")
+				        			GameTooltip:AddLine("Очищает данные выбранного игрового объекта.")
+				        		end
 								GameTooltip:Show()
 							</OnEnter>
 							<OnLeave>
