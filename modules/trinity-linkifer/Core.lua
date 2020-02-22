@@ -101,14 +101,20 @@ local defaults = {
    }
 }
 
-Locale       = LibStub("AceLocale-3.0"):NewLocale("DMA.Linkifier", "ruRU")
+Locale       = LibStub("AceLocale-3.0"):NewLocale("DMA.Linkifier", "ruRU");
 Locale       = Return_enUS();
 
-Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "ruRU")
-Strings      = ReturnStrings_enUS()
+Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "ruRU");
+
 
 function DMA.Linkifier:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("DMA.LinkifierDB", defaults)
+
+  if (IsAddOnLoaded("Prat-3.0")) then
+    Strings    = ReturnPratStrings_enUS();
+  else
+    Strings    = ReturnStrings_enUS();
+  end
 
    for i=1,NUM_CHAT_WINDOWS do
       local cf = getglobal("ChatFrame"..i)

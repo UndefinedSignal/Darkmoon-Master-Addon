@@ -1087,8 +1087,10 @@
 										<OnEnter>
 											GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
 											GameTooltip:AddLine("|cFFFFFFFFПоиск игровых объектов|r")
-											GameTooltip:AddLine("")
-											GameTooltip:AddLine("Первый поиск основной, последующий ввод будет уточняющим.|nЧтобы начать поиск по новому названию нажмите «Clear»")
+											GameTooltip:AddLine("Для поиска необходимо ввести слово длинной не менее 3 символа и нажать «Enter».")
+											GameTooltip:AddLine("Возможно придётся немного подождать пока обработаются данные.")
+											GameTooltip:AddLine("Первый поиск основной, последующий ввод будет уточняющим.")
+											GameTooltip:AddLine("Чтобы начать поиск по новому названию нажмите «Clear»")
 											GameTooltip:Show()
 										</OnEnter>
 										<OnLeave>
@@ -1794,7 +1796,7 @@
 						</Frames>
 					</Frame>
 
-		        	<Button name="$parentClear" inherits="DMA_MenuButtonTemplate" text="Clear">
+		        	<Button name="$parentClear" inherits="DMA_MenuButtonTemplate" text="Очистить">
 		        		<Size x="75" y="20"/>
 				        <Anchors>
 				            <Anchor relativeTo="$parent" point="TOP" x="62" y="-4"/>

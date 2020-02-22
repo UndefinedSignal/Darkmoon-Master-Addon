@@ -38,7 +38,7 @@ end
 function DMA:ProcessDMAGOBSpawn(chatstring)
   DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "addgoxyz:([0-9 -]+.%d+).([0-9 -]+.%d+).([0-9 -]+.%d+)|h");
   DMAUserVars["LastGOB-GUID"] = string.match(chatstring, "|cff008c7f|Haddgoguidgo:(%d+)|h");
-  DMAUserVars["LastGOB-ID"] = string.match(chatstring, "|cff008c7f|Haddgoid:(%d+)|h");
+  DMAUserVars["LastGOB-ID"] = string.match(chatstring, "|cff008c7f|Haddgoid:(%d+)|h");   
   DMA:UpdateGOBEditBox();
 end
 
@@ -48,7 +48,11 @@ function DMA:ProcessDMAGOBTargetGUIDID(chatstring)
 end
 
 function DMA:ProcessDMAGOBTargetXYZ(chatstring)
-  DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, " X: ([0-9 -]+.%d+).+Y: ([0-9 -]+.%d+).+Z: ([0-9 -]+.%d+)");
+  if (IsAddOnLoaded("Prat-3.0")) then
+    DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, " X: ([0-9 -]+.%d+).+Y: ([0-9 -]+.%d+).+Z: ([0-9 -]+.%d+)");
+  else
+    DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "X: ([%p%d.%d]+)  Y: ([%p%d.%d]+)  Z: ([%p%d.%d]+)");
+  end
   DMA:UpdateGOBEditBox();
 end
 
