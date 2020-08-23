@@ -109,7 +109,6 @@ Strings      = LibStub("AceLocale-3.0"):NewLocale("TEST", "ruRU");
 
 function DMA.Linkifier:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("DMA.LinkifierDB", defaults)
-
   if (IsAddOnLoaded("Prat-3.0")) then
     Strings    = ReturnPratStrings_enUS();
   else

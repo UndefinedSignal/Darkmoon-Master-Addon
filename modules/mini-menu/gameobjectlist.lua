@@ -48,11 +48,15 @@ function DMA:ProcessDMAGOBTargetGUIDID(chatstring)
 end
 
 function DMA:ProcessDMAGOBTargetXYZ(chatstring)
+  DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "X: ([%p%d.%d]+)  Y: ([%p%d.%d]+)  Z: ([%p%d.%d]+)"); 
+--[[
   if (IsAddOnLoaded("Prat-3.0")) then
+    DMASave = DMASave + chatstring;
     DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, " X: ([0-9 -]+.%d+).+Y: ([0-9 -]+.%d+).+Z: ([0-9 -]+.%d+)");
   else
     DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "X: ([%p%d.%d]+)  Y: ([%p%d.%d]+)  Z: ([%p%d.%d]+)");
   end
+]]--
   DMA:UpdateGOBEditBox();
 end
 
