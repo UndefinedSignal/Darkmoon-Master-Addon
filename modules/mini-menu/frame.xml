@@ -1651,7 +1651,7 @@
 		        	</Button>
 
 
-		        	<Button name="$parentGobTar" inherits="DMA_MenuButtonTemplate" text="Target" hidden="true">
+		        	<Button name="$parentGobTar" inherits="DMA_MenuButtonTemplate" text="Target" hidden="false">
 		        		<Size x="75" y="20"/>
 				        <Anchors>
 				            <Anchor relativeTo="$parent" point="TOP" x="0" y="-21"/>
