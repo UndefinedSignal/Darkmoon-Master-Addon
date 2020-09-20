@@ -1046,7 +1046,7 @@
 				</Anchors>
 
 			    <Frames>
-					<Frame name="$parentObjectSearchScene" hidden="false">
+					<Frame name="$parentObjectSearchScene" hidden="true">
 						<Anchors>
 				            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-45"/>
 				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
@@ -1194,7 +1194,7 @@
 					</Frame>
 
 
-					<Frame name="$parentObjectInfoScene" hidden="true">
+					<Frame name="$parentObjectInfoScene" hidden="false">
 						<Anchors>
 				            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-25"/>
 				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
@@ -1673,7 +1673,7 @@
 				        </Scripts>
 		        	</Button>
 
-		        	<Button name="$parentChangeMode" inherits="DMA_MenuButtonTemplate" text="Объект">
+		        	<Button name="$parentChangeMode" inherits="DMA_MenuButtonTemplate" text="Поиск">
 		        		<Size x="75" y="20"/>
 				        <Anchors>
 				            <Anchor relativeTo="$parent" point="TOP" x="-62" y="-4"/>

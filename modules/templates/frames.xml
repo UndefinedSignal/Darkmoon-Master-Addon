@@ -244,7 +244,7 @@
 	    <FontString inherits="ChatFontNormal" />
     </EditBox>
 
-    <EditBox name="OBJXYZBox" enableMouse="false" autoFocus="false" multiline="false" letters="13" virtual="true">
+    <EditBox name="OBJXYZBox" enableMouse="false" autoFocus="false" multiline="false" letters="20" virtual="true">
         <Size x="118" y="11"/>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -391,7 +391,6 @@
 				<HighlightTexture file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD"/>
 				<Scripts>
 					<OnClick>
-						print(self:GetName());
 						DMA:ProcessGOBTurnIncDecrement(self:GetName());
 					</OnClick>
 		            <OnEnter>
