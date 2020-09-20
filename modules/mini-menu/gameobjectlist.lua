@@ -74,12 +74,12 @@ function DMA:SetGOBManipulation()
 end
 
 function DMA:UpdateGOBParameters()
-  DMA_GOBScaleSliderCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-SCALE"])));
-  DMA_GOBRotateSlider_OXCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OX"])));
-  DMA_GOBRotateSlider_OYCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OY"])));
-  DMA_GOBRotateSlider_OZCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OZ"])));
-  DMA_GOBScaleSlider:SetValue(DMAUserVars["LastGOB-SCALE"]);
-  DMA_GOBRotateSlider_OX:SetValue(DMAUserVars["LastGOB-OX"]);
-  DMA_GOBRotateSlider_OY:SetValue(DMAUserVars["LastGOB-OY"]);
-  DMA_GOBRotateSlider_OZ:SetValue(DMAUserVars["LastGOB-OZ"]);
+  DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildScaleCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-SCALE"])));
+  DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildOXCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OX"])));
+  DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildOYCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OY"])));
+  DMA_MiniMenuContentGameobjectObjectInfoSceneSlider1ChildOZCounter:SetText(tonumber(string.format("%.2f", DMAUserVars["LastGOB-OZ"])));
+  --DMA_GOBScaleSlider:SetValue(DMAUserVars["LastGOB-SCALE"]);
+  --DMA_GOBRotateSlider_OX:SetValue(DMAUserVars["LastGOB-OX"]);
+  --DMA_GOBRotateSlider_OY:SetValue(DMAUserVars["LastGOB-OY"]);
+  --DMA_GOBRotateSlider_OZ:SetValue(DMAUserVars["LastGOB-OZ"]);
 end

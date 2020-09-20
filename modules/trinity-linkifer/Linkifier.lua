@@ -63,6 +63,15 @@ function MangLinkifier_Decompose(chatstring)
       chatstring = string.gsub (chatstring, Strings["lfer_AddGoxyz2"], MangLinkifier_Link(Strings["lfer_AddGoxyz3"], "%1 %2 %3", "addgoxyz"))
       DMA:ProcessDMAGOBSpawn(chatstring)
     end
+    ----------====~~ PINFO Command Match Text ~~====----------
+    for guid in string.gmatch(chatstring, Strings["lfer_pinfo1"]) do --PINFO Account
+      chatstring = string.gsub(chatstring, Strings["lfer_pinfo2"], MangLinkifier_Link(Strings["lfer_pinfo3"], "%1", "pinfoacc"))
+    end
+    ----------====~~ Повороты Command Match Text ~~====----------
+    for guid in string.gmatch(chatstring, Strings["lfer_rotate1"]) do --PINFO Account
+      DMAUserVars["LastGOB-OZ"], DMAUserVars["LastGOB-OY"], DMAUserVars["LastGOB-OX"] = string.match(chatstring, "Рысканье .oZ.: ([0-9 -]+.%d+) Тангаж .oY.: ([0-9 -]+.%d+) Крен .oX.: ([0-9 -]+.%d+)");
+      DMA:UpdateAngles();
+    end
     ----------====~~ GPS Command Match Text ~~====----------
     for guid in string.gmatch(chatstring, Strings["lfer_GPSxyz1"]) do --GPS XYZ
       chatstring = string.gsub(chatstring, Strings["lfer_GPSxyz2"], MangLinkifier_Link(Strings["lfer_GPSxyz3"], "%1 %2 %3", "gpsxyz"))
@@ -150,6 +159,9 @@ function MangLinkifier_Link(orgtxt, id, type)
     link = orgtxt .." - |cff" .. urlcolor .. "|Haddgoid:" .. id .. "|h["..Locale["lfer_Spawn"].."]|h|r \n"
   elseif(type == "addgoxyz") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Haddgoxyz:" .. id .. "|h["..Locale["lfer_Teleport"].."]|h|r "
+  ----------====~~ PINFO Command Match Text ~~====----------
+  elseif(type == "pinfoacc") then
+    link = orgtxt .." - |cff" .. urlcolor .. "|Hpinfoacc:" .. id .. "|h["..Locale["lfer_Pinfo"].."]|h|r "
   ----------====~~ GPS Command Replace Text ~~====----------
   elseif(type == "gpsxyz") then
     link = orgtxt .." - |cff" .. urlcolor .. "|Hgpsxyz:" .. id .. "|h["..Locale["lfer_Teleport"].."]|h|r "
@@ -256,6 +268,9 @@ function MangLinkifier_SetItemRef(link, text, button)
     return;
   elseif ( strsub(link, 1, 8) == "addgoxyz" ) then
     SendChatMessage(".go "..strsub(link, 10), say, nil, nil)
+    return;
+  elseif ( strsub(link, 1, 8) == "pinfoacc") then
+    SendChatMessage(".look player account "..strsub(link, 10), say, nil, nil)
     return;
   ----------====~~ GPS Command Functions ~~====----------
   elseif ( strsub(link, 1, 6) == "gpsxyz" ) then

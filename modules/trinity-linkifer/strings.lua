@@ -80,7 +80,15 @@ function ReturnPratStrings_enUS()
 
     ["lfer_GPSxyz1"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
     ["lfer_GPSxyz2"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
-    ["lfer_GPSxyz3"] = "X: %1 Y: %2 Z: %3"
+    ["lfer_GPSxyz3"] = "X: %1 Y: %2 Z: %3",
+
+    ["lfer_pinfo1"] = "Account: (.*) .ID: (%d+)., GMLevel: (%d)",
+    ["lfer_pinfo2"] = "Account: (.*) .ID: (%d+)., GMLevel: (%d)",
+    ["lfer_pinfo3"] = "Account: %1 (ID: %2), GMLevel: %3",
+
+    ["lfer_rotate1"] = "Рысканье .oZ.: ([0-9 -]+.%d+) Тангаж .oY.: ([0-9 -]+.%d+) Крен .oX.: ([0-9 -]+.%d+)",
+    ["lfer_rotate2"] = "Рысканье .oZ.: ([0-9 -]+.%d+) Тангаж .oY.: ([0-9 -]+.%d+) Крен .oX.: ([0-9 -]+.%d+)",
+    ["lfer_rotate3"] = "Рысканье (oZ): %1 Тангаж (oY): %2 Крен (oX): %3"
 }
 end
 
@@ -147,6 +155,14 @@ function ReturnStrings_enUS()
 
     ["lfer_GPSxyz1"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
     ["lfer_GPSxyz2"] = "X: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Y: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Z: |cffffffff|Hpos:|h([%p%d.%d]+)|h|r Orientation: |cffffffff|Hpos:|h[%p%d.%d]+|h|r",
-    ["lfer_GPSxyz3"] = "X: %1 Y: %2 Z: %3"
+    ["lfer_GPSxyz3"] = "X: %1 Y: %2 Z: %3",
+
+    ["lfer_pinfo1"] = "Account: (.*) .ID: (%d+)., GMLevel: (%d)",
+    ["lfer_pinfo2"] = "Account: (.*) .ID: (%d+)., GMLevel: (%d)",
+    ["lfer_pinfo3"] = "Account: %1 (ID: %2), GMLevel: %3",
+
+    ["lfer_rotate1"] = "Рысканье .oZ.: ([0-9 -]+.%d+) Тангаж .oY.: ([0-9 -]+.%d+) Крен .oX.: ([0-9 -]+.%d+)",
+    ["lfer_rotate2"] = "Рысканье .oZ.: ([0-9 -]+.%d+) Тангаж .oY.: ([0-9 -]+.%d+) Крен .oX.: ([0-9 -]+.%d+)",
+    ["lfer_rotate3"] = "Рысканье (oZ): %1 Тангаж (oY): %2 Крен (oX): %3"
 }
 end

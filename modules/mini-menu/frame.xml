@@ -1321,474 +1321,286 @@
 												</Scripts>
 										    </EditBox>
 
-											<Slider name="DMA_GOBScaleSlider" inherits="DMA_RotateSliderTemplate" defaultValue="1" minValue="0.1" maxValue="10">
+											<EditBox name="$parentScaleCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter" inherits="DMA_RotateEditbox">
+								            	<Size x="64" y="32"/>
 												<Anchors>
-													<Anchor relativeTo="$parentDistance" point="BOTTOMLEFT" x="-5" y="-50"/>
+													<Anchor point="CENTER" x="0" y="-30"/>
 												</Anchors>
+
+												<Layers>
+											        <Layer>
+											            <FontString name="$parentText" inherits="GameFontNormal" text="Размер" justifyH="RIGHT" parentKey="Text">
+											                <Color r="1" g="1" b="1" a="1"/>
+											                <FontHeight val="16"/>
+											                <Anchors>
+											                    <Anchor point="RIGHT" relativePoint="LEFT" x="-5" y="0" />
+											                </Anchors>
+											                <Shadow>
+											                    <Offset x="1" y="1" />
+											                    <Color r="0" g="0" b="0"/>
+											                </Shadow>
+											            </FontString>
+											        </Layer>
+												</Layers>
 												<Scripts>
-													<OnLoad>
-														self.Name:SetText("Scale: ");
-														DMAUserVars["LastGOB-SCALE"] = 1;
-													</OnLoad>
-													<OnMouseUp>
-														DMAUserVars["LastGOB-SCALE"] = self.Counter:GetText();
-														DMA:SetGOBScale();
-													</OnMouseUp>
-													<OnValueChanged> 
-														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
-													</OnValueChanged>
-												</Scripts>
-												<Frames>
-													<Button name="$parentReload">
-														<Anchors>
-															<Anchor point="LEFT" x="-15" y="-1"/>
-														</Anchors>
-														<Size x="24" y="24"/>
-														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
-														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
-														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-														<Scripts>
-															<OnClick>
-																self.Counter = 1;
-																DMAUserVars["LastGOB-SCALE"] = 1;
+													<OnEnterPressed>
+														self:ClearFocus();
+													</OnEnterPressed>
+													<OnEditFocusGained>
+														self.startNumber = self:GetText();
+													</OnEditFocusGained>
+													<OnEnterPressed>
+														self:ClearFocus();
+													</OnEnterPressed>
+													<OnEscapePressed>
+														self:SetText(self.startNumber);
+														self:SetTextColor(1, 1, 1, 1);
+														self:ClearFocus();
+													</OnEscapePressed>
+													<OnEditFocusLost>
+														local text = self:GetText();
+														if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+															DMAUserVars["LastGOB-SCALE"] = text;
+															self:SetText(tonumber(text));
+															DMA:SetGOBScale();
+														else
+															if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																DMAUserVars["LastGOB-SCALE"] = self.startNumber;
+																self:SetText(self.startNumber);
 																DMA:SetGOBScale();
-															</OnClick>
-												            <OnEnter>
-												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r")
-												                GameTooltip:Show()
-												            </OnEnter>
-												            <OnLeave>
-												                GameTooltip:Hide()
-												            </OnLeave>
-														</Scripts>
-													</Button>
-       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
-											            <Size x="32" y="32"/>
-														<Anchors>
-															<Anchor point="TOP" x="0" y="22"/>
-														</Anchors>
-
-														<Layers>
-															<Layer level="BACKGROUND">
-																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" x="-5" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="RIGHT" x="0" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
-																	<Size x="10" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
-																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
-																	</Anchors>
-																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-																</Texture>
-															</Layer>
-														</Layers>
-														<Scripts>
-															<OnEditFocusGained>
-																self.startNumber = self:GetText();
-															</OnEditFocusGained>
-															<OnEnterPressed>
-																self:ClearFocus();
-															</OnEnterPressed>
-															<OnEscapePressed>
-																self:SetText(self.startNumber);
-																self:SetTextColor(1, 1, 1, 1);
-																self:ClearFocus();
-															</OnEscapePressed>
-															<OnEditFocusLost>
-																local text = self:GetText();
-																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-																	DMAUserVars["LastGOB-SCALE"] = text;
-																	self:SetText(tonumber(text));
-																	DMA:SetGOBScale();
-																else
-																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
-																		DMAUserVars["LastGOB-SCALE"] = self.startNumber;
-																		self:SetText(self.startNumber);
-																		DMA:SetGOBScale();
-																	else
-																		self:SetText("1");
-																		DMAUserVars["LastGOB-SCALE"] = 1;
-																	end
-																end
-																self:SetTextColor(1, 1, 1, 1);
-															</OnEditFocusLost>
-															<OnTextChanged>
-																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
-																	self:SetTextColor(1, 1, 1, 1);
-																else
-																	self:SetTextColor(1,0,0,1);
-																end
-															</OnTextChanged>
-														</Scripts>
-													    <FontString inherits="ChatFontNormal" />
-											        </EditBox>
-												</Frames>
-
-											</Slider>
-
-											<Slider name="DMA_GOBRotateSlider_OX" inherits="DMA_RotateSliderTemplate" >
-												<Anchors>
-													<Anchor relativeTo="DMA_GOBScaleSlider" point="BOTTOMLEFT" x="0" y="-40"/>
-												</Anchors>
-												<Scripts>
-													<OnLoad>
-														self.Name:SetText("OX: ");
-														DMAUserVars["LastGOB-OX"] = 0;
-													</OnLoad>
-													<OnMouseUp>
-														DMAUserVars["LastGOB-OX"] = self.Counter:GetText();
-														DMA:SetGOBManipulation();
-													</OnMouseUp>
-													<OnValueChanged> 
-														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
-													</OnValueChanged>
+															else
+																self:SetText("0.9");
+																DMAUserVars["LastGOB-SCALE"] = 0.9;
+															end
+														end
+														self:SetTextColor(1, 1, 1, 1);
+													</OnEditFocusLost>
+													<OnTextChanged>
+														if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+															self:SetTextColor(1, 1, 1, 1);
+														else
+															self:SetTextColor(1,0,0,1);
+														end
+													</OnTextChanged>
 												</Scripts>
-												<Frames>
-													<Button name="$parentReload">
-														<Anchors>
-															<Anchor point="LEFT" x="-15" y="-1"/>
-														</Anchors>
-														<Size x="24" y="24"/>
-														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
-														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
-														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-														<Scripts>
-															<OnClick>
-																self.Counter = 0;
+											    <FontString inherits="ChatFontNormal" />
+								        	</EditBox>
+
+											<EditBox name="$parentOXCounter" enableMouse="false" autoFocus="false" multiline="false" letters="7" parentKey="Counter" inherits="DMA_RotateEditbox">
+									            <Size x="64" y="32"/>
+												<Anchors>
+													<Anchor relativeTo="$parentScaleCounter" point="BOTTOM" x="0" y="-22"/>
+												</Anchors>
+
+												<Layers>
+											        <Layer>
+											            <FontString name="$parentText" inherits="GameFontNormal" text="Поворот X" justifyH="RIGHT" parentKey="Text">
+											                <Color r="1" g="1" b="1" a="1"/>
+											                <FontHeight val="16"/>
+											                <Anchors>
+											                    <Anchor point="RIGHT" relativePoint="LEFT" x="-5" y="0" />
+											                </Anchors>
+											                <Shadow>
+											                    <Offset x="1" y="1" />
+											                    <Color r="0" g="0" b="0"/>
+											                </Shadow>
+											            </FontString>
+											        </Layer>
+												</Layers>
+												<Scripts>
+													<OnEnterPressed>
+														self:ClearFocus();
+													</OnEnterPressed>
+													<OnEditFocusGained>
+														self.startNumber = self:GetText();
+													</OnEditFocusGained>
+													<OnEnterPressed>
+														self:ClearFocus();
+													</OnEnterPressed>
+													<OnEscapePressed>
+														self:SetText(self.startNumber);
+														self:SetTextColor(1, 1, 1, 1);
+														self:ClearFocus();
+													</OnEscapePressed>
+													<OnEditFocusLost>
+														local text = self:GetText();
+														if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+															DMAUserVars["LastGOB-OX"] = text;
+															self:SetText(tonumber(text));
+															DMA:SetGOBManipulation();
+														else
+															if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+																DMAUserVars["LastGOB-OX"] = self.startNumber;
+																self:SetText(self.startNumber);
+															else
+																self:SetText("0");
 																DMAUserVars["LastGOB-OX"] = 0;
-																DMA:SetGOBManipulation();
-															</OnClick>
-												            <OnEnter>
-												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
-												                GameTooltip:Show();
-												            </OnEnter>
-												            <OnLeave>
-												                GameTooltip:Hide();
-												            </OnLeave>
-														</Scripts>
-													</Button>
-       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
-											            <Size x="32" y="32"/>
-														<Anchors>
-															<Anchor point="TOP" x="0" y="22"/>
-														</Anchors>
-
-														<Layers>
-															<Layer level="BACKGROUND">
-																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" x="-5" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="RIGHT" x="0" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
-																	<Size x="10" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
-																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
-																	</Anchors>
-																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-																</Texture>
-															</Layer>
-														</Layers>
-														<Scripts>
-															<OnEditFocusGained>
-																self.startNumber = self:GetText();
-															</OnEditFocusGained>
-															<OnEnterPressed>
-																self:ClearFocus();
-															</OnEnterPressed>
-															<OnEscapePressed>
-																self:SetText(self.startNumber);
-																self:SetTextColor(1, 1, 1, 1);
-																self:ClearFocus();
-															</OnEscapePressed>
-															<OnEditFocusLost>
-																local text = self:GetText();
-																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-																	DMAUserVars["LastGOB-OX"] = text;
-																	self:SetText(tonumber(text));
-																	DMA:SetGOBManipulation();
-																else
-																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
-																		DMAUserVars["LastGOB-OX"] = self.startNumber;
-																		self:SetText(self.startNumber);
-																		DMA:SetGOBManipulation();
-																	else
-																		self:SetText("0");
-																		DMAUserVars["LastGOB-OX"] = 0;
-																	end
-																end
-																self:SetTextColor(1, 1, 1, 1);
-															</OnEditFocusLost>
-															<OnTextChanged>
-																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
-																	self:SetTextColor(1, 1, 1, 1);
-																else
-																	self:SetTextColor(1,0,0,1);
-																end
-															</OnTextChanged>
-														</Scripts>
-													    <FontString inherits="ChatFontNormal" />
-											        </EditBox>
-												</Frames>
-											</Slider>
-
-											<Slider name="DMA_GOBRotateSlider_OY" inherits="DMA_RotateSliderTemplate" >
-												<Anchors>
-													<Anchor relativeTo="DMA_GOBRotateSlider_OX" point="BOTTOMLEFT" x="0" y="-40"/>
-												</Anchors>
-												<Scripts>
-													<OnLoad>
-														self.Name:SetText("OY: ");
-														DMAUserVars["LastGOB-OY"] = 0;
-													</OnLoad>
-													<OnMouseUp>
-														DMAUserVars["LastGOB-OY"] = self.Counter:GetText();
-														DMA:SetGOBManipulation();
-													</OnMouseUp>
-													<OnValueChanged> 
-														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
-													</OnValueChanged>
+															end
+														end
+														self:SetTextColor(1, 1, 1, 1);
+													</OnEditFocusLost>
+													<OnTextChanged>
+														if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+															self:SetTextColor(1, 1, 1, 1);
+														else
+															self:SetTextColor(1,0,0,1);
+														end
+													</OnTextChanged>
+										            <OnEnter>
+										                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+										                GameTooltip:AddLine("|cFFFFFFFFВращение объекта относительно выбранной оси в пределах -360 — +360|r");
+										                GameTooltip:Show();
+										            </OnEnter>
+										            <OnLeave>
+										                GameTooltip:Hide();
+										            </OnLeave>
 												</Scripts>
-												<Frames>
-													<Button name="$parentReload">
-														<Anchors>
-															<Anchor point="LEFT" x="-15" y="-1"/>
-														</Anchors>
-														<Size x="24" y="24"/>
-														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
-														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
-														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-														<Scripts>
-															<OnClick>
-																self.Counter = 0;
-																DMAUserVars["LastGOB-OY"] = 0;
-																DMA:SetGOBManipulation();
-															</OnClick>
-												            <OnEnter>
-												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
-												                GameTooltip:Show();
-												            </OnEnter>
-												            <OnLeave>
-												                GameTooltip:Hide();
-												            </OnLeave>
-														</Scripts>
-													</Button>
-       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
-											            <Size x="32" y="32"/>
-														<Anchors>
-															<Anchor point="TOP" x="0" y="22"/>
-														</Anchors>
+											    <FontString inherits="ChatFontNormal" />
+								        	</EditBox>
 
-														<Layers>
-															<Layer level="BACKGROUND">
-																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" x="-5" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="RIGHT" x="0" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
-																	<Size x="10" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
-																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
-																	</Anchors>
-																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-																</Texture>
-															</Layer>
-														</Layers>
-														<Scripts>
-															<OnEditFocusGained>
-																self.startNumber = self:GetText();
-															</OnEditFocusGained>
-															<OnEnterPressed>
-																self:ClearFocus();
-															</OnEnterPressed>
-															<OnEscapePressed>
-																self:SetText(self.startNumber);
-																self:SetTextColor(1, 1, 1, 1);
-																self:ClearFocus();
-															</OnEscapePressed>
-															<OnEditFocusLost>
-																local text = self:GetText();
-																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-																	DMAUserVars["LastGOB-OY"] = text;
-																	self:SetText(tonumber(text));
-																	DMA:SetGOBManipulation();
-																else
-																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
-																		DMAUserVars["LastGOB-OY"] = self.startNumber;
-																		self:SetText(self.startNumber);
-																		DMA:SetGOBManipulation();
-																	else
-																		self:SetText("0");
-																		DMAUserVars["LastGOB-OY"] = 0;
-																	end
-																end
-																self:SetTextColor(1, 1, 1, 1);
-															</OnEditFocusLost>
-															<OnTextChanged>
-																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
-																	self:SetTextColor(1, 1, 1, 1);
-																else
-																	self:SetTextColor(1,0,0,1);
-																end
-															</OnTextChanged>
-														</Scripts>
-													    <FontString inherits="ChatFontNormal" />
-											        </EditBox>
-												</Frames>
-											</Slider>
+											<EditBox name="$parentOYCounter" enableMouse="false" autoFocus="false" multiline="false" letters="7" parentKey="Counter" inherits="DMA_RotateEditbox">
+								            <Size x="64" y="32"/>
+											<Anchors>
+												<Anchor relativeTo="$parentOXCounter" point="BOTTOM" x="0" y="-22"/>
+											</Anchors>
 
-											<Slider name="DMA_GOBRotateSlider_OZ" inherits="DMA_RotateSliderTemplate">
-												<Anchors>
-													<Anchor relativeTo="DMA_GOBRotateSlider_OY" point="BOTTOMLEFT" x="0" y="-40"/>
-												</Anchors>
-												<Scripts>
-													<OnLoad>
-														self.Name:SetText("OZ: ");
-														DMAUserVars["LastGOB-OZ"] = 0;
-													</OnLoad>
-													<OnMouseUp>
-														DMAUserVars["LastGOB-OZ"] = self.Counter:GetText();
+											<Layers>
+										        <Layer>
+										            <FontString name="$parentText" inherits="GameFontNormal" text="Поворот Y" justifyH="RIGHT" parentKey="Text">
+										                <Color r="1" g="1" b="1" a="1"/>
+										                <FontHeight val="16"/>
+										                <Anchors>
+										                    <Anchor point="RIGHT" relativePoint="LEFT" x="-5" y="0" />
+										                </Anchors>
+										                <Shadow>
+										                    <Offset x="1" y="1" />
+										                    <Color r="0" g="0" b="0"/>
+										                </Shadow>
+										            </FontString>
+										        </Layer>
+											</Layers>
+											<Scripts>
+												<OnEnterPressed>
+													self:ClearFocus();
+												</OnEnterPressed>
+												<OnEditFocusGained>
+													self.startNumber = self:GetText();
+												</OnEditFocusGained>
+												<OnEnterPressed>
+													self:ClearFocus();
+												</OnEnterPressed>
+												<OnEscapePressed>
+													self:SetText(self.startNumber);
+													self:SetTextColor(1, 1, 1, 1);
+													self:ClearFocus();
+												</OnEscapePressed>
+												<OnEditFocusLost>
+													local text = self:GetText();
+													if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+														DMAUserVars["LastGOB-OY"] = text;
+														self:SetText(tonumber(text));
 														DMA:SetGOBManipulation();
-													</OnMouseUp>
-													<OnValueChanged> 
-														self.Counter:SetText(tonumber(string.format("%.2f", self:GetValue())));
-													</OnValueChanged>
-												</Scripts>
-												<Frames>
-													<Button name="$parentReload">
-														<Anchors>
-															<Anchor point="LEFT" x="-15" y="-1"/>
-														</Anchors>
-														<Size x="24" y="24"/>
-														<NormalTexture file="Interface\Buttons\UI-RotationLeft-Button-Up"/>
-														<PushedTexture file="Interface\Buttons\UI-RotationLeft-Button-Down"/>
-														<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-														<Scripts>
-															<OnClick>
-																self.Counter = 0;
-																DMAUserVars["LastGOB-OZ"] = 0;
-																DMA:SetGOBManipulation();
-															</OnClick>
-												            <OnEnter>
-												                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-												                GameTooltip:AddLine("|cFFFFFFFFВернуться к стандартному значению|r");
-												                GameTooltip:Show();
-												            </OnEnter>
-												            <OnLeave>
-												                GameTooltip:Hide();
-												            </OnLeave>
-														</Scripts>
-													</Button>
-       												<EditBox name="$parentCounter" enableMouse="false" autoFocus="false" multiline="false" letters="5" parentKey="Counter">
-											            <Size x="32" y="32"/>
-														<Anchors>
-															<Anchor point="TOP" x="0" y="22"/>
-														</Anchors>
+													else
+														if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+															DMAUserVars["LastGOB-OY"] = self.startNumber;
+															self:SetText(self.startNumber);
+														else
+															self:SetText("0");
+															DMAUserVars["LastGOB-OY"] = 0;
+														end
+													end
+													self:SetTextColor(1, 1, 1, 1);
+												</OnEditFocusLost>
+												<OnTextChanged>
+													if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+														self:SetTextColor(1, 1, 1, 1);
+													else
+														self:SetTextColor(1,0,0,1);
+													end
+												</OnTextChanged>
+									            <OnEnter>
+									                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+									                GameTooltip:AddLine("|cFFFFFFFFВращение объекта относительно выбранной оси в пределах -360 — +360|r");
+									                GameTooltip:Show();
+									            </OnEnter>
+									            <OnLeave>
+									                GameTooltip:Hide();
+									            </OnLeave>
+											</Scripts>
+										    <FontString inherits="ChatFontNormal" />
+								        </EditBox>
 
-														<Layers>
-															<Layer level="BACKGROUND">
-																<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" x="-5" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
-																	<Size x="8" y="20"/>
-																	<Anchors>
-																		<Anchor point="RIGHT" x="0" y="0"/>
-																	</Anchors>
-																	<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
-																</Texture>
-																<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
-																	<Size x="10" y="20"/>
-																	<Anchors>
-																		<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
-																		<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
-																	</Anchors>
-																	<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-																</Texture>
-															</Layer>
-														</Layers>
-														<Scripts>
-															<OnEditFocusGained>
-																self.startNumber = self:GetText();
-															</OnEditFocusGained>
-															<OnEnterPressed>
-																self:ClearFocus();
-															</OnEnterPressed>
-															<OnEscapePressed>
-																self:SetText(self.startNumber);
-																self:SetTextColor(1, 1, 1, 1);
-																self:ClearFocus();
-															</OnEscapePressed>
-															<OnEditFocusLost>
-																local text = self:GetText();
-																if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-																	DMAUserVars["LastGOB-OZ"] = text;
-																	self:SetText(tonumber(text));
-																	DMA:SetGOBManipulation();
-																else
-																	if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
-																		DMAUserVars["LastGOB-OZ"] = self.startNumber;
-																		self:SetText(self.startNumber);
-																		DMA:SetGOBManipulation();
-																	else
-																		self:SetText("0");
-																		DMAUserVars["LastGOB-OZ"] = 0;
-																	end
-																end
-																self:SetTextColor(1, 1, 1, 1);
-															</OnEditFocusLost>
-															<OnTextChanged>
-																if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
-																	self:SetTextColor(1, 1, 1, 1);
-																else
-																	self:SetTextColor(1,0,0,1);
-																end
-															</OnTextChanged>
-														</Scripts>
-													    <FontString inherits="ChatFontNormal" />
-											        </EditBox>
-												</Frames>
-											</Slider>
+										<EditBox name="$parentOZCounter" enableMouse="false" autoFocus="false" multiline="false" letters="7" parentKey="Counter" inherits="DMA_RotateEditbox">
+								            <Size x="64" y="32"/>
+											<Anchors>
+												<Anchor relativeTo="$parentOYCounter" point="BOTTOM" x="0" y="-22"/>
+											</Anchors>
+
+											<Layers>
+										        <Layer>
+										            <FontString name="$parentText" inherits="GameFontNormal" text="Поворот Z" justifyH="RIGHT" parentKey="Text">
+										                <Color r="1" g="1" b="1" a="1"/>
+										                <FontHeight val="16"/>
+										                <Anchors>
+										                    <Anchor point="RIGHT" relativePoint="LEFT" x="-5" y="0" />
+										                </Anchors>
+										                <Shadow>
+										                    <Offset x="1" y="1" />
+										                    <Color r="0" g="0" b="0"/>
+										                </Shadow>
+										            </FontString>
+										        </Layer>
+											</Layers>
+											<Scripts>
+												<OnEnterPressed>
+													self:ClearFocus();
+												</OnEnterPressed>
+												<OnEditFocusGained>
+													self.startNumber = self:GetText();
+												</OnEditFocusGained>
+												<OnEnterPressed>
+													self:ClearFocus();
+												</OnEnterPressed>
+												<OnEscapePressed>
+													self:SetText(self.startNumber);
+													self:SetTextColor(1, 1, 1, 1);
+													self:ClearFocus();
+												</OnEscapePressed>
+												<OnEditFocusLost>
+													local text = self:GetText();
+													if ( self.startNumber ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+														DMAUserVars["LastGOB-OZ"] = text;
+														self:SetText(tonumber(text));
+														DMA:SetGOBManipulation();
+													else
+														if (self.startNumber ~= nil and self.startNumber ~= "" and tonumber(self.startNumber) ~= nil) then
+															DMAUserVars["LastGOB-OZ"] = self.startNumber;
+															self:SetText(self.startNumber);
+														else
+															self:SetText("0");
+															DMAUserVars["LastGOB-OZ"] = 0;
+														end
+													end
+													self:SetTextColor(1, 1, 1, 1);
+												</OnEditFocusLost>
+												<OnTextChanged>
+													if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+														self:SetTextColor(1, 1, 1, 1);
+													else
+														self:SetTextColor(1,0,0,1);
+													end
+												</OnTextChanged>
+									            <OnEnter>
+									                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+									                GameTooltip:AddLine("|cFFFFFFFFВращение объекта относительно выбранной оси в пределах -360 — +360|r");
+									                GameTooltip:Show();
+									            </OnEnter>
+									            <OnLeave>
+									                GameTooltip:Hide();
+									            </OnLeave>
+											</Scripts>
+										    <FontString inherits="ChatFontNormal" />
+								        </EditBox>
 										</Frames>
 									</Frame>
 								</ScrollChild>
