@@ -72,7 +72,8 @@
                         GameTooltip:AddDoubleLine("Created by:", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
                         GameTooltip:AddLine(" ");
                         GameTooltip:AddDoubleLine("Thanks to:", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
-                        GameTooltip:AddDoubleLine("Версия:", "0.91 BFA", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine("Версия:", "0.92 BFA", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine("Ролевой сервер Darkmoon:", "rp-wow.ru", 1, 1, 1, 1, 0.96, 0.41);
 		                GameTooltip:Show();
 					</OnEnter>
 					<OnLeave>

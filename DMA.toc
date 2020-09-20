@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Title: DMA
 ## Author: TrinityAdmin Dev team + Manground Dev Team + TestUnit + Taku @Druidsmoker
-## Version: 0.91
+## Version: 0.92
 ## Notes: This addon was created for work with Trinity 8.*+ Servers
 ## Name: Darkmoon Master Addon
 ## X-Date: 08 September 2019
