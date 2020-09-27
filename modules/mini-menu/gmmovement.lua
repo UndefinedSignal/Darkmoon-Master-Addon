@@ -33,20 +33,27 @@ function DMA:MoveCharacterXYZ(mode)
 	if distance == nil then
 		distance = 0;
 	end
-	
+
 	if mode == 2 then
-		distance = distance * -math.pi;
+		angle = angle + -math.pi;
 	end
-	if mode == 4 then -- Right
-		angle = math.abs(angle + math.pi/2);
-	elseif mode == 3 then -- Left
-		angle = math.abs(angle + (3*math.pi/2));
+	if mode == 4 then -- Left
+		angle = angle + math.pi/2;
+	elseif mode == 3 then
+		angle = angle + ((3*math.pi)/2);
 	end
+
+	if angle > 2*math.pi then
+		angle = math.abs(angle - 2*math.pi)
+	elseif angle < 0 then 
+		angle = 2*math.pi + angle;
+	end
+
 	local sin = math.sin(angle);
 	local cos = math.cos(angle);
-	local py, px = DMA.HBD:GetRawPlayerWorldPosition();
-	--px = px + (cos * distance) + (sin * distance)
-	--py = py + (sin * distance) - (cos * distance)
+	--local py, px = DMA.HBD:GetRawPlayerWorldPosition();
+	local px = DMAUserVars["LastGPS-X"];
+	local py = DMAUserVars["LastGPS-Y"];
 	px = px + distance * cos;
 	py = py + distance * sin;
 
@@ -57,8 +64,5 @@ function DMA:MoveCharacterXYZ(mode)
 	DMA:UpdateEditBoxXYZ();
 
 	local msg = ".go xyz "..DMAUserVars["LastGPS-X"].." "..DMAUserVars["LastGPS-Y"].." "..DMAUserVars["LastGPS-Z"];
-	--print(msg)
 	SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
 end
--- 1.5707975 - 3.141595 + 1.5707975
--- 6,28319

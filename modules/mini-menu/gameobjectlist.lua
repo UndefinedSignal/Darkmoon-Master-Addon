@@ -36,10 +36,12 @@ function DMA:ObjectsScrollBar_Update()
 end
 
 function DMA:ProcessDMAGOBSpawn(chatstring)
+  DMAUserVars["LastGOB-OZ"] = math.deg(GetPlayerFacing());
   DMAUserVars["LastGOB-X"], DMAUserVars["LastGOB-Y"], DMAUserVars["LastGOB-Z"] = string.match(chatstring, "addgoxyz:([0-9 -]+.%d+).([0-9 -]+.%d+).([0-9 -]+.%d+)|h");
   DMAUserVars["LastGOB-GUID"] = string.match(chatstring, "|cff008c7f|Haddgoguidgo:(%d+)|h");
   DMAUserVars["LastGOB-ID"] = string.match(chatstring, "|cff008c7f|Haddgoid:(%d+)|h");   
   DMA:UpdateGOBEditBox();
+  DMA:UpdateAngles();
 end
 
 function DMA:ProcessDMAGOBTargetGUIDID(chatstring)

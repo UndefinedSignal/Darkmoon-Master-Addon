@@ -1718,6 +1718,170 @@
 
 			</Frame>
 
+			<Frame name="DMA_MiniMenuContentTeleport" movable="true" toplevel="true" frameStrata="PARENT" hidden="true">
+				<Anchors>
+		            <Anchor relativeTo="$parent" point="TOPLEFT" x="8" y="-45"/>
+		            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-8" y="32"/>
+				</Anchors>
+
+			    <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture file="Interface\ENCOUNTERJOURNAL\UI-EJ-BOSS-Nhallish Feaster of Souls" alphaMode="ADD">
+                            <Size x="128" y="64"/>
+                            <Color r="1.0" g="1.0" b="1.0" a="0.70"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="0" y="25"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+			    </Layers>
+
+				<Frames>
+					<Frame name="$parentSearch" hidden="false">
+						<Anchors>
+				            <Anchor relativeTo="$parent" point="TOPLEFT" x="0" y="0"/>
+				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="0" y="0"/>
+						</Anchors>
+						<Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+						    <EdgeSize>
+						        <AbsValue val="16"/>
+						    </EdgeSize>
+						    <BackgroundInsets>
+						        <AbsInset left="3" right="3" top="3" bottom="3"/>
+						    </BackgroundInsets>
+						</Backdrop>
+						<Frames>
+
+	      					<EditBox name="$parentEditBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
+						          <Size x="195" y="30"/>
+						          <Anchors>
+						              <Anchor point="TOPRIGHT" x="0" y="25"/>
+						          </Anchors>
+						          <Scripts>
+										<OnShow/>
+										<OnLoad>
+											self:SetTextColor(1,1,1,1);
+										</OnLoad>
+										<OnEnterPressed>
+											local text = self:GetText();
+											if (text == "" or string.len(text) >= 3) then
+												print("search: "..self:GetText());
+											end
+											self:ClearFocus();
+										</OnEnterPressed>
+										<OnTextChanged>
+											DMA:SearchBoxTemplate_OnTextChanged(self);
+										</OnTextChanged>
+										<OnEditFocusLost/>
+										<OnEditFocusGained/>
+										<OnKeyDown/>
+										<OnEnter>
+											GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+											GameTooltip:AddLine("|cFFFFFFFFТелепорты?!|r")
+											GameTooltip:Show()
+										</OnEnter>
+										<OnLeave>
+							                GameTooltip:Hide()
+										</OnLeave>
+									</Scripts>
+						    </EditBox>
+
+							<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate" hidden="false">
+								<Anchors>
+						            <Anchor relativeTo="$parent" point="TOPLEFT" x="2" y="-4"/>
+						            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-25" y="4"/>
+								</Anchors>
+								<Scripts>
+									<OnVerticalScroll>
+										--if (self:GetParent()GOB13:IsShown()) then
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--else
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--end
+									</OnVerticalScroll>
+									<OnShow>
+										--DMA.GOB.ObjectListInitialized = true;
+										--DMA:GenerateObjectsScrollMenu();
+									</OnShow>
+								</Scripts>
+							</ScrollFrame>
+
+							<Button name="$parentTELE1" id="1" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentScrollBar" point="TOP" x="5" y="-2"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE2" id="2" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE1" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE3" id="3" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE2" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE4" id="4" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE3" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE5" id="5" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE4" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE6" id="6" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE5" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE7" id="7" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE6" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE8" id="8" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE7" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE9" id="9" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE8" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE10" id="10" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE9" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE11" id="11" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE10" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE12" id="12" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE11" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE13" id="13" inherits="DMA_TeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE12" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+						</Frames>
+						<Scripts>
+							<OnShow>
+								--DMA:GenerateObjectsScrollMenu();
+							</OnShow>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+
             <!-- 
            \.   \.      __,-"-.__      ./   ./
        \.   \`.  \`.-'"" _,="=._ ""`-.'/  .'/   ./
@@ -1860,11 +2024,6 @@
 		        <Anchors>
 		            <Anchor relativeTo="$parentPick6" point="LEFT" x="0" y="-30"/>
 		        </Anchors>
-		        <Scripts>
-		        	<OnLoad>
-		        		self:Disable();
-		        	</OnLoad>
-		        </Scripts>
         	</Button>
         	<Button name="$parentPick8" inherits="DMA_MenuButtonTemplate" text="Misc">
 		        <Anchors>
@@ -1953,6 +2112,132 @@
 				</Scripts>
 		    </AnimationGroup>
 		</Animations>
+
+		<Frames>
+			<Frame name="$parentTeleport" movable="true" toplevel="true" frameStrata="PARENT" hidden="false">
+				<Anchors>
+		            <Anchor relativeTo="$parent" point="TOPLEFT" x="2" y="-25"/>
+		            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-2" y="12"/>
+				</Anchors>
+
+			    <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture file="Interface\ENCOUNTERJOURNAL\UI-EJ-BOSS-Nhallish Feaster of Souls" alphaMode="ADD">
+                            <Size x="128" y="64"/>
+                            <Color r="1.0" g="1.0" b="1.0" a="0.70"/>
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" x="0" y="25"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+			    </Layers>
+
+				<Frames>
+					<Frame name="$parentSearch" hidden="false">
+						<Anchors>
+				            <Anchor relativeTo="$parent" point="TOPLEFT" x="0" y="0"/>
+				            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="0" y="0"/>
+						</Anchors>
+						<Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+						    <EdgeSize>
+						        <AbsValue val="16"/>
+						    </EdgeSize>
+						    <BackgroundInsets>
+						        <AbsInset left="3" right="3" top="3" bottom="3"/>
+						    </BackgroundInsets>
+						</Backdrop>
+						<Frames>
+							<ScrollFrame name="$parentScrollBar" inherits="FauxScrollFrameTemplate" hidden="false">
+								<Anchors>
+						            <Anchor relativeTo="$parent" point="TOPLEFT" x="2" y="-4"/>
+						            <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="-25" y="4"/>
+								</Anchors>
+								<Scripts>
+									<OnVerticalScroll>
+										--if (self:GetParent()GOB13:IsShown()) then
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--else
+										--	FauxScrollFrame_OnVerticalScroll(self, offset, 32, DMA:GenerateObjectsScrollMenu());
+										--end
+									</OnVerticalScroll>
+									<OnShow>
+										--DMA.GOB.ObjectListInitialized = true;
+										--DMA:GenerateObjectsScrollMenu();
+									</OnShow>
+								</Scripts>
+							</ScrollFrame>
+
+							<Button name="$parentTELE1" id="1" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentScrollBar" point="TOP" x="5" y="-2"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE2" id="2" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE1" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE3" id="3" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE2" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE4" id="4" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE3" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE5" id="5" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE4" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE6" id="6" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE5" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE7" id="7" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE6" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE8" id="8" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE7" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE9" id="9" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE8" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE10" id="10" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE9" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE11" id="11" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE10" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+							<Button name="$parentTELE12" id="12" inherits="DMA_MiniTeleportButtonTemplate" hidden="false">
+								<Anchors>
+									<Anchor relativeTo="$parentTELE11" point="TOP" x="0" y="-20"/>
+								</Anchors>
+							</Button>
+						</Frames>
+						<Scripts>
+							<OnShow>
+								--DMA:GenerateObjectsScrollMenu();
+							</OnShow>
+						</Scripts>
+					</Frame>
+				</Frames>
+			</Frame>
+		</Frames>
 
 		<Scripts>
 			<OnShow>

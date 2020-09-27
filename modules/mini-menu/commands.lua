@@ -52,7 +52,7 @@ commands["DMA_MiniMenuLeftPick3"] = {"/print(\"WIP\")"}; -- Char2
 commands["DMA_MiniMenuLeftPick4"] = {"/print(\"WIP\")"}; -- NPC
 commands["DMA_MiniMenuLeftPick5"] = {"/DMA:HideMiniMenuFrames();	DMAPlayerMoveFrame:Show();"}; -- Playermove
 commands["DMA_MiniMenuLeftPick6"] = {"/DMA:HideMiniMenuFrames();	DMA_MiniMenuContentGameobject:Show();"}; -- Gameobject
-commands["DMA_MiniMenuLeftPick7"] = {"/print(\"WIP\")"}; -- Tele
+commands["DMA_MiniMenuLeftPick7"] = {"/DMA:HideMiniMenuFrames();	DMA_MiniMenuContentTeleport:Show();		DMA_MiniMenuRight:Show();	DMA_MiniMenuRightTeleport:Show();"}; -- Tele
 commands["DMA_MiniMenuLeftPick8"] = {"/DMA:ProcessDMAMorph()"}; -- Misc
 commands["DMA_MiniMenuLeftPick9"] = {"/print(\"WIP\")"}; -- Server
 
@@ -60,7 +60,8 @@ function DMA:HideMiniMenuFrames()
 	DMA_MiniMenuContentGM:Hide();
 	DMACharacterFrame:Hide();
 	DMAPlayerMoveFrame:Hide();
-	DMA_MiniMenuContentGameobject:Hide()
+	DMA_MiniMenuContentGameobject:Hide();
+	DMA_MiniMenuContentTeleport:Hide();
 end
 
 function DMA:EXECUTEGMCOMMAND(cmd)
@@ -68,6 +69,10 @@ function DMA:EXECUTEGMCOMMAND(cmd)
 end
 
 function DMA:EXECUTEPICKMENUCOMMAND(cmd)
+	if (_G["DMA_MiniMenuRight"]:IsShown()) then
+		_G["DMA_MiniMenuRightTeleport"]:Hide();
+		_G["DMA_MiniMenuRight"].FadeOut:Play();
+	end
 	DMA:SendChatMessage(commands[tostring(cmd)]);
 end
 

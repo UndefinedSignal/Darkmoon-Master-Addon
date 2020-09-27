@@ -418,3 +418,14 @@ end
 function DMA:InputBoxInstructions_OnTextChanged(self)
 	self.Instructions:SetShown(self:GetText() == "")
 end
+
+
+
+function memes()
+  for k, v in pairs(DMA.TeleportLocations) do
+    print(k);
+    for l, b in pairs(DMA.TeleportLocations[k]) do
+      print(l);
+    end
+  end
+end

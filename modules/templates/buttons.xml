@@ -78,6 +78,80 @@
         </Scripts>
     </Button>
 
+    <Button name="DMA_TeleportButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="" virtual="true" hidden="false">
+        <Size x="180" y="20"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="$parentNumber" inherits="SystemFont_Med1" justifyH="CENTER" text="0">
+                    <Size x="42" y="32"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="5"/>
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0.25"/>
+                </FontString>
+
+                <FontString name="$parentName" inherits="SystemFont_Med1" text="...">
+                    <Size x="128" y="0"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="10" y="0"/>
+                    </Anchors>
+                    <Color r="1" g="1" b="1"/>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnEnter>
+                --GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                --GameTooltip:AddDoubleLine(DMAGOBButtons[tonumber(self:GetID())][1], DMAGOBButtons[tonumber(self:GetID())][2], 1, 1, 1, 1, 0.96, 0.41);
+                --GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                --local msg = ".gob add "..DMAGOBButtons[tonumber(self:GetID())][2];
+                --SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+            </OnClick>
+        </Scripts>
+    </Button>
+
+    <Button name="DMA_MiniTeleportButtonTemplate" inherits="UIMenuButtonStretchTemplate" text="" virtual="true" hidden="false">
+        <Size x="124" y="20"/>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="$parentNumber" inherits="SystemFont_Med1" justifyH="CENTER" text="0">
+                    <Size x="42" y="32"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="5"/>
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0.25"/>
+                </FontString>
+
+                <FontString name="$parentName" inherits="SystemFont_Med1" text="...">
+                    <Size x="128" y="0"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="10" y="0"/>
+                    </Anchors>
+                    <Color r="1" g="1" b="1"/>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnEnter>
+                --GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                --GameTooltip:AddDoubleLine(DMAGOBButtons[tonumber(self:GetID())][1], DMAGOBButtons[tonumber(self:GetID())][2], 1, 1, 1, 1, 0.96, 0.41);
+                --GameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide();
+            </OnLeave>
+            <OnClick>
+                --local msg = ".gob add "..DMAGOBButtons[tonumber(self:GetID())][2];
+                --SendChatMessage(msg, "WHISPER", nil, GetUnitName("PLAYER"));
+            </OnClick>
+        </Scripts>
+    </Button>
+
 	<Button name="DMA_TriggerButton" virtual="true" inherits="UIMenuButtonStretchTemplate">
 		
 		<HighlightTexture file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD">
