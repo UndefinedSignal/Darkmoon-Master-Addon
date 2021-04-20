@@ -227,7 +227,7 @@
 
 	    <Scripts>
 	    	<OnTextChanged>
-	    		if self:GetText() == "" then
+	    		if self:GetText() == " " then
 	    			self:SetText("1");
 	    		end
 	    	</OnTextChanged>

@@ -2,7 +2,7 @@
 local MaxNumberOfColumn = 12
 local MinNumberOfColumn = 3
 local NumberOfColumn = 12
-local MaxModelID = 90000
+local MaxModelID = 95474
 local WindowWidth = 1000
 local WindowHeight = 760
 -- vars
